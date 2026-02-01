@@ -475,7 +475,7 @@ public class PlayerMovement : MonoBehaviour
         OnDash.RemoveListener(delegate { tutorialStateManager.ToggleTutorialX(2);});
     }
 
-    //methods to remotely enable and disable player's actions if needed (currently used to help with interactions between settings menu and first tutorial)
+    //methods to remotely enable and disable player's actions if needed (currently used to help with interactions between settings menu and first tutorial and disable movement during the panning cutscene)
     public void EnableActions(int i)
     {
         InputAction[] actions = {moveAction, jumpAction, dashAction};

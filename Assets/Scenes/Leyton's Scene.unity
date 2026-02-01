@@ -5691,6 +5691,9 @@ MonoBehaviour:
   tertiaryFade:
   - {fileID: 1561792097}
   - {fileID: 1042441452}
+  firstTutorialFade:
+  - {fileID: 508606229}
+  - {fileID: 480294352}
   tutorialStateManager: {fileID: 1771808299}
   tutorialButtons: {fileID: 834271965}
   playerMovement: {fileID: 1803198818}
@@ -12989,7 +12992,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -700, y: -59}
+  m_AnchoredPosition: {x: -700, y: 67}
   m_SizeDelta: {x: 336.3082, y: 77.4098}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1135585917
@@ -18225,7 +18228,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

@@ -11,6 +11,7 @@ public class GameplayUIFading : MonoBehaviour
     [SerializeField] private GameObject[] primaryFade;
     [SerializeField] private GameObject[] secondaryFade;
     [SerializeField] private GameObject[] tertiaryFade;
+    [SerializeField] private GameObject[] firstTutorialFade;
 
     [SerializeField] private TutorialStateManager tutorialStateManager;
     [SerializeField] private TutorialButtons tutorialButtons;
@@ -34,6 +35,11 @@ public class GameplayUIFading : MonoBehaviour
             playerMovement.DisableActions(2);
             FadeOutObjects();
             StartCoroutine(FadePrimaryObjects());
+        }
+        else if(!hasFadeCompleted && tutorialStateManager.GetIsFirstTutorial()) //do a different fade sequence if it's the first tutorial
+        {
+            FadeOutFirstTutorialObjects();
+            StartCoroutine(FadeFirstTutorialObjects());
         }
     }
 
@@ -123,6 +129,43 @@ public class GameplayUIFading : MonoBehaviour
                             if (tertiaryFade[i].transform.GetChild(j).transform.GetChild(k).GameObject().GetComponent<CanvasRenderer>())
                             {
                                 tertiaryFade[i].transform.GetChild(j).transform.GetChild(k).GameObject().GetComponent<CanvasRenderer>().SetAlpha(0f);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void FadeOutFirstTutorialObjects()
+    {
+        for (int i = 0; i < firstTutorialFade.Length; i++)
+        {
+            if (firstTutorialFade[i].GetComponent<CanvasRenderer>()) //there is no need to change the alpha if the gameobject doesn't have a canvas renderer component
+            {
+                firstTutorialFade[i].GetComponent<CanvasRenderer>().SetAlpha(0f);
+            }
+
+            if (firstTutorialFade[i].transform.childCount > 0)
+            {
+                GameObject[] tempArray = new GameObject[firstTutorialFade[i].transform.childCount];
+
+                for (int j = 0; j < tempArray.Length; j++)
+                {
+                    if (firstTutorialFade[i].transform.GetChild(j).GameObject().GetComponent<CanvasRenderer>()) //there is no need to change the alpha if the gameobject doesn't have a canvas renderer component
+                    {
+                        firstTutorialFade[i].transform.GetChild(j).GameObject().GetComponent<CanvasRenderer>().SetAlpha(0f);
+                    }
+
+                    if (firstTutorialFade[i].transform.GetChild(j).transform.childCount > 0)
+                    {
+                        GameObject[] tempArray2 = new GameObject[firstTutorialFade[i].transform.GetChild(j).transform.childCount];
+
+                        for (int k = 0; k < tempArray2.Length; k++)
+                        {
+                            if (firstTutorialFade[i].transform.GetChild(j).transform.GetChild(k).GameObject().GetComponent<CanvasRenderer>()) //there is no need to change the alpha if the gameobject doesn't have a canvas renderer component
+                            {
+                                firstTutorialFade[i].transform.GetChild(j).transform.GetChild(k).GameObject().GetComponent<CanvasRenderer>().SetAlpha(0f);
                             }
                         }
                     }
@@ -250,6 +293,47 @@ public class GameplayUIFading : MonoBehaviour
 
         hasFadeCompleted = true;
         tutorialButtons.UpdateGlyphs();
+        yield return null;
+    }
+
+    private IEnumerator FadeFirstTutorialObjects()
+    {
+        
+        yield return new WaitForSeconds(4f); //wait for camera to pan around
+
+        for (int i = 0; i < firstTutorialFade.Length; i++)
+        {
+            if (firstTutorialFade[i].gameObject.GetComponent<CanvasRenderer>())
+            {
+                firstTutorialFade[i].GetComponent<Graphic>().CrossFadeAlpha(1f, fadeInDuration, false);
+            }
+
+            if (firstTutorialFade[i].transform.childCount > 0)
+            {
+                GameObject[] tempArray = new GameObject[firstTutorialFade[i].transform.childCount];
+
+                for (int j = 0; j < tempArray.Length; j++)
+                {
+                    if (firstTutorialFade[i].transform.GetChild(j).GameObject().GetComponent<CanvasRenderer>())
+                    {
+                        firstTutorialFade[i].transform.GetChild(j).GameObject().GetComponent<Graphic>().CrossFadeAlpha(1f, fadeInDuration, false);
+                    }
+
+                    if (firstTutorialFade[i].transform.GetChild(j).transform.childCount > 0)
+                    {
+                        GameObject[] tempArray2 = new GameObject[firstTutorialFade[i].transform.GetChild(j).transform.childCount];
+
+                        for (int k = 0; k < tempArray2.Length; k++)
+                        {
+                            if (firstTutorialFade[i].transform.GetChild(j).transform.GetChild(k).GameObject().GetComponent<CanvasRenderer>())
+                            {
+                                firstTutorialFade[i].transform.GetChild(j).transform.GetChild(k).GameObject().GetComponent<Graphic>().CrossFadeAlpha(1f, fadeInDuration, false);
+                            }
+                        }
+                    }
+                }
+            }
+        }
         yield return null;
     }
 
