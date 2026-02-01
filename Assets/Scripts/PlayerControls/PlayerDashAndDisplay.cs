@@ -21,7 +21,7 @@ public class PlayerDashAndDisplay : MonoBehaviour
     [SerializeField] private int meterMinimum = 0;
     [SerializeField] private int meterMaximum = 15;
     [SerializeField] private float dashDuration;
-    [SerializeField] private Color[] flashcolours; 
+    [SerializeField] private Color[] flashcolors; 
     private bool isDashPrepared;
     public bool canDash = false;
 
@@ -128,7 +128,7 @@ public class PlayerDashAndDisplay : MonoBehaviour
             isDashPrepared = true;
         }
         //Failsafe to reset color 
-        else
+        else if (!isDashPrepared)
         {
             sliderFill.GetComponent<Image>().color = nonFilledColor;
         }
@@ -149,7 +149,6 @@ public class PlayerDashAndDisplay : MonoBehaviour
         canDash = false;
         controlGlyphWASD.SetActive(false);
         controlGlyphArrowKeys.SetActive(false);
-        StopCoroutine(TweenColorOnFullBar());
         sliderFill.GetComponent<Image>().color = nonFilledColor;
         isDashing = true;
         isDashPrepared = false;
@@ -206,12 +205,17 @@ public class PlayerDashAndDisplay : MonoBehaviour
 
     private IEnumerator TweenColorOnFullBar()
     {
-        var getFill = sliderFill.GetComponent<Image>();
-
-        foreach (Color i in flashcolours)
+        while (true)
         {
-            getFill.color = i;
-            yield return new WaitForSeconds(0.4f);
+            foreach (Color i in flashcolors)
+            {
+                sliderFill.GetComponent<Image>().color = i;
+                yield return new WaitForSeconds(0.4f);
+                if(isDashing)
+                {
+                    yield break;
+                }
+            }
         }
     }
 
