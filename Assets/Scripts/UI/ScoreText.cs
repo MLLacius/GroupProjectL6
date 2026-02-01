@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 //Luke, Shara and Leyton script
 public class ScoreText : MonoBehaviour
 {
@@ -25,5 +26,19 @@ public class ScoreText : MonoBehaviour
         int highScore = gameMaster.GetHighScore();
         highScoreText.text = "High Score: " + highScore.ToString();
         Debug.Log(highScore);
+    }
+
+    public void HighScoreAchievedGameplay()
+    {
+        Color startingColor = highScoreText.color;
+        StartCoroutine(FlashHighScore());
+        highScoreText.color = startingColor;
+    }
+
+    private IEnumerator FlashHighScore()
+    {
+
+
+        yield return null;
     }
 }
