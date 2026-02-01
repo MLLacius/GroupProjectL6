@@ -21,6 +21,7 @@ public class PlayerDashAndDisplay : MonoBehaviour
     [SerializeField] private int meterMinimum = 0;
     [SerializeField] private int meterMaximum = 15;
     [SerializeField] private float dashDuration;
+    [SerializeField] private Color[] flashcolours; 
     private bool isDashPrepared;
     public bool canDash = false;
 
@@ -207,15 +208,10 @@ public class PlayerDashAndDisplay : MonoBehaviour
     {
         var getFill = sliderFill.GetComponent<Image>();
 
-        while (true)
+        foreach (Color i in flashcolours)
         {
-            getFill.CrossFadeColor(new Color(224f, 0f, 0f), 0.5f, false, false);
-
-            yield return new WaitForSeconds(0.5f);
-
-            getFill.CrossFadeColor(filledColor, 0.5f, false, false);
-
-            yield return new WaitForSeconds(0.5f);
+            getFill.color = i;
+            yield return new WaitForSeconds(0.4f);
         }
     }
 

@@ -3434,6 +3434,10 @@ MonoBehaviour:
   meterMinimum: 0
   meterMaximum: 15
   dashDuration: 6
+  flashcolours:
+  - {r: 0.8784314, g: 0, b: 0, a: 0}
+  - {r: 1, g: 0.23529412, b: 0, a: 0}
+  - {r: 1, g: 0.39215687, b: 0, a: 0}
   canDash: 0
   dashDurationUpgrade: {fileID: 11400000, guid: 8f4c88367edcb45f6b6a8b038e380271, type: 2}
   dashCostUpgrade: {fileID: 11400000, guid: 9e7496930e26c4677847ce7597f685ed, type: 2}
