@@ -13,6 +13,7 @@ public class ControlSchemeManager : MonoBehaviour
 
     private InputAction WASD;
     private InputAction ArrowKeys;
+    private InputAction Touchscreen;
     private int currentControlScheme;
 
     private void Awake()
@@ -21,7 +22,10 @@ public class ControlSchemeManager : MonoBehaviour
         inputActions.FindActionMap("Player");
         WASD = inputActions.FindAction("Player/Move (WASD)");
         ArrowKeys = inputActions.FindAction("Player/Move (ArrowKeys)");
+        Touchscreen = inputActions.FindAction("Player/Move (Mobile)");
     }
+
+#if !UNITY_PLATFORM_ANDROID
 
     private void Start()
     {
@@ -97,4 +101,11 @@ public class ControlSchemeManager : MonoBehaviour
         }
         SetControlScheme();
     }
+#endif
+
+#if UNITY_PLATFORM_ANDROID
+
+
+
+#endif
 }
