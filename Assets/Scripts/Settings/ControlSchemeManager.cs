@@ -9,6 +9,10 @@ public class ControlSchemeManager : MonoBehaviour
     [SerializeField] private TutorialButtons tutorialButtons;
     [SerializeField] private TutorialStateManager tutorialStateManager;
 
+    [Header("Mobile Controls")]
+    [SerializeField] private GameObject mobileControlHolder;
+    [SerializeField] private GameObject[] mobileControlButtons;
+
     public InputActionAsset inputActions;
 
     private InputAction WASD;
@@ -25,10 +29,17 @@ public class ControlSchemeManager : MonoBehaviour
         Touchscreen = inputActions.FindAction("Player/Move (Mobile)");
     }
 
-#if !UNITY_PLATFORM_ANDROID
-
     private void Start()
     {
+        //if(Application.platform == RuntimePlatform.Android)
+        {
+            mobileControlHolder.SetActive(true);
+            for(int i = 0; i < mobileControlButtons.Length; i++)
+            {
+                mobileControlButtons[i].SetActive(true);
+            }
+        }
+
         if(WASD == null || ArrowKeys == null)
         {
             Debug.Log("Input Action can't be found");
@@ -101,11 +112,4 @@ public class ControlSchemeManager : MonoBehaviour
         }
         SetControlScheme();
     }
-#endif
-
-#if UNITY_PLATFORM_ANDROID
-
-
-
-#endif
 }

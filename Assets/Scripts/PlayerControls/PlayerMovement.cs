@@ -2,10 +2,12 @@ using System.Collections;
 using NUnit.Framework;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 //Luke script, Leyton added tutorial and dash logic, Shara did screen shake
 //The original version of this script was done by me and everyone tweaked it
 public class PlayerMovement : MonoBehaviour
@@ -29,6 +31,13 @@ public class PlayerMovement : MonoBehaviour
     public UnityEvent OnDash; //Called when the player dashes forward
     public UnityEvent OnDashFinish; //Called when the player's dash finishes
     public UnityEvent OnEscapePressed;
+
+    [Header("Mobile Platform Events")]
+    public UnityEvent OnDashBarPressed;
+    public UnityEvent OnJumpPressed;
+    public UnityEvent OnLeftPressed;
+    public UnityEvent OnRightPressed;
+
     //Inputs
     private InputAction moveAction;
     private InputAction jumpAction;
@@ -45,6 +54,12 @@ public class PlayerMovement : MonoBehaviour
     private LevelSpawner levelSpawner;
     private Rigidbody playerRigidbody;
 
+    [Header("Mobile Control References")]
+    [SerializeField] private Button dashButton;
+    [SerializeField] private Button jumpButton;
+    [SerializeField] private Button leftButton;
+    [SerializeField] private Button rightButton;
+
     [Header("Movement Speed and Input Settings")]
     [SerializeField] private float jumpForce;
     [SerializeField] private float fallMultiplier = 2.5f;
@@ -55,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool isPlayerDashing = false;
     [SerializeField] private float dashEndInvincibilityTime = 0.5f; //How long the player is invincible after dash ends
     [SerializeField] private bool canDashWhileStumbling = false;
+    [SerializeField] private bool enableTouchControls;
 
     [Header("Ground Detection")]
     [SerializeField] private Transform groundCheckTransform;
@@ -95,7 +111,6 @@ public class PlayerMovement : MonoBehaviour
         levelSpawner = GameObject.Find("Level Spawner").GetComponent<LevelSpawner>();
         playerRigidbody = GetComponent<Rigidbody>();
         InitialiseControlScheme();
-        jumpAction = InputSystem.actions.FindAction("Jump");
         pauseAction = InputSystem.actions.FindAction("Pause");
 
 
@@ -113,6 +128,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
         playerRigidbody.constraints = lockedX;
+
+        //if(Application.platform == RuntimePlatform.Android || EditorApplication.isRemoteConnected)
+        {
+            dashButton.onClick.AddListener(MobileDash);
+            leftButton.onClick.AddListener(MobileLaneSwitchLeft);
+            rightButton.onClick.AddListener(MobileLaneSwitchRight);
+            jumpButton.onClick.AddListener(MobileJump);
+        }
     }
 
     // Update is called once per frame
@@ -149,6 +172,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void HandleInputs()
     {
+#if !UNITY_PLATFORM_ANDROID
         //Lane switch
         if(inputDelayTimer <= 0f)
         {
@@ -182,8 +206,66 @@ public class PlayerMovement : MonoBehaviour
         {
             OnEscapePressed.Invoke();
         }
+#endif
+        //Reset jump state if grounded
+        if (GroundCheck() && isJumping && playerRigidbody.linearVelocity.y <= -0.1f) { isJumping = false; }
+        if (!GroundCheck() && isJumping)
+        {
+            AlterJumpVelocity();
+        }
+
+        if (pauseAction.WasPressedThisFrame())
+        {
+            OnEscapePressed.Invoke();
+        }
     }
-        
+
+    private void MobileDash()
+    {
+        //Dash
+        if (dashAndDisplay.canDash && !isPlayerDashing)
+        {
+            //If we cant dash while stumbling and are stumbling, return
+            if (!canDashWhileStumbling && isStumbling)
+            {
+                Debug.Log("Can't dash while stumbling");
+                return;
+            }
+            OnDashBarPressed.Invoke();
+            OnPlayerDash();
+        }
+    }
+
+    private void MobileLaneSwitchLeft()
+    {
+        //Lane switch
+        if (inputDelayTimer <= 0f)
+        {
+            OnLeftPressed.Invoke();
+            TrySwitchLane(Lanes.Left, Lanes.Right); //Left input
+        }
+    }
+
+    private void MobileLaneSwitchRight()
+    {
+        //Lane switch
+        if (inputDelayTimer <= 0f)
+        {
+            OnRightPressed.Invoke();
+            TrySwitchLane(Lanes.Right, Lanes.Left); //Right input
+        }
+    }
+
+    private void MobileJump()
+    {
+        //Jump
+        if (currentJumpDelay <= 0f && GroundCheck())
+        {
+            OnJumpPressed.Invoke();
+            PerformJump();
+        }
+    }
+
     private void TrySwitchLane(Lanes targetLane, Lanes oppositeLane)
     {
         Lanes finalTargetLane = currentLane;
@@ -360,29 +442,40 @@ public class PlayerMovement : MonoBehaviour
 
     public void InitialiseControlScheme()
     {
-        if (PlayerPrefs.HasKey("ControlSchemeKey"))
+        if (!(Application.platform == RuntimePlatform.Android) && !enableTouchControls)
         {
-            //change the referenced input actions based on current control scheme pulled from player prefs
-            switch (PlayerPrefs.GetInt("ControlSchemeKey"))
+            jumpAction = InputSystem.actions.FindAction("Jump");
+
+            if (PlayerPrefs.HasKey("ControlSchemeKey"))
             {
-                case 0:
-                    moveAction = InputSystem.actions.FindAction("Move (WASD)");
-                    dashAction = InputSystem.actions.FindAction("Dash (WASD)");
-                    break;
-                case 1:
-                    moveAction = InputSystem.actions.FindAction("Move (ArrowKeys)");
-                    dashAction = InputSystem.actions.FindAction("Dash (ArrowKeys)");
-                    break;
-                default:
-                    moveAction = InputSystem.actions.FindAction("Move (WASD)");
-                    dashAction = InputSystem.actions.FindAction("Dash (WASD)");
-                    break;
+                //change the referenced input actions based on current control scheme pulled from player prefs
+                switch (PlayerPrefs.GetInt("ControlSchemeKey"))
+                {
+                    case 0:
+                        moveAction = InputSystem.actions.FindAction("Move (WASD)");
+                        dashAction = InputSystem.actions.FindAction("Dash (WASD)");
+                        break;
+                    case 1:
+                        moveAction = InputSystem.actions.FindAction("Move (ArrowKeys)");
+                        dashAction = InputSystem.actions.FindAction("Dash (ArrowKeys)");
+                        break;
+                    default:
+                        moveAction = InputSystem.actions.FindAction("Move (WASD)");
+                        dashAction = InputSystem.actions.FindAction("Dash (WASD)");
+                        break;
+                }
+            }
+            else
+            {
+                moveAction = InputSystem.actions.FindAction("Move (WASD)");
+                dashAction = InputSystem.actions.FindAction("Dash (WASD)");
             }
         }
         else
         {
-            moveAction = InputSystem.actions.FindAction("Move (WASD)");
+            moveAction = InputSystem.actions.FindAction("Move (Mobile)");
             dashAction = InputSystem.actions.FindAction("Dash (WASD)");
+            jumpAction = InputSystem.actions.FindAction("Jump (Mobile)");
         }
 
         dashAction.Enable(); //this prevents a very specific bug where dashing will not work during runs following the first tutorial (if the game is not closed/reset) for the control scheme that was not used in said tutorial if the control scheme was changed before the first tutorial
