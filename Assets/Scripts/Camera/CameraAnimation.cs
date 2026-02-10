@@ -1,6 +1,5 @@
 using UnityEngine;
 using Unity.Cinemachine;
-using System.Collections;
 //Rob script 
 public class CameraAnimation : MonoBehaviour
 {

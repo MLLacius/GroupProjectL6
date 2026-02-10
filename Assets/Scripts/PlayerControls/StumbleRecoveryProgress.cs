@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 //Luke script
 
 public class StumbleRecoveryProgress : MonoBehaviour
@@ -12,7 +11,7 @@ public class StumbleRecoveryProgress : MonoBehaviour
     private float currentRecoveryTime;
     [SerializeField, Range(0, 1)] private float startingDashAlpha;
 
-    void Start()
+    private void Start()
     {
         playerMovement = FindFirstObjectByType<PlayerMovement>();    
     }

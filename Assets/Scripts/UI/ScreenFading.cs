@@ -34,17 +34,17 @@ public class ScreenFading : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
 
-            // Calculate how far along we are
+            //Calculate how far along we are
             float lerpValue = elapsedTime / duration;
 
-            // Move alpha from start to target based on time
+            //Move alpha from start to target based on time
             imageColor.a = Mathf.Lerp(startingAlpha, targetAlpha, lerpValue);
             image.color = imageColor;
 
             yield return null;
         }
 
-        // Ensure we hit the exact target alpha at the end
+        //Ensure we hit the exact target alpha at the end
         imageColor.a = targetAlpha;
         image.color = imageColor;
         onFadeComplete.Invoke();

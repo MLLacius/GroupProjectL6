@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using UnityEngine;
 
 //Please see ObjectSpawner.cs for base class details
@@ -21,18 +20,7 @@ public class ObstacleSpawner : ObjectSpawner
 
     protected override void Update()
     {
-        base.Update(); //Calls base update in ObjectSpawner.cs
-        // Only check immediately after we try to spawn something
-        /*if (gameMaster != null && gameMaster.GetGameplayState())
-        {
-            if (!hasAttemptedSpawn && transform.childCount == 0 && transform.position.z > 5f)
-            {
-                Debug.Log("Obstacle Spawner attempting to spawn object again");
-                SpawnObject();
-                hasAttemptedSpawn = true;
-            }
-        }*/
-
+        base.Update();
     }
 
     protected override void Awake()
@@ -45,7 +33,6 @@ public class ObstacleSpawner : ObjectSpawner
     {
         base.SpawnObject();
         spawnedObject.transform.position = spawnTransform.position;
-        //spawnedObject.transform.rotation = spawnTransform.rotation;
         //Do a check to see if this object has any children (i.e. spawned obstacle)
         if(transform.childCount == 0)
         {

@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.UI;
 //Shara script
 public class Music : MonoBehaviour
@@ -13,7 +11,7 @@ public class Music : MonoBehaviour
     public AudioSource[] volumeAudio;
     public AudioSource volumeAudios;
 
-    void Start()
+    private void Start()
     {
         firstPlayInt = PlayerPrefs.GetInt(FirstPlay);
         if (firstPlayInt == 0)
@@ -39,14 +37,14 @@ public class Music : MonoBehaviour
 
     public void OnApplicationFocus(bool infocus)
     {
-        // Saves all settings done and when you leave the game and come back the settings are the same as when you left
+        //Saves all settings done and when you leave the game and come back the settings are the same as when you left
         if (!infocus)
         {
             SaveVolume();
         }
     }
 
-    // this allows the player to control the volume through the slider
+    //this allows the player to control the volume through the slider
     public void UpdateVolume()
     {
         volumeAudios.volume = volumeSlider.value;
@@ -55,6 +53,5 @@ public class Music : MonoBehaviour
         {
             volumeAudio[i].volume = volumeSlider.value;
         }
-        
     }
 }

@@ -1,11 +1,7 @@
 using System.Collections;
-using NUnit.Framework;
 using Unity.Cinemachine;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 //Luke script, Leyton added tutorial and dash logic, Shara did screen shake
@@ -78,7 +74,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayers;
 
     //States
-    //private CinemachineImpulseSource impulseSource;
     private Lanes currentLane = Lanes.Center;
     private float currentJumpDelay;
     private float currentStumbleInvincibilityTime;
@@ -104,9 +99,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool invincibilityTesting = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
-        //impulseSource = GetComponent<CinemachineImpulseSource>();
         gameMaster = GameObject.Find("Game Master").GetComponent<GameMaster>();
         levelSpawner = GameObject.Find("Level Spawner").GetComponent<LevelSpawner>();
         playerRigidbody = GetComponent<Rigidbody>();
@@ -139,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (gameMaster != null && !gameMaster.GetGameplayState()) { return; }
         if (isGameOver) { return; }
@@ -157,12 +151,10 @@ public class PlayerMovement : MonoBehaviour
         if(currentStumbleInvincibilityTime > 0f)
         {
             currentStumbleInvincibilityTime -= Time.deltaTime;
-            //Debug.Log("Player is Invincible");
         } 
         if(isStumbling)
         {
             currentStumbleTimer -= Time.deltaTime;
-            //Debug.Log("Stumlbing time left" + currentStumbleTimer);
             if(currentStumbleTimer <= 0f)
             {
                 RecoverFromStumble();
@@ -309,7 +301,6 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator SmoothLaneSwitch(float targetX)
     {
-        //Debug.Log("targetX: " + targetX); 
         float startX = playerRigidbody.position.x;
         float t = 0f;
         while(t < 1f)
@@ -324,7 +315,6 @@ public class PlayerMovement : MonoBehaviour
         playerRigidbody.MovePosition(finalPosition);
         yield return new WaitForFixedUpdate(); //Wait for physics update until we lock player X position again
         playerRigidbody.constraints = lockedX;
-        //Debug.Log("Final X:" + playerRigidbody.position.x);
     }
 
     private bool CheckForCloseCallObstacles()
@@ -401,7 +391,6 @@ public class PlayerMovement : MonoBehaviour
         currentStumbleInvincibilityTime = stumbleInvincibilityTime;
         currentStumbleTimer = stumbleRecoverTime;
         stumbleRecoveryProgress.OnRecoveryStart();
-        //Debug.Log("Player Stumbled");
         OnStumble.Invoke();
     }
 
@@ -491,7 +480,6 @@ public class PlayerMovement : MonoBehaviour
     {
         isPlayerDashing = true; //toggle to let player destroy obstacles instead of dying to them
         dashAndDisplay.OnPlayerDash(); //reset dash meter
-        //Debug.Log("Dash started at " + Time.time);
         StartCoroutine(Dash());
     }
 
@@ -500,7 +488,6 @@ public class PlayerMovement : MonoBehaviour
         OnDash.Invoke();
         float startingDashSpeed = levelSpawner.GetSpeed();
         float maxDashSpeed = levelSpawner.GetSpeed() * 3;
-        //bool isDashIncreasing = true;
         bool hasDashFinished = false;
 
         //increase player's speed
@@ -532,7 +519,6 @@ public class PlayerMovement : MonoBehaviour
         {
             isPlayerDashing = false;
             OnDashFinish.Invoke();
-            //Debug.Log("Dash finished at " + Time.time);
             //Adds dash end invincibility frames
             currentStumbleInvincibilityTime = dashEndInvincibilityTime;
             yield return null;

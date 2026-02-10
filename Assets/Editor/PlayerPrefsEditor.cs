@@ -67,9 +67,6 @@ public class PlayerPrefsEditor : EditorWindow
 
     void OnGUI()
     {
-        //EditorGUILayout.BeginVertical();
-        //EditorGUILayout.BeginScrollView(new Vector2(), GUILayout.MaxHeight());
-
         scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
 
         //Last score editor
@@ -227,6 +224,5 @@ public class PlayerPrefsEditor : EditorWindow
         }
 
         EditorGUILayout.EndScrollView();
-        //EditorGUILayout.EndVertical();
     }
 }

@@ -1,8 +1,5 @@
 using UnityEngine;
-using UnityEngine.Events;
 using System.Collections.Generic;
-using Unity.Collections;
-using UnityEngine.Rendering.PostProcessing;
 //Luke script (the original version of this script was done together with everyone week 1)
 public class LevelSpawner : MonoBehaviour
 {
@@ -38,7 +35,7 @@ public class LevelSpawner : MonoBehaviour
     //The string is the prefab name with the queue of objects being all the instances of that prefab
     private Dictionary<string, Queue<GameObject>> segmentPool = new Dictionary<string, Queue<GameObject>>();
 
-    void Start()
+    private void Start()
     {
         gameMaster = GameObject.Find("Game Master").GetComponent<GameMaster>();
         tutorialStateManager = GameObject.Find("Game Master").GetComponent<TutorialStateManager>();
@@ -47,21 +44,21 @@ public class LevelSpawner : MonoBehaviour
         {
             segmentPool.Add(prefab.name, new Queue<GameObject>());
         }
-            // Spawn the initial level segments
+        //Spawn the initial level segments
         for (int i = 0; i < menuInitialSegmentCount; i++)
         {
             SpawnSegment();
         }
     }
 
-    void Update()
+    private void Update()
     {
         UpdateMoveSpeed();
         MoveSegments();
         CheckForCleanup();
     }
 
-    void UpdateMoveSpeed()
+    private void UpdateMoveSpeed()
     {
         if (moveSpeed < maxMoveSpeed && gameMaster.GetGameplayState())
         {
@@ -99,7 +96,7 @@ public class LevelSpawner : MonoBehaviour
         }
     }
 
-    void MoveSegments()
+    private void MoveSegments()
     {
         if(movementStopped) { return; }
         // 1. Move the actual objects
@@ -111,17 +108,17 @@ public class LevelSpawner : MonoBehaviour
         spawnZ -= moveSpeed * Time.deltaTime;
     }
 
-    void CheckForCleanup()
+    private void CheckForCleanup()
     {
-        // Check if the oldest segment (index 0) has moved past the delete threshold
+        //Check if the oldest segment (index 0) has moved past the delete threshold
         if (activeSegments.Count > 0 && activeSegments[0].transform.position.z < deleteZ)
         {
             RemoveOldestSegment();
-            SpawnSegment(); // Add a new one at the end to keep the loop going
+            SpawnSegment(); //Add a new one at the end to keep the loop going
         }
     }
 
-    void SpawnSegment()
+    private void SpawnSegment()
     {
         int selectedPrefabIndex = Random.Range(0, levelPrefabs.Length);
         GameObject selectedPrefab = levelPrefabs[selectedPrefabIndex];
@@ -160,7 +157,6 @@ public class LevelSpawner : MonoBehaviour
     {
         GameObject selectedPrefab = tutorialLevelPrefabs[index];
         GameObject segment = Instantiate(selectedPrefab);
-        //Debug.Log("Instantiating new segment: " + prefab.name);
 
         segment.transform.position = new Vector3(0, 0, spawnZ);
         segment.SetActive(true);
@@ -179,7 +175,6 @@ public class LevelSpawner : MonoBehaviour
             spawnZ += defaultSegmentLength;
         }
 
-
         //If main game has started
         if (gameMaster.GetGameplayState())
         {
@@ -192,7 +187,7 @@ public class LevelSpawner : MonoBehaviour
         }
     }
 
-    void RemoveOldestSegment()
+    private void RemoveOldestSegment()
     {
         GameObject oldSegment = activeSegments[0];
         activeSegments.RemoveAt(0); 
@@ -206,7 +201,6 @@ public class LevelSpawner : MonoBehaviour
         {
             GameObject segment = segmentPool[prefab.name].Dequeue();
             segment.SetActive(true);
-            //Debug.Log("Reusing segment from pool: " + prefab.name);
             return segment;
         }
         //Otherwise, instantiate a new one
@@ -214,7 +208,6 @@ public class LevelSpawner : MonoBehaviour
         {
             GameObject segment = Instantiate(prefab);
             segment.name = prefab.name; // Ensure the name matches for pooling
-            //Debug.Log("Instantiating new segment: " + prefab.name);
             return segment;
         }
     }
@@ -225,12 +218,10 @@ public class LevelSpawner : MonoBehaviour
         if (segmentPool.ContainsKey(segment.name))
         {
             segmentPool[segment.name].Enqueue(segment);
-            //Debug.Log("Returned segment to pool: " + segment.name);
         }
         else
         {
             Destroy(segment);
-            //Debug.LogWarning("Attempted to return a segment to a non-existent pool: " + segment.name);
         }
     }
 

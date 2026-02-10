@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 //Shara script
 public class AudioPlayer : MonoBehaviour
@@ -8,12 +6,8 @@ public class AudioPlayer : MonoBehaviour
     private float volumeFloat;
     public AudioSource[] volumeAudio;
     public AudioSource volumeAudios;
-    void Awake()
-    {
 
-    }
-
-    private void ContintueSettings()
+    private void ContinueSettings()
     {
         volumeFloat = PlayerPrefs.GetFloat(VolumePref);
 

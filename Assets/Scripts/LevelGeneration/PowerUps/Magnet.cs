@@ -1,14 +1,12 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;  
 //Shara script
 public class Magnet : MonoBehaviour
 {
-
     public GameObject coinDectectorObj;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         coinDectectorObj = GameObject.FindGameObjectWithTag("CoinDetector");
         coinDectectorObj.SetActive(false);
@@ -23,7 +21,7 @@ public class Magnet : MonoBehaviour
         }
     }
 
-    IEnumerator ActivateCoin()
+    private IEnumerator ActivateCoin()
     {
         coinDectectorObj.SetActive(true);
         yield return new WaitForSeconds(10f);

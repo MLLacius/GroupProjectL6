@@ -2,6 +2,8 @@ using UnityEngine;
 //Leyton script
 public class FirstTutorialTriggerController : MonoBehaviour
 {
+    //this script serves to provide a connection between colliders on tutorial segments and the tutorial sequence
+
     [SerializeField] private int identifier;
 
     TutorialStateManager tutorialStateManager;

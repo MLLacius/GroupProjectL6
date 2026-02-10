@@ -180,39 +180,6 @@ public class TutorialStateManager : MonoBehaviour
     public IEnumerator ExplainDash()
     {
         playerMovement.EnableActions(2);
-
-        /*
-        switch (PlayerPrefs.GetInt("ControlSchemeKey"))
-        {
-            case 0:
-                WASDGlyphHolder.SetActive(true);
-                WASDGlyphs[3].SetActive(true);
-
-                arrowKeysGlyphHolder.SetActive(false);
-                arrowKeysGlyphs[3].SetActive(false);
-                Debug.Log("Dash tutorial: Showing WASD Glyphs");
-                break;
-
-            case 1:
-                arrowKeysGlyphHolder.SetActive(true);
-                arrowKeysGlyphs[3].SetActive(true);
-
-                WASDGlyphHolder.SetActive(false);
-                WASDGlyphs[3].SetActive(false);
-                Debug.Log("Dash tutorial: Showing ArrowKeys Glyphs");
-                break;
-
-            default:
-                WASDGlyphHolder.SetActive(true);
-                WASDGlyphs[3].SetActive(true);
-
-                arrowKeysGlyphHolder.SetActive(false);
-                arrowKeysGlyphs[3].SetActive(false);
-                Debug.Log("Dash tutorial: Showing WASD Glyphs by default");
-                break;
-        }
-        */
-
         firstTutorialObjects[3].SetActive(true);
 
         Time.timeScale = 0f;
@@ -221,12 +188,6 @@ public class TutorialStateManager : MonoBehaviour
         playerMovement.AssignTutorialEvents();
         yield return new WaitUntil(() => tutorialChecks[2]);
 
-        /*
-        WASDGlyphHolder.SetActive(false);
-        WASDGlyphs[3].SetActive(false);
-        arrowKeysGlyphHolder.SetActive(false);
-        arrowKeysGlyphs[3].SetActive(false);
-        */
         firstTutorialObjects[3].SetActive(false);
         firstTutorialObjectsHolder.SetActive(false);
 

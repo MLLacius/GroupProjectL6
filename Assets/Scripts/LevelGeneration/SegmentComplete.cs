@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Events;
 //Luke script 
@@ -9,16 +8,12 @@ public class SegmentComplete : MonoBehaviour
     private LevelSpawner levelSpawner;
     [SerializeField] private GameObject segmentObject; // Reference to the segment GameObject
     private bool isCompleted = false;
-    void Start()
-    {
 
-    }
     public void OnTriggerEnter(Collider other)
     {
         if(!isCompleted)
         {
             isCompleted = true;
-            //Debug.Log("Trigger entered by: " + other.name);
             if(other.CompareTag("Player"))
             {
                 CompletedSegment.Invoke();
@@ -26,7 +21,6 @@ public class SegmentComplete : MonoBehaviour
         }
         else
         {
-            //Debug.Log("Segment already completed, ignoring trigger by: " + other.name);
             return;
         }
     }

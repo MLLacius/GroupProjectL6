@@ -1,13 +1,12 @@
-using Unity.VisualScripting;
 using UnityEngine;
 //Luke script mainly, Leyton added audio, debris and dash logic, Shara did screen shake (unused)
 public class Obstacle : MonoBehaviour
 {
     private PlayerMovement playerMovement;
     private AudioController audioController;
+    private GameMaster gameMaster;
     [SerializeField] private bool instantGameOver = false;
     [SerializeField] private GameObject debrisParticles;
-    private GameMaster gameMaster;
 
     private ScreenShake screenShake;
     
@@ -19,7 +18,6 @@ public class Obstacle : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        //Debug.Log("Collided");
         //Hit player 
         if(collision.gameObject.CompareTag("Player"))
         {
@@ -44,7 +42,6 @@ public class Obstacle : MonoBehaviour
             {
                 audioController.PlayObstacleDestroy();
                 Instantiate(debrisParticles, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, this.gameObject.transform.position.z), Quaternion.identity);
-                //GameObject.Destroy(this.gameObject);
                 RemoveObject();
                 gameMaster.AwardDashDestructionBonus();
             }
@@ -52,19 +49,14 @@ public class Obstacle : MonoBehaviour
         //Hit another obstacle somehow
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
-            //Debug.LogWarning("Obstacle collided with another obstacle, or potentially itself?");
             ObstacleSpawner.ReturnObjectToPool(collision.gameObject);
-        }
-        else
-        {
-            //Debug.Log("Obstacle collided with non player entity");
         }
     }
 
     private void RemoveObject()
     {
+        //Force obstacle back to pool
         ObstacleSpawner.ReturnObjectToPool(this.gameObject);
-        //Debug.Log("Obstacle forced back to pool");
     }
 
 

@@ -13,7 +13,7 @@ public class ActivePowerupManager : MonoBehaviour
     private List<PowerUpEffect> powerupsToRemove = new List<PowerUpEffect>();
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         HandleTimers();
     }

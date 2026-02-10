@@ -1,7 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.HighDefinition.Attributes;
 //Shara script
 public class ScreenShake : MonoBehaviour
 {
@@ -17,7 +15,7 @@ public class ScreenShake : MonoBehaviour
     //controls the shape of the shake
     public AnimationCurve dampingCurve = new AnimationCurve
     (
-        new Keyframe(0,0), //start at the center
+        new Keyframe(0, 0), //start at the center
         new Keyframe(0.5f, 1), //peak at half duration
         new Keyframe(1, 0) //end at the center smoothly
     );
@@ -30,16 +28,6 @@ public class ScreenShake : MonoBehaviour
         initialPosition = transform.localPosition;
     }
 
-    //private void Update()
-    //{
-    //    if(startShake)
-    //    {
-    //        TriggerShake(Vector3.right);
-    //        startShake = false;
-    //    }
-    //}
-
-    //triggers a screen shake in the speciified direction
     public void TriggerShake(Vector3 direction)
     {
         //stops any jittery overlapping shakes
@@ -49,7 +37,7 @@ public class ScreenShake : MonoBehaviour
             transform.localPosition = initialPosition;
         }
 
-        //If not shaking, set init position
+        //if not shaking, set init position
         else
         {
             initialPosition = transform.localPosition;

@@ -3,8 +3,6 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
 using System;
-using UnityEngine.InputSystem;
-using UnityEngine.Events;
 //Mainly a Leyton script, Luke helped fix a few bugs
 public class SettingsMenu : MonoBehaviour
 {
@@ -25,7 +23,7 @@ public class SettingsMenu : MonoBehaviour
     public Slider musicSlider;
 
     //Serialized all of these instead of setting values in awake 
-    //So I can split settings menu from the manager so we can set default values without having to re-open the menu
+    //So we can split settings menu from the manager to set default values without having to re-open the menu
     [SerializeField] private TextMeshProUGUI volumeDisplayText;
     [SerializeField] private TextMeshProUGUI musicDisplayText;
     [SerializeField] private TMP_Dropdown qualityOptions;
@@ -36,7 +34,7 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private ControlSchemeManager controlSchemeManagerScript;
     [SerializeField] private TextMeshProUGUI windowDisplayText;
 
-    void Start()
+    private void Start()
     {
         //set intital values and proporties of components
         volumeSlider.minValue = minimumVolume;
@@ -58,7 +56,6 @@ public class SettingsMenu : MonoBehaviour
         qualityOptions.AddOptions(displayResolutions);
         qualityOptions.value = defaultResolutionIndex;
 
-
         //assign unity events
         SetWindow();
         SetControlScheme();
@@ -74,7 +71,7 @@ public class SettingsMenu : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         if (volumeSlider.value == 0)
         {

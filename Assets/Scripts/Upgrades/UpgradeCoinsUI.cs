@@ -5,8 +5,8 @@ using UnityEngine;
 public class UpgradeCoinsUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text coinsText;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    //Start is called once before the first execution of Update after the MonoBehaviour is created
+    private void Start()
     {
         UpdateCoinsDisplay();
     }

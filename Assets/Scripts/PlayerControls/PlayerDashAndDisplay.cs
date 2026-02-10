@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 //Leyton script, tweaked by Luke to make bars smoothly fill/deplete and for tutorial values
 public class PlayerDashAndDisplay : MonoBehaviour
@@ -45,8 +42,8 @@ public class PlayerDashAndDisplay : MonoBehaviour
     [Header("Tutorial Values")]
     [Tooltip("How many coins are required to charge dash in first tutorial")]
 
-    [SerializeField, UnityEngine.Min(1)] private int tutorialDashCost; //Must be greater than or equal to 1
-    [SerializeField, UnityEngine.Min(0)] private int tutorialDashStartValue; //Must be greater than or equal to 0
+    [SerializeField, Min(1)] private int tutorialDashCost; //Must be greater than or equal to 1
+    [SerializeField, Min(0)] private int tutorialDashStartValue; //Must be greater than or equal to 0
 
 
     public void EnableTutorialDashCost()
@@ -106,7 +103,6 @@ public class PlayerDashAndDisplay : MonoBehaviour
         //Show dash charge amount on display
         if (dashDisplay && !isDashing)
         {
-            //dashDisplay.value = collectedCoins;
             dashDisplay.value = Mathf.Lerp(dashDisplay.value, collectedCoins, fillSpeed * Time.deltaTime);
         }
         //Show dash time left on display

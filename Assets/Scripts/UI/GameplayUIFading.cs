@@ -2,8 +2,6 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-//Leyton script
-
 //Leyton script; luke helped fix a bug with first tutorial
 
 public class GameplayUIFading : MonoBehaviour

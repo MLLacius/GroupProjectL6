@@ -91,7 +91,7 @@ public abstract class ObjectSpawner : MonoBehaviour
         }
     }
 
-    private static void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
+    private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         objectPool.Clear();
     }

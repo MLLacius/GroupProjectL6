@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 //Shara script
 public class ButtonsFunctionality : MonoBehaviour
 {
     // Play game button
     public void PlayGame()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Main Game");
+        SceneManager.LoadScene("Main Game");
     }
 
     // Quit game button

@@ -20,7 +20,7 @@ public class UpgradePanelUI : MonoBehaviour
     private UpgradeManager upgradeManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         //Get reference to Upgrade Manager
         upgradeManager = FindFirstObjectByType<UpgradeManager>();

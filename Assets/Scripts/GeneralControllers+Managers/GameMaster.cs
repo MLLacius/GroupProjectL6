@@ -1,9 +1,7 @@
 using UnityEngine;
-using System;
 using UnityEngine.Events;
 using Unity.Cinemachine;
 using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
 //Luke script mainly, shara contributed a few lines, Leyton added scoring/tutorial logic
 public class GameMaster : MonoBehaviour
 {
@@ -34,7 +32,6 @@ public class GameMaster : MonoBehaviour
     private int highScore = 0;
     private int collectiblesGained = 0;
 
-    private Transform playerTransform;
     private LevelSpawner levelSpawner;
     private PlayerMovement playerMovement;
     [SerializeField] PlayerDashAndDisplay PlayerDashAndDisplay;
@@ -47,11 +44,10 @@ public class GameMaster : MonoBehaviour
     [SerializeField] private UpgradeManager upgradeManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         rawScore = 0;
         scoreOffset = 0;
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         levelSpawner = GameObject.Find("Level Spawner").GetComponent<LevelSpawner>();
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
         highScore = PlayerPrefs.GetInt("HighScore", 0);
@@ -64,21 +60,19 @@ public class GameMaster : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (gameState == GameState.MainMenu)
         {
             gameplayStarted = false;
             scoreOffset = Time.time;
-            //Debug.Log("ScoreOffset: " + scoreOffset);
             return;
         }
         else if (gameState == GameState.Gameplay)
         {
             scoreMultiplier = levelSpawner.GetSpeed() / 10;
             rawScore += Time.deltaTime * (scoreMultiplier + currentDashMultiplier);
-            currentScore = Convert.ToInt32(rawScore);
-            //Debug.Log("CurrentScore: " + currentScore + " Time: " + Time.time + " Raw Score: " + rawScore);
+            currentScore = (int)rawScore;
             if (currentScore > highScore)
             {
                 highScore = currentScore;
@@ -128,7 +122,7 @@ public class GameMaster : MonoBehaviour
         levelSpawner.UpdateSegmentCount();
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
         SaveValues();
     }
