@@ -164,9 +164,9 @@ public class PlayerMovement : MonoBehaviour
     }
     private void HandleInputs()
     {
-#if !UNITY_PLATFORM_ANDROID
+#if !UNITY_ANDROID || UNITY_EDITOR
         //Lane switch
-        if(inputDelayTimer <= 0f)
+        if (inputDelayTimer <= 0f)
         {
             float moveInput = moveAction.ReadValue<float>();
             if(moveInput < -0.1f) { TrySwitchLane(Lanes.Left, Lanes.Right);} //Left input
@@ -530,6 +530,7 @@ public class PlayerMovement : MonoBehaviour
         return isPlayerDashing;
     }
 
+#if !UNITY_ANDROID || UNITY_EDITOR
     //assign event to fade out glyphs only once first tutorial has been completed
     public void AssignTutorialEvents()
     {
@@ -537,6 +538,7 @@ public class PlayerMovement : MonoBehaviour
         OnJump.AddListener(delegate {tutorialButtons.StartFadeOut();});
         OnDash.AddListener(delegate () { tutorialButtons.StartFadeOut();});
     }
+#endif
 
     //add relevant bool checks to progress through first tutorial
     public void AssignFirstTutorialEvents()

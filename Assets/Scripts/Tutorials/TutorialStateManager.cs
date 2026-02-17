@@ -69,6 +69,7 @@ public class TutorialStateManager : MonoBehaviour
 
         playerMovement.EnableActions(0);
 
+#if !UNITY_ANDROID || UNITY_EDITOR
         switch (PlayerPrefs.GetInt("ControlSchemeKey"))
         {
             case 0:
@@ -104,6 +105,7 @@ public class TutorialStateManager : MonoBehaviour
                 Debug.Log("Showing WASD Glyphs by default");
                 break;
         }
+#endif
 
         firstTutorialObjects[0].SetActive(true);
         firstTutorialObjects[1].SetActive(true);
@@ -112,12 +114,14 @@ public class TutorialStateManager : MonoBehaviour
 
         yield return new WaitUntil(() => tutorialChecks[0]);
 
+#if !UNITY_ANDROID || UNITY_EDITOR
         WASDGlyphHolder.SetActive(false);
         WASDGlyphs[0].SetActive(false);
         WASDGlyphs[1].SetActive(false);
         arrowKeysGlyphHolder.SetActive(false);
         arrowKeysGlyphs[0].SetActive(false);
         arrowKeysGlyphs[1].SetActive(false);
+#endif
         firstTutorialObjects[0].SetActive(false);
         firstTutorialObjects[1].SetActive(false);
 
@@ -130,6 +134,7 @@ public class TutorialStateManager : MonoBehaviour
     {
         playerMovement.EnableActions(1);
 
+#if !UNITY_ANDROID || UNITY_EDITOR
         switch (PlayerPrefs.GetInt("ControlSchemeKey"))
         {
             case 0:
@@ -159,6 +164,7 @@ public class TutorialStateManager : MonoBehaviour
 
                 break;
         }
+#endif
 
         firstTutorialObjects[2].SetActive(true);
 
@@ -166,10 +172,12 @@ public class TutorialStateManager : MonoBehaviour
 
         yield return new WaitUntil(() => tutorialChecks[1]);
 
+#if !UNITY_ANDROID || UNITY_EDITOR
         WASDGlyphHolder.SetActive(false);
         WASDGlyphs[2].SetActive(false);
         arrowKeysGlyphHolder.SetActive(false);
         arrowKeysGlyphs[2].SetActive(false);
+#endif
         firstTutorialObjects[2].SetActive(false);
 
         Time.timeScale = 1f;
@@ -185,7 +193,9 @@ public class TutorialStateManager : MonoBehaviour
         Time.timeScale = 0f;
 
         playerMovement.ForceStumblingFalse();
+#if !UNITY_ANDROID || UNITY_EDITOR
         playerMovement.AssignTutorialEvents();
+#endif
         yield return new WaitUntil(() => tutorialChecks[2]);
 
         firstTutorialObjects[3].SetActive(false);

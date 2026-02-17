@@ -252,7 +252,8 @@ public class GameplayUIFading : MonoBehaviour
 
     private IEnumerator FadeTertiaryObjects()
     {
-        if(!tutorialButtons.GetHasFadedOut()) //don't change the control scheme alphas if the player has already made them fade through making input
+#if !UNITY_ANDROID || UNITY_EDITOR
+        if (!tutorialButtons.GetHasFadedOut()) //don't change the control scheme alphas if the player has already made them fade through making input
         {
             for (int i = 0; i < tertiaryFade.Length; i++)
             {
@@ -288,9 +289,9 @@ public class GameplayUIFading : MonoBehaviour
                 }
             }
         }
-
-        hasFadeCompleted = true;
         tutorialButtons.UpdateGlyphs();
+#endif
+        hasFadeCompleted = true;
         yield return null;
     }
 

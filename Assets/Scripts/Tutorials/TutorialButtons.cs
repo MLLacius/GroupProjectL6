@@ -21,6 +21,7 @@ public class TutorialButtons : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private GameplayUIFading gameplayUIFading;
 
+#if !UNITY_ANDROID || UNITY_EDITOR
     private void OnEnable()
     {
         hasFadedOut = false;     
@@ -192,4 +193,5 @@ public class TutorialButtons : MonoBehaviour
     {
         return hasFadedOut;
     }
+#endif
 }

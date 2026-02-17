@@ -75,7 +75,9 @@ public class ControlSchemeManager : MonoBehaviour
 
         if (!tutorialStateManager.GetIsFirstTutorial())
         {
+#if !UNITY_ANDROID || UNITY_EDITOR
             tutorialButtons.UpdateGlyphs();
+#endif
             return;
         }
         else
