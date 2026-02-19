@@ -10,6 +10,7 @@ public class GameplayUIFading : MonoBehaviour
     [SerializeField] private GameObject[] secondaryFade;
     [SerializeField] private GameObject[] tertiaryFade;
     [SerializeField] private GameObject[] firstTutorialFade;
+    [SerializeField] private Button pauseButton;
 
     [SerializeField] private TutorialStateManager tutorialStateManager;
     [SerializeField] private TutorialButtons tutorialButtons;
@@ -25,6 +26,8 @@ public class GameplayUIFading : MonoBehaviour
 
     public void StartFadeSequence() //called through the editor
     {
+        pauseButton.interactable = false;
+
         if (!hasFadeCompleted && !tutorialStateManager.GetIsFirstTutorial()) //stop this fading sequence from happening in the first tutorial
         {
             //disable player controls during the panning cutscene
@@ -218,6 +221,8 @@ public class GameplayUIFading : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1.8f);
+
+        pauseButton.interactable = true;
 
         StartCoroutine(FadeSecondaryObjects());
     }

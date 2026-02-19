@@ -6,9 +6,9 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseButton;
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject settingsMenu, settingsMenuMobile, gameplayBackButton, gameplayBackButtonMobile;
 
     private bool isPauseMenuActive;
-    private string currentScene;
 
     private void Start()
     {
@@ -32,6 +32,20 @@ public class PauseMenu : MonoBehaviour
         }
 
         pauseMenu.SetActive(isPauseMenuActive);
+    }
+
+    public void OpenSettingsPauseMenu()
+    {
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            settingsMenuMobile.SetActive(true);
+            gameplayBackButtonMobile.SetActive(true);
+        }
+        else
+        {
+            settingsMenu.SetActive(true);
+            gameplayBackButton.SetActive(true);
+        }
     }
 
     public void ReloadScene()

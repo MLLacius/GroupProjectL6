@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 //Shara script
 public class ButtonsFunctionality : MonoBehaviour
 {
+    [SerializeField] private GameObject settingsMenu, settingsMenuMobile;
+
     // Play game button
     public void PlayGame()
     {
@@ -12,7 +14,18 @@ public class ButtonsFunctionality : MonoBehaviour
     // Quit game button
     public void QuitGame()
     {
-        Debug.Log("Exit!");
         Application.Quit();
+    }
+
+    public void OpenSettingsMainMenu()
+    {
+        if(Application.platform == RuntimePlatform.Android)
+        {
+            settingsMenuMobile.SetActive(true);
+        }
+        else
+        {
+            settingsMenu.SetActive(true);
+        }
     }
 }

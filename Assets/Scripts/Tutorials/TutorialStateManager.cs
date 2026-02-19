@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 //Leyton script
 public class TutorialStateManager : MonoBehaviour
 {
@@ -208,6 +209,7 @@ public class TutorialStateManager : MonoBehaviour
         highScoreText.SetActive(true);
         scoreText.SetActive(true);
         pauseButton.SetActive(true);
+        pauseButton.GetComponent<Button>().interactable = true;
 
         playerMovement.UnassignFirstTutorialEvents();
         gameMaster.SetStateGameplay();
