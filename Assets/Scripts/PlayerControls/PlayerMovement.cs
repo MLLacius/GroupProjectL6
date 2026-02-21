@@ -97,6 +97,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float worldSpeedRayDistanceMultiplier = 1f;
     [SerializeField] LayerMask obstacleLayers;
     [SerializeField] private bool invincibilityTesting = false;
+    [SerializeField] private CinemachineCamera cineCam;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
@@ -488,23 +489,35 @@ public class PlayerMovement : MonoBehaviour
         OnDash.Invoke();
         float startingDashSpeed = levelSpawner.GetSpeed();
         float maxDashSpeed = levelSpawner.GetSpeed() * 3;
+        float defaultFieldOfView = cineCam.Lens.FieldOfView;
         bool hasDashFinished = false;
 
-        //increase player's speed
+        //increase player's speed and pan in camera
         for (float increasingSpeed = levelSpawner.GetSpeed(); levelSpawner.GetSpeed() < maxDashSpeed; increasingSpeed += (startingDashSpeed / 10))
         {
             levelSpawner.SetSpeed(increasingSpeed);
+            if(cineCam.Lens.FieldOfView > defaultFieldOfView - 10)
+            {
+                cineCam.Lens.FieldOfView -= 0.5f;
+                Debug.Log("FOV: " + cineCam.Lens.FieldOfView);
+            }
             yield return new WaitForSeconds(0.02f);
         }
+        cineCam.Lens.FieldOfView = defaultFieldOfView - 10;
 
         //duration player will stay at max speed of dash before decreasing
         float dashTime = dashAndDisplay.GetDashDuration();
         yield return new WaitForSeconds(dashTime);
 
-        //decrease player's speed
+        //decrease player's speed and pan out camera
         for (float decreasingSpeed = levelSpawner.GetSpeed(); levelSpawner.GetSpeed() > startingDashSpeed; decreasingSpeed -= ((startingDashSpeed * 3) / 20))
         {
             levelSpawner.SetSpeed(decreasingSpeed);
+            if (cineCam.Lens.FieldOfView < defaultFieldOfView)
+            {
+                cineCam.Lens.FieldOfView += 0.8f;
+                Debug.Log("FOV: " + cineCam.Lens.FieldOfView);
+            }
             yield return new WaitForSeconds(0.08f);
 
             if(levelSpawner.GetSpeed() <= startingDashSpeed)
@@ -514,7 +527,8 @@ public class PlayerMovement : MonoBehaviour
                 break;
             }
         }
-        
+        cineCam.Lens.FieldOfView = defaultFieldOfView;
+
         if (hasDashFinished)
         {
             isPlayerDashing = false;
