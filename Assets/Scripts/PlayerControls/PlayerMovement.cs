@@ -48,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private CinemachineImpulseSource cinemachineImpulse; //Reference to the camera shake script to trigger shakes on stumble
     private GameMaster gameMaster;
     private LevelSpawner levelSpawner;
+    private CameraAnimation cameraAnimation;
     private Rigidbody playerRigidbody;
 
     [Header("Mobile Control References")]
@@ -97,13 +98,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float worldSpeedRayDistanceMultiplier = 1f;
     [SerializeField] LayerMask obstacleLayers;
     [SerializeField] private bool invincibilityTesting = false;
-    [SerializeField] private CinemachineCamera cineCam;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
         gameMaster = GameObject.Find("Game Master").GetComponent<GameMaster>();
         levelSpawner = GameObject.Find("Level Spawner").GetComponent<LevelSpawner>();
+        cameraAnimation = GetComponentInChildren<CameraAnimation>();
         playerRigidbody = GetComponent<Rigidbody>();
         InitialiseControlScheme();
         pauseAction = InputSystem.actions.FindAction("Pause");
@@ -489,21 +490,18 @@ public class PlayerMovement : MonoBehaviour
         OnDash.Invoke();
         float startingDashSpeed = levelSpawner.GetSpeed();
         float maxDashSpeed = levelSpawner.GetSpeed() * 3;
-        float defaultFieldOfView = cineCam.Lens.FieldOfView;
+        float defaultFieldOfView = cameraAnimation.GetCameraFOV();
         bool hasDashFinished = false;
 
         //increase player's speed and pan in camera
         for (float increasingSpeed = levelSpawner.GetSpeed(); levelSpawner.GetSpeed() < maxDashSpeed; increasingSpeed += (startingDashSpeed / 10))
         {
             levelSpawner.SetSpeed(increasingSpeed);
-            if(cineCam.Lens.FieldOfView > defaultFieldOfView - 10)
-            {
-                cineCam.Lens.FieldOfView -= 0.5f;
-                Debug.Log("FOV: " + cineCam.Lens.FieldOfView);
-            }
+            cameraAnimation.CameraPanIn(defaultFieldOfView - 10, 0.5f);
             yield return new WaitForSeconds(0.02f);
         }
-        cineCam.Lens.FieldOfView = defaultFieldOfView - 10;
+        cameraAnimation.SetCameraFOV(defaultFieldOfView - 10);
+        cameraAnimation.SetSplineOffset(-0.5f);
 
         //duration player will stay at max speed of dash before decreasing
         float dashTime = dashAndDisplay.GetDashDuration();
@@ -513,11 +511,7 @@ public class PlayerMovement : MonoBehaviour
         for (float decreasingSpeed = levelSpawner.GetSpeed(); levelSpawner.GetSpeed() > startingDashSpeed; decreasingSpeed -= ((startingDashSpeed * 3) / 20))
         {
             levelSpawner.SetSpeed(decreasingSpeed);
-            if (cineCam.Lens.FieldOfView < defaultFieldOfView)
-            {
-                cineCam.Lens.FieldOfView += 0.8f;
-                Debug.Log("FOV: " + cineCam.Lens.FieldOfView);
-            }
+            cameraAnimation.CameraPanOut(defaultFieldOfView, 0.8f);
             yield return new WaitForSeconds(0.08f);
 
             if(levelSpawner.GetSpeed() <= startingDashSpeed)
@@ -527,7 +521,8 @@ public class PlayerMovement : MonoBehaviour
                 break;
             }
         }
-        cineCam.Lens.FieldOfView = defaultFieldOfView;
+        cameraAnimation.SetCameraFOV(defaultFieldOfView);
+        cameraAnimation.SetSplineOffset(0f);
 
         if (hasDashFinished)
         {
@@ -550,7 +545,7 @@ public class PlayerMovement : MonoBehaviour
     {
         OnLaneChange.AddListener(delegate {tutorialButtons.StartFadeOut();});
         OnJump.AddListener(delegate {tutorialButtons.StartFadeOut();});
-        OnDash.AddListener(delegate () { tutorialButtons.StartFadeOut();});
+        OnDash.AddListener(delegate {tutorialButtons.StartFadeOut();});
     }
 #endif
 
