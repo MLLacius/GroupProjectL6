@@ -65,14 +65,7 @@ public class CoinSpawnPoint : MonoBehaviour
         if (activeCoin != null && gameMaster != null && !gameMaster.GetGameplayState())
         {
             activeCoin.SetActive(false);
-        }
-    }
-
-    private void OnDisable()
-    {
-        if (gameMaster)
-        {
-            gameMaster.OnGameStart.RemoveListener(SpawnCoin);
+            Destroy(this);
         }
     }
 
@@ -98,6 +91,14 @@ public class CoinSpawnPoint : MonoBehaviour
         {
             activeCoin = Instantiate(coinPrefab, transform);
             activeCoin.transform.localPosition = initialLocalPosition;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (gameMaster)
+        {
+            gameMaster.OnGameStart.RemoveListener(SpawnCoin);
         }
     }
 }
