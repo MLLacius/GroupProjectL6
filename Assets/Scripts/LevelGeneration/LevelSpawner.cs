@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 //Luke script (the original version of this script was done together with everyone week 1)
 public class LevelSpawner : MonoBehaviour
 {
@@ -20,6 +21,10 @@ public class LevelSpawner : MonoBehaviour
     [SerializeField] private float deleteZ = -20f; // The Z position where segments get destroyed
     [SerializeField] private float moveSpeedGainPerSec = 0.01f;
     [SerializeField] private float maxMoveSpeed = 30f;
+
+    [Header("Level Variation")]
+    [SerializeField] private Material[] segmentBaseOptions;
+    private Dictionary<int, Material> segmentBaseOptionsDict = new Dictionary<int, Material>();
     
     private GameMaster gameMaster;
     private TutorialStateManager tutorialStateManager;
@@ -39,6 +44,12 @@ public class LevelSpawner : MonoBehaviour
     {
         gameMaster = GameObject.Find("Game Master").GetComponent<GameMaster>();
         tutorialStateManager = GameObject.Find("Game Master").GetComponent<TutorialStateManager>();
+
+        for (int i = 0; i < segmentBaseOptions.Length; i++)
+        {
+            segmentBaseOptionsDict.Add(i, segmentBaseOptions[i]);
+            Debug.Log(segmentBaseOptionsDict.Keys.ElementAt(i) + ", " + segmentBaseOptionsDict[i] + " added to dictionary");
+        }
         //Setup the dictionary
         foreach (GameObject prefab in levelPrefabs)
         {

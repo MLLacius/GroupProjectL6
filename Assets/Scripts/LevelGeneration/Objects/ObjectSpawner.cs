@@ -11,7 +11,7 @@ public abstract class ObjectSpawner : MonoBehaviour
     [SerializeField] protected GameObject[] prefabGroup3;
     
     // Pool of objects
-    static private Dictionary<string, Queue<GameObject>> objectPool = new Dictionary<string, Queue<GameObject>>();
+    private static Dictionary<string, Queue<GameObject>> objectPool = new Dictionary<string, Queue<GameObject>>();
     private static bool isInitialized = false;
     protected GameObject spawnedObject;
 

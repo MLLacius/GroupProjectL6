@@ -23216,8 +23216,20 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2229341482224022280, guid: bcf8850a958ac419e82fb3ae8726cbd0, type: 3}
+      propertyPath: segmentBaseOptions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2229341482224022280, guid: bcf8850a958ac419e82fb3ae8726cbd0, type: 3}
       propertyPath: tutorialLevelPrefabs.Array.size
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2229341482224022280, guid: bcf8850a958ac419e82fb3ae8726cbd0, type: 3}
+      propertyPath: 'segmentBaseOptions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 940c11f4610fa69408dfff94f54dc414, type: 2}
+    - target: {fileID: 2229341482224022280, guid: bcf8850a958ac419e82fb3ae8726cbd0, type: 3}
+      propertyPath: 'segmentBaseOptions.Array.data[1]'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2229341482224022280, guid: bcf8850a958ac419e82fb3ae8726cbd0, type: 3}
       propertyPath: 'tutorialLevelPrefabs.Array.data[0]'
