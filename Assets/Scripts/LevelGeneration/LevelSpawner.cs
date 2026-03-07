@@ -24,7 +24,7 @@ public class LevelSpawner : MonoBehaviour
 
     [Header("Level Variation")]
     [SerializeField] private Material[] segmentBaseOptions;
-    private Dictionary<int, Material> segmentBaseOptionsDict = new Dictionary<int, Material>();
+    protected Dictionary<int, Material> segmentBaseOptionsDict = new Dictionary<int, Material>();
     
     private GameMaster gameMaster;
     private TutorialStateManager tutorialStateManager;

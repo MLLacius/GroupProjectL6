@@ -5,10 +5,6 @@ using UnityEngine.SceneManagement;
 public abstract class ObjectSpawner : MonoBehaviour
 {
     [SerializeField] protected GameObject[] prefabList;
-
-    [SerializeField] protected GameObject[] prefabGroup1;
-    [SerializeField] protected GameObject[] prefabGroup2;
-    [SerializeField] protected GameObject[] prefabGroup3;
     
     // Pool of objects
     private static Dictionary<string, Queue<GameObject>> objectPool = new Dictionary<string, Queue<GameObject>>();
