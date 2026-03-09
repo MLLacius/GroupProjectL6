@@ -15,6 +15,17 @@ public class PlayerMovement : MonoBehaviour
         Right //2
     }
 
+#if UNITY_ANDROID
+    enum TouchDirection
+    {
+        Left,
+        Right,
+        Up,
+        Down,
+        None
+    }
+#endif
+
     //Unity Events: Please use these to handle other logic when these events occur.
     //Please don't hook into Update or other functions in this script for these events.
     //Oh and remember to assign functions in inspector/through script :)
@@ -82,6 +93,7 @@ public class PlayerMovement : MonoBehaviour
     private float inputDelayTimer = 0f;
     private RigidbodyConstraints lockedX = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
     private RigidbodyConstraints unlockedX = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+    private TouchDirection touchDirection = TouchDirection.None;
 
     private bool isStumbling = false;
     private bool isJumping = false;
@@ -108,7 +120,6 @@ public class PlayerMovement : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody>();
         InitialiseControlScheme();
         pauseAction = InputSystem.actions.FindAction("Pause");
-
 
         if(tutorialStateManager.GetIsFirstTutorial())
         {
@@ -200,6 +211,70 @@ public class PlayerMovement : MonoBehaviour
         {
             OnEscapePressed.Invoke();
         }
+#endif
+
+#if UNITY_ANDROID
+
+        if (Touchscreen.current.press.isPressed && touchDirection == TouchDirection.None)
+        {
+            Debug.Log("Touch Input!");
+
+            if (Touchscreen.current.position.x.value - Touchscreen.current.primaryTouch.startPosition.x.value <= -(Screen.currentResolution.width / 12) && inputDelayTimer <= 0f)
+            {
+                touchDirection = TouchDirection.Left;
+                Debug.Log("Swiped left");
+            }
+            else if (Touchscreen.current.position.x.value - Touchscreen.current.primaryTouch.startPosition.x.value >= (Screen.currentResolution.width / 12) && inputDelayTimer <= 0f)
+            {
+                touchDirection = TouchDirection.Right;
+                Debug.Log("Swiped right");
+            }
+            else if (Touchscreen.current.position.y.value - Touchscreen.current.primaryTouch.startPosition.y.value >= (Screen.currentResolution.height / 8) && inputDelayTimer <= 0f)
+            {
+                touchDirection = TouchDirection.Up;
+                Debug.Log("Swiped up");
+            }
+            else if (Touchscreen.current.position.y.value - Touchscreen.current.primaryTouch.startPosition.y.value <= -(Screen.currentResolution.height / 8) && inputDelayTimer <= 0f)
+            {
+                touchDirection = TouchDirection.Down;
+                Debug.Log("Swiped down");
+            }
+        }
+
+        switch (touchDirection)
+        {
+            case TouchDirection.Left: //Left input
+                TrySwitchLane(Lanes.Left, Lanes.Right);
+                touchDirection = TouchDirection.None;
+                break;
+
+            case TouchDirection.Right: //Right input
+                TrySwitchLane(Lanes.Right, Lanes.Left);
+                touchDirection = TouchDirection.None;
+                break;
+
+            case TouchDirection.Up: //Jump
+                if (currentJumpDelay <= 0f && GroundCheck())
+                {
+                    PerformJump();
+                }
+                touchDirection = TouchDirection.None;
+                break;
+
+            case TouchDirection.Down: //Perform no action
+                touchDirection = TouchDirection.None;
+                break;
+
+            case TouchDirection.None: //No swipe gesture
+                break;
+        }
+        //Reset jump state if grounded
+        if (GroundCheck() && isJumping && playerRigidbody.linearVelocity.y <= -0.1f) { isJumping = false; }
+        if (!GroundCheck() && isJumping)
+        {
+            AlterJumpVelocity();
+        }
+
 #endif
         //Reset jump state if grounded
         if (GroundCheck() && isJumping && playerRigidbody.linearVelocity.y <= -0.1f) { isJumping = false; }

@@ -19,7 +19,7 @@
                     "name": "Jump (Mobile)",
                     "type": "Value",
                     "id": "758895ab-17a3-48ad-b471-e39ecc972be7",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Touch",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -64,7 +64,7 @@
                     "name": "Move (Mobile)",
                     "type": "Value",
                     "id": "1a6c87d6-d45b-4d26-836d-905727c007ce",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Touch",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -114,42 +114,9 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "1D Axis",
-                    "id": "4f9bac5d-4cf3-4ef9-b983-450a40e2b422",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move (Mobile)",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "94b70b6f-ecc3-4567-8c11-d031ef7e5645",
-                    "path": "<Touchscreen>/delta/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Touch",
-                    "action": "Move (Mobile)",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "da43de93-4cd8-48f0-ad45-4142e4a0ad81",
-                    "path": "<Touchscreen>/delta/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Touch",
-                    "action": "Move (Mobile)",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "",
                     "id": "3a218161-09dd-468d-aba1-c10548f1bb7f",
-                    "path": "<Touchscreen>/delta/up",
+                    "path": "<Touchscreen>/primaryTouch",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Touch",
@@ -231,6 +198,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c9908538-28ba-4e02-903b-6065e348aff5",
+                    "path": "<Touchscreen>/primaryTouch",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Touch",
+                    "action": "Move (Mobile)",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
