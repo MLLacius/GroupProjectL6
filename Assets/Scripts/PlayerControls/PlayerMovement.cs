@@ -41,9 +41,6 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Mobile Platform Events")]
     public UnityEvent OnDashBarPressed;
-    public UnityEvent OnJumpPressed;
-    public UnityEvent OnLeftPressed;
-    public UnityEvent OnRightPressed;
 
     //Inputs
     private InputAction moveAction;
@@ -139,9 +136,6 @@ public class PlayerMovement : MonoBehaviour
         //if(Application.platform == RuntimePlatform.Android || EditorApplication.isRemoteConnected)
         {
             dashButton.onClick.AddListener(MobileDash);
-            leftButton.onClick.AddListener(MobileLaneSwitchLeft);
-            rightButton.onClick.AddListener(MobileLaneSwitchRight);
-            jumpButton.onClick.AddListener(MobileJump);
         }
     }
 
@@ -217,8 +211,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Touchscreen.current.press.isPressed && touchDirection == TouchDirection.None)
         {
-            Debug.Log("Touch Input!");
-
+            //track mouse position delta to find out directional swipes
             if (Touchscreen.current.position.x.value - Touchscreen.current.primaryTouch.startPosition.x.value <= -(Screen.currentResolution.width / 12) && inputDelayTimer <= 0f)
             {
                 touchDirection = TouchDirection.Left;
@@ -302,36 +295,6 @@ public class PlayerMovement : MonoBehaviour
             }
             OnDashBarPressed.Invoke();
             OnPlayerDash();
-        }
-    }
-
-    private void MobileLaneSwitchLeft()
-    {
-        //Lane switch
-        if (inputDelayTimer <= 0f)
-        {
-            OnLeftPressed.Invoke();
-            TrySwitchLane(Lanes.Left, Lanes.Right); //Left input
-        }
-    }
-
-    private void MobileLaneSwitchRight()
-    {
-        //Lane switch
-        if (inputDelayTimer <= 0f)
-        {
-            OnRightPressed.Invoke();
-            TrySwitchLane(Lanes.Right, Lanes.Left); //Right input
-        }
-    }
-
-    private void MobileJump()
-    {
-        //Jump
-        if (currentJumpDelay <= 0f && GroundCheck())
-        {
-            OnJumpPressed.Invoke();
-            PerformJump();
         }
     }
 
