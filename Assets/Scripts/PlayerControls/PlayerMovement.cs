@@ -123,6 +123,7 @@ public class PlayerMovement : MonoBehaviour
             moveAction.Disable();
             jumpAction.Disable();
             dashAction.Disable();
+            OnStumble.AddListener(delegate{tutorialStateManager.AttemptStumbleTutorial();});
         }
 
         //Check stumble timings are valid

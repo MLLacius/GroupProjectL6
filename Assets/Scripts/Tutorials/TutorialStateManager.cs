@@ -14,6 +14,7 @@ public class TutorialStateManager : MonoBehaviour
     [SerializeField] private GameObject[] arrowKeysGlyphs = new GameObject[3];
     [SerializeField] private GameObject firstTutorialObjectsHolder;
     [SerializeField] private GameObject[] firstTutorialObjects = new GameObject[4];
+    [SerializeField] private Button stumbleExplaination;
 
     //ui elements to be disabled during first tutorial
     [SerializeField] private GameObject highScoreText;
@@ -26,6 +27,7 @@ public class TutorialStateManager : MonoBehaviour
     //checks to update the current tutorial state
     public bool isFirstTutorial = false;
     private bool[] tutorialChecks = {false, false, false};
+    private bool stumbleTutorialCheck = true;
 
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private GameMaster gameMaster;
@@ -56,6 +58,7 @@ public class TutorialStateManager : MonoBehaviour
         {
             FirstTutorialStart.Invoke();
             Debug.Log("Started first tutorial");
+            stumbleTutorialCheck = false;
             firstTutorialObjectsHolder.SetActive(true);
 
             highScoreText.SetActive(false);
@@ -227,6 +230,37 @@ public class TutorialStateManager : MonoBehaviour
         FirstTutorialEnd.Invoke();
     }
 
+    public void AttemptStumbleTutorial()
+    {
+        if(!stumbleTutorialCheck)
+        {
+            StartCoroutine(ExplainStumble());
+        }
+    }
+
+    private IEnumerator ExplainStumble()
+    {
+        if (stumbleTutorialCheck)
+        {
+            yield break;
+        }
+        else
+        {
+            stumbleExplaination.gameObject.SetActive(true);
+            Time.timeScale = 0f;
+
+            yield return new WaitForSecondsRealtime(2f);
+            yield return new WaitUntil(() => stumbleTutorialCheck);
+
+            stumbleExplaination.gameObject.SetActive(false);
+            Time.timeScale = 1f;
+
+            playerMovement.OnStumble.RemoveListener(delegate{AttemptStumbleTutorial();});
+
+            yield return null;
+        }
+    }
+
     public void ToggleTutorialX (int n)
     {
         tutorialChecks[n] = true;
@@ -235,5 +269,10 @@ public class TutorialStateManager : MonoBehaviour
     public bool GetIsFirstTutorial()
     {
         return isFirstTutorial;
+    }
+
+    public void EnableStumbleTutorialCheck()
+    {
+        stumbleTutorialCheck = true;
     }
 }
