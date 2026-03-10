@@ -133,6 +133,7 @@ public class TutorialStateManager : MonoBehaviour
 
     public IEnumerator ExplainJump()
     {
+        playerMovement.DisableActions(0);
         playerMovement.EnableActions(1);
 
 #if !UNITY_ANDROID || UNITY_EDITOR
@@ -182,12 +183,15 @@ public class TutorialStateManager : MonoBehaviour
         firstTutorialObjects[2].SetActive(false);
 
         Time.timeScale = 1f;
+        playerMovement.EnableActions(0);
 
         yield return null;
     }
 
     public IEnumerator ExplainDash()
     {
+        playerMovement.DisableActions(0);
+        playerMovement.DisableActions(1);
         playerMovement.EnableActions(2);
         firstTutorialObjects[3].SetActive(true);
 
@@ -203,6 +207,8 @@ public class TutorialStateManager : MonoBehaviour
         firstTutorialObjectsHolder.SetActive(false);
 
         Time.timeScale = 1f;
+        playerMovement.EnableActions(0);
+        playerMovement.EnableActions(1);
 
         yield return new WaitForSeconds(0.8f);
 
