@@ -212,22 +212,22 @@ public class PlayerMovement : MonoBehaviour
         if (Touchscreen.current.press.isPressed && touchDirection == TouchDirection.None)
         {
             //track mouse position delta to find out directional swipes
-            if (Touchscreen.current.position.x.value - Touchscreen.current.primaryTouch.startPosition.x.value <= -(Screen.currentResolution.width / 12) && inputDelayTimer <= 0f)
+            if (Touchscreen.current.position.x.value - Touchscreen.current.primaryTouch.startPosition.x.value <= -(Screen.currentResolution.width / 12) && moveAction.enabled)
             {
                 touchDirection = TouchDirection.Left;
                 Debug.Log("Swiped left");
             }
-            else if (Touchscreen.current.position.x.value - Touchscreen.current.primaryTouch.startPosition.x.value >= (Screen.currentResolution.width / 12) && inputDelayTimer <= 0f)
+            else if (Touchscreen.current.position.x.value - Touchscreen.current.primaryTouch.startPosition.x.value >= (Screen.currentResolution.width / 12) && moveAction.enabled)
             {
                 touchDirection = TouchDirection.Right;
                 Debug.Log("Swiped right");
             }
-            else if (Touchscreen.current.position.y.value - Touchscreen.current.primaryTouch.startPosition.y.value >= (Screen.currentResolution.height / 8) && inputDelayTimer <= 0f)
+            else if (Touchscreen.current.position.y.value - Touchscreen.current.primaryTouch.startPosition.y.value >= (Screen.currentResolution.height / 8) && jumpAction.enabled)
             {
                 touchDirection = TouchDirection.Up;
                 Debug.Log("Swiped up");
             }
-            else if (Touchscreen.current.position.y.value - Touchscreen.current.primaryTouch.startPosition.y.value <= -(Screen.currentResolution.height / 8) && inputDelayTimer <= 0f)
+            else if (Touchscreen.current.position.y.value - Touchscreen.current.primaryTouch.startPosition.y.value <= -(Screen.currentResolution.height / 8))
             {
                 touchDirection = TouchDirection.Down;
                 Debug.Log("Swiped down");
@@ -237,12 +237,18 @@ public class PlayerMovement : MonoBehaviour
         switch (touchDirection)
         {
             case TouchDirection.Left: //Left input
-                TrySwitchLane(Lanes.Left, Lanes.Right);
+                if (inputDelayTimer <= 0f)
+                {
+                    TrySwitchLane(Lanes.Left, Lanes.Right);
+                }
                 touchDirection = TouchDirection.None;
                 break;
 
             case TouchDirection.Right: //Right input
-                TrySwitchLane(Lanes.Right, Lanes.Left);
+                if (inputDelayTimer <= 0f)
+                {
+                    TrySwitchLane(Lanes.Right, Lanes.Left);
+                }
                 touchDirection = TouchDirection.None;
                 break;
 
