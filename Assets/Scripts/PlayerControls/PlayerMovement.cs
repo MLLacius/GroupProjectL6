@@ -90,7 +90,9 @@ public class PlayerMovement : MonoBehaviour
     private float inputDelayTimer = 0f;
     private RigidbodyConstraints lockedX = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
     private RigidbodyConstraints unlockedX = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+#if UNITY_ANDROID
     private TouchDirection touchDirection = TouchDirection.None;
+#endif
 
     private bool isStumbling = false;
     private bool isJumping = false;
