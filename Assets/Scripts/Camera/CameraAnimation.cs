@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 //Rob script 
@@ -8,9 +9,18 @@ public class CameraAnimation : MonoBehaviour
     [SerializeField] private CinemachineSplineDolly splineDolly;
     private CinemachineBrain cineBrain;
 
+    private float startingFOV;
+    private float targetFOV;
+    private float startingSplineOffset;
+    private float targetSplineOffset;
+
     private void Start()
     {
         cineBrain = GetComponent<CinemachineBrain>();
+        startingFOV = cineCam.Lens.FieldOfView;
+        targetFOV = startingFOV - 10;
+        startingSplineOffset = splineDolly.SplineOffset.y;
+        targetSplineOffset = startingSplineOffset - 0.5f;
     }
 
     public void CameraAnim()
@@ -18,31 +28,37 @@ public class CameraAnimation : MonoBehaviour
         cineCamera.SetActive(true);
     }
 
-    public void CameraPanIn(float i, float decreaseAmount)
+    public IEnumerator CameraPanIn(float timeToComplete)
     {
-        if (cineCam.Lens.FieldOfView > i)
-        {
-            cineCam.Lens.FieldOfView -= decreaseAmount;
-            Debug.Log("FOV: " + cineCam.Lens.FieldOfView);
-        }
+        float elapsedTime = 0f;
 
-        if(splineDolly.SplineOffset.y > -0.5)
+        while(elapsedTime < timeToComplete)
         {
-            splineDolly.SplineOffset.y -= decreaseAmount / 10;
+            elapsedTime += Time.deltaTime;
+
+            float lerpValue = elapsedTime / timeToComplete;
+
+            cineCam.Lens.FieldOfView = Mathf.Lerp(startingFOV, targetFOV, lerpValue);
+            splineDolly.SplineOffset.y = Mathf.Lerp(startingSplineOffset, targetSplineOffset, lerpValue);
+
+            yield return null;
         }
     }
 
-    public void CameraPanOut(float i, float increaseAmount)
+    public IEnumerator CameraPanOut(float timeToComplete)
     {
-        if (cineCam.Lens.FieldOfView < i)
-        {
-            cineCam.Lens.FieldOfView += increaseAmount;
-            Debug.Log("FOV: " + cineCam.Lens.FieldOfView);
-        }
+        float elapsedTime = 0f;
 
-        if (splineDolly.SplineOffset.y < 0)
+        while (elapsedTime < timeToComplete)
         {
-            splineDolly.SplineOffset.y += increaseAmount / 10;
+            elapsedTime += Time.deltaTime;
+
+            float lerpValue = elapsedTime / timeToComplete;
+
+            cineCam.Lens.FieldOfView = Mathf.Lerp(targetFOV, startingFOV, lerpValue);
+            splineDolly.SplineOffset.y = Mathf.Lerp(targetSplineOffset, startingSplineOffset, lerpValue);
+
+            yield return null;
         }
     }
 
