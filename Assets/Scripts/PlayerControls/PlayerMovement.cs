@@ -75,7 +75,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool isPlayerDashing = false;
     [SerializeField] private float dashEndInvincibilityTime = 0.5f; //How long the player is invincible after dash ends
     [SerializeField] private bool canDashWhileStumbling = false;
-    [SerializeField] private bool enableTouchControls;
 
     [Header("Ground Detection")]
     [SerializeField] private Transform groundCheckTransform;
@@ -480,40 +479,31 @@ public class PlayerMovement : MonoBehaviour
 
     public void InitialiseControlScheme()
     {
-        if (!(Application.platform == RuntimePlatform.Android) && !enableTouchControls)
-        {
-            jumpAction = InputSystem.actions.FindAction("Jump");
+        jumpAction = InputSystem.actions.FindAction("Jump");
 
-            if (PlayerPrefs.HasKey("ControlSchemeKey"))
+        if (PlayerPrefs.HasKey("ControlSchemeKey"))
+        {
+            //change the referenced input actions based on current control scheme pulled from player prefs
+            switch (PlayerPrefs.GetInt("ControlSchemeKey"))
             {
-                //change the referenced input actions based on current control scheme pulled from player prefs
-                switch (PlayerPrefs.GetInt("ControlSchemeKey"))
-                {
-                    case 0:
-                        moveAction = InputSystem.actions.FindAction("Move (WASD)");
-                        dashAction = InputSystem.actions.FindAction("Dash (WASD)");
-                        break;
-                    case 1:
-                        moveAction = InputSystem.actions.FindAction("Move (ArrowKeys)");
-                        dashAction = InputSystem.actions.FindAction("Dash (ArrowKeys)");
-                        break;
-                    default:
-                        moveAction = InputSystem.actions.FindAction("Move (WASD)");
-                        dashAction = InputSystem.actions.FindAction("Dash (WASD)");
-                        break;
-                }
-            }
-            else
-            {
-                moveAction = InputSystem.actions.FindAction("Move (WASD)");
-                dashAction = InputSystem.actions.FindAction("Dash (WASD)");
+                case 0:
+                    moveAction = InputSystem.actions.FindAction("Move (WASD)");
+                    dashAction = InputSystem.actions.FindAction("Dash (WASD)");
+                    break;
+                case 1:
+                    moveAction = InputSystem.actions.FindAction("Move (ArrowKeys)");
+                    dashAction = InputSystem.actions.FindAction("Dash (ArrowKeys)");
+                    break;
+                default:
+                    moveAction = InputSystem.actions.FindAction("Move (WASD)");
+                    dashAction = InputSystem.actions.FindAction("Dash (WASD)");
+                    break;
             }
         }
         else
         {
-            moveAction = InputSystem.actions.FindAction("Move (Mobile)");
+            moveAction = InputSystem.actions.FindAction("Move (WASD)");
             dashAction = InputSystem.actions.FindAction("Dash (WASD)");
-            jumpAction = InputSystem.actions.FindAction("Jump (Mobile)");
         }
 
         dashAction.Enable(); //this prevents a very specific bug where dashing will not work during runs following the first tutorial (if the game is not closed/reset) for the control scheme that was not used in said tutorial if the control scheme was changed before the first tutorial

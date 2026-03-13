@@ -207,7 +207,6 @@ public class TutorialStateManager : MonoBehaviour
         yield return new WaitUntil(() => tutorialChecks[2]);
 
         firstTutorialObjects[3].SetActive(false);
-        firstTutorialObjectsHolder.SetActive(false);
 
         Time.timeScale = 1f;
         playerMovement.EnableActions(0);
