@@ -22,5 +22,19 @@ public class LevelSectionManager : LevelSpawner
         {
             Debug.Log(prefab.name);
         }
+
+        prefabGroup2 = Resources.LoadAll<GameObject>("Area2Obstacles");
+
+        foreach (GameObject prefab in prefabGroup2)
+        {
+            Debug.Log(prefab.name);
+        }
+
+        prefabGroup3 = Resources.LoadAll<GameObject>("Area3Obstacles");
+
+        foreach (GameObject prefab in prefabGroup3)
+        {
+            Debug.Log(prefab.name);
+        }
     }
 }

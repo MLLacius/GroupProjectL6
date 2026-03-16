@@ -303,6 +303,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SegmentData
   segmentLength: 15
+  hardSegments:
+  - {fileID: 9098834875976951334, guid: b4a4dca8e40c7974cb263156cad3bcc8, type: 3}
+  impossibleSegments: []
 --- !u!1001 &285513436943344718
 PrefabInstance:
   m_ObjectHideFlags: 0

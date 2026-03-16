@@ -33,6 +33,7 @@ public class LevelSpawner : MonoBehaviour
     private List<GameObject> activeSegments = new List<GameObject>(); 
 
     private bool movementStopped = false;
+    private string lastSpawnedSegment;
     
 
     //Instead of instanting and destroying segments, we're using an object pool
@@ -134,9 +135,27 @@ public class LevelSpawner : MonoBehaviour
         int selectedPrefabIndex = Random.Range(0, levelPrefabs.Length);
         GameObject selectedPrefab = levelPrefabs[selectedPrefabIndex];
         GameObject segment = GetSegmentFromPool(selectedPrefab);
+
+        for (int i = 0; levelPrefabs.Length > i; i++)
+        {
+            if(lastSpawnedSegment == levelPrefabs[i].name)
+            {
+                levelPrefabs[i].GetComponent<SegmentData>().GetImpossibleSegments();
+
+                break;
+            }
+            else
+            {
+                continue;
+            }
+        }
+
         segment.transform.position = new Vector3(0, 0, spawnZ);
         segment.SetActive(true);
         activeSegments.Add(segment);
+
+        //create a reference to the last segment to check the difficulty of the next segment
+        lastSpawnedSegment = segment.name;
 
         //Get the individual segment length (this makes it so each segment does not have to be of equal length)
         SegmentData segmentData = segment.GetComponent<SegmentData>();
