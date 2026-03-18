@@ -8,6 +8,7 @@ public class PlayerDashAndDisplay : MonoBehaviour
     [SerializeField] private GameObject sliderFill;
     [SerializeField] private GameObject controlGlyphWASD;
     [SerializeField] private GameObject controlGlyphArrowKeys;
+    [SerializeField] private GameObject controlGlyphPress;
     private Slider dashDisplay;
 
     private float collectedCoins = 0;
@@ -145,6 +146,7 @@ public class PlayerDashAndDisplay : MonoBehaviour
         canDash = false;
         controlGlyphWASD.SetActive(false);
         controlGlyphArrowKeys.SetActive(false);
+        controlGlyphPress.SetActive(false);
         sliderFill.GetComponent<Image>().color = nonFilledColor;
         isDashing = true;
         isDashPrepared = false;
@@ -180,6 +182,7 @@ public class PlayerDashAndDisplay : MonoBehaviour
 
     private void ShowDashGlyph()
     {
+#if !UNITY_ANDROID || UNITY_EDITOR
         switch(PlayerPrefs.GetInt("ControlSchemeKey"))
         {
             case 0:
@@ -197,6 +200,11 @@ public class PlayerDashAndDisplay : MonoBehaviour
                 controlGlyphArrowKeys.SetActive(false);
                 break;
         }
+#endif
+
+#if UNITY_ANDROID
+        controlGlyphPress.SetActive(true);
+#endif
     }
 
     private IEnumerator TweenColorOnFullBar()

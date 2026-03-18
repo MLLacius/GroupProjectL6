@@ -3,4 +3,7 @@ https://www.kenney.nl/assets/impact-sounds - Player Dash (multiple assets + modi
 https://www.kenney.nl/assets/impact-sounds - Player Impact Hard (modified)
 https://pixabay.com/sound-effects/film-special-effects-rock-destroy-6409/ - Obstacle Destroy (modified)
 https://www.kenney.nl/assets/ui-pack - Majority of UI Elements
-
+https://www.flaticon.com/free-icon/press-button_9417126 - Press Icon
+https://www.flaticon.com/free-icon/swipe-left_9417110 - Swipe Left Icon
+https://www.flaticon.com/free-icon/swipe-right_9417109 - Swipe Right Icon
+https://www.flaticon.com/free-icon/swipe-up_9417111 - Swipe Up Icon

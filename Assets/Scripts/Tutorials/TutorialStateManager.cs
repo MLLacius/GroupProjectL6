@@ -14,6 +14,8 @@ public class TutorialStateManager : MonoBehaviour
     [SerializeField] private GameObject[] arrowKeysGlyphs = new GameObject[3];
     [SerializeField] private GameObject firstTutorialObjectsHolder;
     [SerializeField] private GameObject[] firstTutorialObjects = new GameObject[4];
+    [SerializeField] private GameObject swipeTutorialObjects;
+    [SerializeField] private GameObject swipeUpTutorialObject;
     [SerializeField] private Button stumbleExplaination;
 
     //ui elements to be disabled during first tutorial
@@ -111,6 +113,10 @@ public class TutorialStateManager : MonoBehaviour
         }
 #endif
 
+#if UNITY_ANDROID
+        swipeTutorialObjects.SetActive(true);
+#endif
+
         firstTutorialObjects[0].SetActive(true);
         firstTutorialObjects[1].SetActive(true);
 
@@ -126,6 +132,7 @@ public class TutorialStateManager : MonoBehaviour
         arrowKeysGlyphs[0].SetActive(false);
         arrowKeysGlyphs[1].SetActive(false);
 #endif
+        swipeTutorialObjects.SetActive(false);
         firstTutorialObjects[0].SetActive(false);
         firstTutorialObjects[1].SetActive(false);
 
@@ -171,6 +178,10 @@ public class TutorialStateManager : MonoBehaviour
         }
 #endif
 
+#if UNITY_ANDROID
+        swipeUpTutorialObject.SetActive(true);
+#endif
+
         firstTutorialObjects[2].SetActive(true);
 
         Time.timeScale = 0f;
@@ -183,6 +194,7 @@ public class TutorialStateManager : MonoBehaviour
         arrowKeysGlyphHolder.SetActive(false);
         arrowKeysGlyphs[2].SetActive(false);
 #endif
+        swipeUpTutorialObject.SetActive(false);
         firstTutorialObjects[2].SetActive(false);
 
         Time.timeScale = 1f;
