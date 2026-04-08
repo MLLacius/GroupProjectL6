@@ -1,0 +1,3 @@
+- Create a new scriptable object in this folder via create -> Scriptable Object -> Level Section Type
+- Base material: Material used for segment floor
+- Obstacles: List of prefab obstacles for segment to use

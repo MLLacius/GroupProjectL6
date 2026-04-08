@@ -6,9 +6,14 @@ using UnityEngine;
 public class SegmentData : MonoBehaviour
 {
     [SerializeField] private float segmentLength;
+    [SerializeField] private Material baseMaterial;
+    [SerializeField] private GameObject segmentFloor;
+    [SerializeField] private GameObject[] objectSpawners;
 
     [SerializeField] private GameObject[] hardSegments;
     [SerializeField] private GameObject[] impossibleSegments;
+
+    private LevelSpawner levelSpawner;
 
     //Hard and impossible segments combos notes for reference
     /*
@@ -30,6 +35,26 @@ public class SegmentData : MonoBehaviour
     Segment 3 - Segment 6 (Right Lane)
     Segment 2 - Segment 6
     */
+
+    private void Awake()
+    {
+        levelSpawner = FindFirstObjectByType<LevelSpawner>();
+        segmentFloor.GetComponent<MeshRenderer>().material = baseMaterial;
+    }
+
+    private void OnEnable()
+    {
+        UpdateSectionType();
+    }
+
+    public void UpdateSectionType()
+    {
+        segmentFloor.GetComponent<MeshRenderer>().material = levelSpawner.GetSectionData().baseMaterial;
+        for (int i = 0; i < objectSpawners.Length; i++)
+        {
+            objectSpawners[i].GetComponent<ObstacleSpawner>().UpdatePrefabList();
+        }
+    }
 
     public float GetSegmentLength()
     {

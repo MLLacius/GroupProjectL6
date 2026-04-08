@@ -21000,7 +21000,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2229341482224022280, guid: bcf8850a958ac419e82fb3ae8726cbd0, type: 3}
   m_PrefabInstance: {fileID: 1136476468846709606}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2102608575}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 249a36adeb472f44db1cea4ed36bbb22, type: 3}
@@ -23034,33 +23034,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2086196707}
   m_CullTransparentMesh: 1
---- !u!1 &2102608575 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6606079764639810192, guid: bcf8850a958ac419e82fb3ae8726cbd0, type: 3}
-  m_PrefabInstance: {fileID: 1136476468846709606}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2102608577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2102608575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32f143d0b1a3baa49830c67db20adc0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LevelSectionManager
-  levelPrefabs: []
-  tutorialLevelPrefabs: []
-  defaultSegmentLength: 0
-  menuInitialSegmentCount: 0
-  additionalInitialSegmentCount: 0
-  moveSpeed: 10
-  deleteZ: -20
-  moveSpeedGainPerSec: 0.01
-  maxMoveSpeed: 30
-  segmentBaseOptions: []
 --- !u!1 &2105983010
 GameObject:
   m_ObjectHideFlags: 0
@@ -23517,9 +23490,17 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2229341482224022280, guid: bcf8850a958ac419e82fb3ae8726cbd0, type: 3}
+      propertyPath: currentSectionType
+      value: 
+      objectReference: {fileID: 11400000, guid: bc6344ea30b2a614baad8be023302fab, type: 2}
+    - target: {fileID: 2229341482224022280, guid: bcf8850a958ac419e82fb3ae8726cbd0, type: 3}
       propertyPath: initialSegmentCount
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2229341482224022280, guid: bcf8850a958ac419e82fb3ae8726cbd0, type: 3}
+      propertyPath: startingSectionType
+      value: 
+      objectReference: {fileID: 11400000, guid: bc6344ea30b2a614baad8be023302fab, type: 2}
     - target: {fileID: 2229341482224022280, guid: bcf8850a958ac419e82fb3ae8726cbd0, type: 3}
       propertyPath: defaultSegmentLength
       value: 15
@@ -23631,10 +23612,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6606079764639810192, guid: bcf8850a958ac419e82fb3ae8726cbd0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2102608577}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcf8850a958ac419e82fb3ae8726cbd0, type: 3}
 --- !u!1001 &2153721136234904144
 PrefabInstance:

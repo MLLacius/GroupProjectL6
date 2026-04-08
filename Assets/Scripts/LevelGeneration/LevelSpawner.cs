@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Linq;
 //Luke script (the original version of this script was done together with everyone week 1)
 public class LevelSpawner : MonoBehaviour
 {
@@ -21,16 +20,17 @@ public class LevelSpawner : MonoBehaviour
     [SerializeField] private float deleteZ = -20f; // The Z position where segments get destroyed
     [SerializeField] private float moveSpeedGainPerSec = 0.01f;
     [SerializeField] private float maxMoveSpeed = 30f;
-
-    [Header("Level Variation")]
-    [SerializeField] private Material[] segmentBaseOptions;
-    protected Dictionary<int, Material> segmentBaseOptionsDict = new Dictionary<int, Material>();
     
     private GameMaster gameMaster;
     private TutorialStateManager tutorialStateManager;
+    private LevelSectionType[] levelSectionTypes;
+    [SerializeField] private LevelSectionType startingSectionType;
+    private LevelSectionType currentSectionType = null;
     private List<GameObject> spawnedLevels = new List<GameObject>(); 
     private float spawnZ = 0f;
-    private List<GameObject> activeSegments = new List<GameObject>(); 
+    private List<GameObject> activeSegments = new List<GameObject>();
+    private float currentSectionLength;
+    private float sectionChangeThreshold;
 
     private bool movementStopped = false;
     private string lastSpawnedSegment;
@@ -45,12 +45,10 @@ public class LevelSpawner : MonoBehaviour
     {
         gameMaster = GameObject.Find("Game Master").GetComponent<GameMaster>();
         tutorialStateManager = GameObject.Find("Game Master").GetComponent<TutorialStateManager>();
+        levelSectionTypes = Resources.LoadAll<LevelSectionType>("Level Sections");
+        currentSectionLength = 0;
+        currentSectionType = startingSectionType;
 
-        for (int i = 0; i < segmentBaseOptions.Length; i++)
-        {
-            segmentBaseOptionsDict.Add(i, segmentBaseOptions[i]);
-            Debug.Log(segmentBaseOptionsDict.Keys.ElementAt(i) + ", " + segmentBaseOptionsDict[i] + " added to dictionary");
-        }
         //Setup the dictionary
         foreach (GameObject prefab in levelPrefabs)
         {
@@ -61,6 +59,8 @@ public class LevelSpawner : MonoBehaviour
         {
             SpawnSegment();
         }
+
+        CalculateSectionThreshold();
     }
 
     private void Update()
@@ -68,6 +68,11 @@ public class LevelSpawner : MonoBehaviour
         UpdateMoveSpeed();
         MoveSegments();
         CheckForCleanup();
+
+        if(currentSectionLength == sectionChangeThreshold)
+        {
+            ChangeCurrentSection();
+        }
     }
 
     private void UpdateMoveSpeed()
@@ -180,6 +185,7 @@ public class LevelSpawner : MonoBehaviour
             {
                 spawner.SpawnObject();
             }
+            currentSectionLength += segmentData.GetSegmentLength();
         } 
     }
 
@@ -255,6 +261,28 @@ public class LevelSpawner : MonoBehaviour
         }
     }
 
+    private void CalculateSectionThreshold()
+    {
+        sectionChangeThreshold = Random.Range(currentSectionType.minLength, currentSectionType.maxLength);
+        while (sectionChangeThreshold % 15 != 0)
+        {
+            sectionChangeThreshold = Random.Range(currentSectionType.minLength, currentSectionType.maxLength);
+            Debug.Log("Section range threshold: " + sectionChangeThreshold);
+
+            if (sectionChangeThreshold % 15 == 0)
+            {
+                break;
+            }
+        }
+    }
+
+    private void ChangeCurrentSection()
+    {
+        currentSectionType = levelSectionTypes[Random.Range(0, levelSectionTypes.Length)];
+        currentSectionLength = 0;
+        CalculateSectionThreshold();
+    }
+
     public float GetSpeed()
     {
         return moveSpeed;
@@ -280,5 +308,10 @@ public class LevelSpawner : MonoBehaviour
     {
         moveSpeed = 0f;
         movementStopped = true;
+    }
+
+    public LevelSectionType GetSectionData()
+    {
+        return currentSectionType;
     }
 }

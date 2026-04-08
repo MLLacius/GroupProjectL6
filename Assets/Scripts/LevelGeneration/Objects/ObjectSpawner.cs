@@ -1,15 +1,18 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 //Luke script and Leyton tweaked slightly
 public abstract class ObjectSpawner : MonoBehaviour
 {
-    [SerializeField] protected GameObject[] prefabList;
+    [SerializeField] protected List<GameObject> prefabList;
     
     // Pool of objects
     private static Dictionary<string, Queue<GameObject>> objectPool = new Dictionary<string, Queue<GameObject>>();
     private static bool isInitialized = false;
     protected GameObject spawnedObject;
+
+    private LevelSpawner levelSpawner; 
 
     protected virtual void Awake()
     {
@@ -25,9 +28,9 @@ public abstract class ObjectSpawner : MonoBehaviour
 
     public virtual void SpawnObject()
     {
-        if(prefabList.Length == 0) return;
+        if(prefabList.Count == 0) return;
 
-        int selectedIndex = Random.Range(0, prefabList.Length);
+        int selectedIndex = UnityEngine.Random.Range(0, prefabList.Count);
         GameObject selectedPrefab = prefabList[selectedIndex];
         
         GameObject spawnedPrefab = GetPooledObject(selectedPrefab);
@@ -94,5 +97,17 @@ public abstract class ObjectSpawner : MonoBehaviour
     private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         objectPool.Clear();
+    }
+
+    public void UpdatePrefabList()
+    {
+        levelSpawner = FindFirstObjectByType<LevelSpawner>();
+
+        prefabList.Clear();
+
+        for (int i = 0; i < levelSpawner.GetSectionData().obstacles.Length; i++)
+        {
+            prefabList.Add(levelSpawner.GetSectionData().obstacles[i]);
+        }
     }
 }
