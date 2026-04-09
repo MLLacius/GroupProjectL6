@@ -185,7 +185,7 @@ public class LevelSpawner : MonoBehaviour
             {
                 spawner.SpawnObject();
             }
-            currentSectionLength += segmentData.GetSegmentLength();
+            currentSectionLength += (segmentData.GetSegmentLength() / segmentData.GetSegmentLength());
         } 
     }
 
@@ -263,17 +263,8 @@ public class LevelSpawner : MonoBehaviour
 
     private void CalculateSectionThreshold()
     {
-        sectionChangeThreshold = Random.Range(currentSectionType.minLength, currentSectionType.maxLength);
-        while (sectionChangeThreshold % 15 != 0)
-        {
-            sectionChangeThreshold = Random.Range(currentSectionType.minLength, currentSectionType.maxLength);
-            Debug.Log("Section range threshold: " + sectionChangeThreshold);
-
-            if (sectionChangeThreshold % 15 == 0)
-            {
-                break;
-            }
-        }
+        sectionChangeThreshold = Random.Range(currentSectionType.minSegmentCount, currentSectionType.maxSegmentCount);
+        Debug.Log("Section range threshold: " + sectionChangeThreshold);
     }
 
     private void ChangeCurrentSection()

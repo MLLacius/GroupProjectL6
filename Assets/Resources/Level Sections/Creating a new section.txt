@@ -1,3 +1,5 @@
 - Create a new scriptable object in this folder via create -> Scriptable Object -> Level Section Type
 - Base material: Material used for segment floor
 - Obstacles: List of prefab obstacles for segment to use
+- Min segment count: Minimum amount of segments the section lasts for before it can change
+- Max segment count: Maximum amount of segments the section lasts for before it can change

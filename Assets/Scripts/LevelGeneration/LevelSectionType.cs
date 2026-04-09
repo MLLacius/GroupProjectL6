@@ -14,6 +14,6 @@ public class LevelSectionType : ScriptableObject
 
     public Material baseMaterial;
     public GameObject[] obstacles;
-    [Min(15)] public int minLength;
-    public int maxLength;
+    [Min(15)] public int minSegmentCount;
+    public int maxSegmentCount;
 }
