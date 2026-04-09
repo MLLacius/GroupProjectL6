@@ -101,6 +101,7 @@ public abstract class ObjectSpawner : MonoBehaviour
 
     public void UpdatePrefabList()
     {
+        //change the set of obstacles used by the obstacle spawner depending on the section type
         levelSpawner = FindFirstObjectByType<LevelSpawner>();
 
         prefabList.Clear();

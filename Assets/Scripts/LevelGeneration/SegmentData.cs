@@ -1,7 +1,7 @@
 using UnityEngine;
 
 //This script just holds some data on the segment for level gen
-//There shouldn't be any functionality within this script outside of getters/setters
+//There shouldn't be any functionality within this script outside of getters/setters (other than updating for section types)
 //Luke script
 public class SegmentData : MonoBehaviour
 {
@@ -49,6 +49,7 @@ public class SegmentData : MonoBehaviour
 
     public void UpdateSectionType()
     {
+        //update segment for current section type
         segmentFloor.GetComponent<MeshRenderer>().material = levelSpawner.GetSectionData().baseMaterial;
         for (int i = 0; i < objectSpawners.Length; i++)
         {

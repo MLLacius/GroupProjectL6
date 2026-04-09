@@ -45,7 +45,7 @@ public class LevelSpawner : MonoBehaviour
     {
         gameMaster = GameObject.Find("Game Master").GetComponent<GameMaster>();
         tutorialStateManager = GameObject.Find("Game Master").GetComponent<TutorialStateManager>();
-        levelSectionTypes = Resources.LoadAll<LevelSectionType>("Level Sections");
+        levelSectionTypes = Resources.LoadAll<LevelSectionType>("Level Sections"); //load the scriptable objects used to store section presets
         currentSectionLength = 0;
         currentSectionType = startingSectionType;
 
@@ -69,6 +69,7 @@ public class LevelSpawner : MonoBehaviour
         MoveSegments();
         CheckForCleanup();
 
+        //change the section type if the required number of segments have spawned
         if(currentSectionLength == sectionChangeThreshold)
         {
             ChangeCurrentSection();
