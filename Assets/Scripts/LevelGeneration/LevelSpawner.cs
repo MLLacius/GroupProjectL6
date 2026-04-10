@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 //Luke script (the original version of this script was done together with everyone week 1)
 public class LevelSpawner : MonoBehaviour
 {
@@ -33,7 +34,8 @@ public class LevelSpawner : MonoBehaviour
     private float sectionChangeThreshold;
 
     private bool movementStopped = false;
-    private string lastSpawnedSegment;
+    private List<GameObject> impossibleNextSegments;
+    private string previousSegment;
     
 
     //Instead of instanting and destroying segments, we're using an object pool
@@ -138,30 +140,47 @@ public class LevelSpawner : MonoBehaviour
 
     private void SpawnSegment()
     {
-        int selectedPrefabIndex = Random.Range(0, levelPrefabs.Length);
-        GameObject selectedPrefab = levelPrefabs[selectedPrefabIndex];
-        GameObject segment = GetSegmentFromPool(selectedPrefab);
+        GameObject selectedPrefab;
+        bool isValidCombination = false;
 
-        for (int i = 0; levelPrefabs.Length > i; i++)
+        do
         {
-            if(lastSpawnedSegment == levelPrefabs[i].name)
-            {
-                levelPrefabs[i].GetComponent<SegmentData>().GetImpossibleSegments();
+            int selectedPrefabIndex = Random.Range(0, levelPrefabs.Length);
+             selectedPrefab = levelPrefabs[selectedPrefabIndex];
 
+            if(impossibleNextSegments == null || impossibleNextSegments.Count == 0)
+            {
                 break;
             }
-            else
+
+            for(int i = 0; i < impossibleNextSegments.Count; i++)
             {
-                continue;
+                if(selectedPrefab.name == impossibleNextSegments[i].name)
+                {
+                    Debug.Log("Level spawner tried to make an impossible segment combination: " + previousSegment + " + " + impossibleNextSegments[i].name + " at " + Time.time);
+                    break;
+                }
+                else
+                {
+                    isValidCombination = true;
+                }
             }
         }
+        while (!isValidCombination);
+
+        GameObject segment = GetSegmentFromPool(selectedPrefab);
 
         segment.transform.position = new Vector3(0, 0, spawnZ);
         segment.SetActive(true);
         activeSegments.Add(segment);
 
-        //create a reference to the last segment to check the difficulty of the next segment
-        lastSpawnedSegment = segment.name;
+        //create a reference to the last segment's impossible combinations for spawning the next segment
+        if (impossibleNextSegments != null)
+        {
+            impossibleNextSegments.Clear();
+        }
+        impossibleNextSegments = segment.GetComponent<SegmentData>().GetImpossibleSegments().ToList();
+        previousSegment = segment.name;
 
         //Get the individual segment length (this makes it so each segment does not have to be of equal length)
         SegmentData segmentData = segment.GetComponent<SegmentData>();
