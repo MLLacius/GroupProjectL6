@@ -35,6 +35,7 @@ public class LevelSpawner : MonoBehaviour
 
     private bool movementStopped = false;
     private List<GameObject> impossibleNextSegments;
+    private List<GameObject> hardNextSegments;
     private string previousSegment;
     
 
@@ -168,6 +169,35 @@ public class LevelSpawner : MonoBehaviour
         }
         while (!isValidCombination);
 
+        if (gameMaster.GetDifficulty() != 2)
+        {
+            isValidCombination = false;
+            do
+            {
+                int selectedPrefabIndex = Random.Range(0, levelPrefabs.Length);
+                selectedPrefab = levelPrefabs[selectedPrefabIndex];
+
+                if (hardNextSegments == null || hardNextSegments.Count == 0)
+                {
+                    break;
+                }
+
+                for (int i = 0; i < hardNextSegments.Count; i++)
+                {
+                    if (selectedPrefab.name == hardNextSegments[i].name)
+                    {
+                        Debug.Log("Level spawner tried to make an hard segment combination: " + previousSegment + " + " + hardNextSegments[i].name + " at " + Time.time);
+                        break;
+                    }
+                    else
+                    {
+                        isValidCombination = true;
+                    }
+                }
+            }
+            while (!isValidCombination);
+        }
+
         GameObject segment = GetSegmentFromPool(selectedPrefab);
 
         segment.transform.position = new Vector3(0, 0, spawnZ);
@@ -180,6 +210,17 @@ public class LevelSpawner : MonoBehaviour
             impossibleNextSegments.Clear();
         }
         impossibleNextSegments = segment.GetComponent<SegmentData>().GetImpossibleSegments().ToList();
+
+        //create a reference to the last segment's hard combinations for spawning the next segment if the difficulty is low
+        if (gameMaster.GetDifficulty() != 2)
+        {
+            if (hardNextSegments != null)
+            {
+                hardNextSegments.Clear();
+            }
+            hardNextSegments = segment.GetComponent<SegmentData>().GetHardSegments().ToList();
+        }
+
         previousSegment = segment.name;
 
         //Get the individual segment length (this makes it so each segment does not have to be of equal length)

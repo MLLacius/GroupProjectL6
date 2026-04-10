@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Unity.Cinemachine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering.PostProcessing;
 //Luke script mainly, shara contributed a few lines, Leyton added scoring/tutorial logic
 public class GameMaster : MonoBehaviour
 {
@@ -22,7 +23,10 @@ public class GameMaster : MonoBehaviour
 
     [SerializeField] private GameState gameState;
     [SerializeField] private CinemachineCamera cineCam;
-    
+
+    [Tooltip("0 = Easy, 1 = Normal, 2 = Hard")]
+    [SerializeField, UnityEngine.Min(0), Max(2)] private int gameDifficultyID; 
+
     private float rawScore;
     private float scoreOffset;
     private float tutorialOffset;
@@ -83,6 +87,7 @@ public class GameMaster : MonoBehaviour
                     OnHighScoreAchieved.Invoke();
                 }
             }
+            UpdateDifficulty();
             return;
         }
         else if (gameState == GameState.FirstTutorial)
@@ -157,6 +162,11 @@ public class GameMaster : MonoBehaviour
         return collectiblesGained;
     }
 
+    public int GetDifficulty()
+    {
+        return gameDifficultyID;
+    }
+
     //Returns true/false depending on whether the player can spend the requested amount of collectibles
     public bool TrySpendCollectibles(int amount)
     {
@@ -227,5 +237,26 @@ public class GameMaster : MonoBehaviour
         Debug.Log("Dash destruction bonus: " + dashDestructionBonus.ToString());
         rawScore += dashDestructionBonus;
         return;
+    }
+
+    private void UpdateDifficulty()
+    {
+        switch (currentScore)
+        {
+            case 0:
+                gameDifficultyID = 0;
+                Debug.Log("Difficulty set to easy");
+            break;
+
+            case 500: 
+                gameDifficultyID = 1;
+                Debug.Log("Difficulty set to medium");
+                break;
+
+            case 1000:
+                gameDifficultyID = 2;
+                Debug.Log("Difficulty set to hard");
+                break;
+        }
     }
 }

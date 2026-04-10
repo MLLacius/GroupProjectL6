@@ -23740,6 +23740,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1106205023}
     - target: {fileID: 8377336787629280370, guid: 0f3f7d1d6bbc94929b265d48af9b9429, type: 3}
+      propertyPath: gameDifficultyID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8377336787629280370, guid: 0f3f7d1d6bbc94929b265d48af9b9429, type: 3}
       propertyPath: PlayerDashAndDisplay
       value: 
       objectReference: {fileID: 480294354}
