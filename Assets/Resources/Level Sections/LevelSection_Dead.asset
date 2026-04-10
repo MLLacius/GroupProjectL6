@@ -17,5 +17,5 @@ MonoBehaviour:
   - {fileID: 6445847162815758754, guid: c5bf3e88b5c85da4999dcc75d3e0bc6f, type: 3}
   - {fileID: 2117490036210599222, guid: c99b5430f3f0eca438d83190e2cdf8cf, type: 3}
   - {fileID: 1753432967900362907, guid: 717c590073a44c742806f66e8f4cc94f, type: 3}
-  minLength: 300
-  maxLength: 750
+  minSegmentCount: 20
+  maxSegmentCount: 50
