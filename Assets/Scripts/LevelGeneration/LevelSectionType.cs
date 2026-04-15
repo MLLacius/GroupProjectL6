@@ -12,8 +12,25 @@ public class LevelSectionType : ScriptableObject
     - Min/Max Length/Duration
     */
 
+    public enum Difficulty
+    {
+        Easy,
+        Medium,
+        Hard
+    }
+
+    [Tooltip("Material used for segment floor")]
     public Material baseMaterial;
+
+    [Tooltip("Pool of obstacles that obstacle spawners on sgement can use")]
     public GameObject[] obstacles;
+
+    [Tooltip("Minimum amount of segments section can last for")]
     [Min(15)] public int minSegmentCount;
+
+    [Tooltip("Maximum amount of segemnts section can last for")]
     public int maxSegmentCount;
+
+    [Tooltip("Section will start appearing from this difficulty onwards")]
+    public Difficulty startingDifficulty;
 }
