@@ -19,3 +19,4 @@ MonoBehaviour:
   - {fileID: 1753432967900362907, guid: 717c590073a44c742806f66e8f4cc94f, type: 3}
   minSegmentCount: 20
   maxSegmentCount: 50
+  startingDifficulty: 1

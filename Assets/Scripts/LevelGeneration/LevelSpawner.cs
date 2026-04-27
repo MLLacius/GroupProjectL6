@@ -330,7 +330,17 @@ public class LevelSpawner : MonoBehaviour
 
     private void ChangeCurrentSection()
     {
-        currentSectionType = levelSectionTypes[Random.Range(0, levelSectionTypes.Length)];
+        LevelSectionType levelSectionTypeHolder;
+
+        do 
+        {
+            levelSectionTypeHolder = levelSectionTypes[Random.Range(0, levelSectionTypes.Length)];
+            Debug.Log("Attempting to change section type to: " + levelSectionTypeHolder.name);
+        }
+        while (!((int)levelSectionTypeHolder.startingDifficulty <= gameMaster.GetDifficulty()));
+
+        currentSectionType = levelSectionTypeHolder;
+        Debug.Log("Current section type changed to: " + currentSectionType.name);
         currentSectionLength = 0;
         CalculateSectionThreshold();
     }
