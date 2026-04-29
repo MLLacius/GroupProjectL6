@@ -1,6 +1,7 @@
-using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
+using UnityEngine;
 //Luke script (the original version of this script was done together with everyone week 1)
 public class LevelSpawner : MonoBehaviour
 {
@@ -34,8 +35,7 @@ public class LevelSpawner : MonoBehaviour
     private float sectionChangeThreshold;
 
     private bool movementStopped = false;
-    private List<GameObject> impossibleNextSegments;
-    private List<GameObject> hardNextSegments;
+    private List<GameObject> impossibleNextSegments, hardNextSegments, mediumNextSegments;
     private string previousSegment;
     
 
@@ -141,61 +141,18 @@ public class LevelSpawner : MonoBehaviour
 
     private void SpawnSegment()
     {
-        GameObject selectedPrefab;
-        bool isValidCombination = false;
+        GameObject selectedPrefab = levelPrefabs[Random.Range(0, levelPrefabs.Length)];
 
-        do
+        CheckSegmentCombos(impossibleNextSegments, selectedPrefab);
+
+        if (gameMaster.GetDifficulty() != 1)
         {
-            int selectedPrefabIndex = Random.Range(0, levelPrefabs.Length);
-             selectedPrefab = levelPrefabs[selectedPrefabIndex];
-
-            if(impossibleNextSegments == null || impossibleNextSegments.Count == 0)
-            {
-                break;
-            }
-
-            for(int i = 0; i < impossibleNextSegments.Count; i++)
-            {
-                if(selectedPrefab.name == impossibleNextSegments[i].name)
-                {
-                    Debug.Log("Level spawner tried to make an impossible segment combination: " + previousSegment + " + " + impossibleNextSegments[i].name + " at " + Time.time);
-                    break;
-                }
-                else
-                {
-                    isValidCombination = true;
-                }
-            }
+            CheckSegmentCombos(mediumNextSegments, selectedPrefab);
         }
-        while (!isValidCombination);
 
         if (gameMaster.GetDifficulty() != 2)
         {
-            isValidCombination = false;
-            do
-            {
-                int selectedPrefabIndex = Random.Range(0, levelPrefabs.Length);
-                selectedPrefab = levelPrefabs[selectedPrefabIndex];
-
-                if (hardNextSegments == null || hardNextSegments.Count == 0)
-                {
-                    break;
-                }
-
-                for (int i = 0; i < hardNextSegments.Count; i++)
-                {
-                    if (selectedPrefab.name == hardNextSegments[i].name)
-                    {
-                        Debug.Log("Level spawner tried to make an hard segment combination: " + previousSegment + " + " + hardNextSegments[i].name + " at " + Time.time);
-                        break;
-                    }
-                    else
-                    {
-                        isValidCombination = true;
-                    }
-                }
-            }
-            while (!isValidCombination);
+            CheckSegmentCombos(hardNextSegments, selectedPrefab);
         }
 
         GameObject segment = GetSegmentFromPool(selectedPrefab);
@@ -211,14 +168,24 @@ public class LevelSpawner : MonoBehaviour
         }
         impossibleNextSegments = segment.GetComponent<SegmentData>().GetImpossibleSegments().ToList();
 
-        //create a reference to the last segment's hard combinations for spawning the next segment if the difficulty is low
         if (gameMaster.GetDifficulty() != 2)
         {
+            //create a reference to the last segment's hard combinations for spawning the next segment
             if (hardNextSegments != null)
             {
                 hardNextSegments.Clear();
             }
             hardNextSegments = segment.GetComponent<SegmentData>().GetHardSegments().ToList();
+        }
+
+        if (gameMaster.GetDifficulty() != 1)
+        {
+            //create a reference to the last segment's medium combinations for spawning the next segment
+            if (mediumNextSegments != null)
+            {
+                mediumNextSegments.Clear();
+            }
+            mediumNextSegments = segment.GetComponent<SegmentData>().GetMediumSegments().ToList();
         }
 
         previousSegment = segment.name;
@@ -247,7 +214,38 @@ public class LevelSpawner : MonoBehaviour
                 spawner.SpawnObject();
             }
             currentSectionLength += (segmentData.GetSegmentLength() / segmentData.GetSegmentLength());
-        } 
+        }
+    }
+
+    private void CheckSegmentCombos(List<GameObject> nextSegments, GameObject selectedPrefab)
+    {
+        bool isValidCombination;
+
+        isValidCombination = false;
+        do
+        {
+            int selectedPrefabIndex = Random.Range(0, levelPrefabs.Length);
+            selectedPrefab = levelPrefabs[selectedPrefabIndex];
+
+            if (nextSegments == null || nextSegments.Count == 0)
+            {
+                break;
+            }
+
+            for (int i = 0; i < nextSegments.Count; i++)
+            {
+                if (selectedPrefab.name == nextSegments[i].name)
+                {
+                    Debug.Log("Level spawner tried to make a disallowed segment combination: " + previousSegment + " + " + nextSegments[i].name + " at " + Time.time + "s");
+                    break;
+                }
+                else
+                {
+                    isValidCombination = true;
+                }
+            }
+        }
+        while (!isValidCombination);
     }
 
     private void SpawnTutorialSegment(int index)

@@ -17,7 +17,7 @@ MonoBehaviour:
   upgradeIcon: {fileID: 0}
   levelDefinitions:
   - levelDescription: Awards bonus score when destroying obstacles while dashing.
-    cost: 500
+    cost: 50
     upgradeValue: 5
   - levelDescription: Increases bonus score when destroying an obstacle with dash
     cost: 1000

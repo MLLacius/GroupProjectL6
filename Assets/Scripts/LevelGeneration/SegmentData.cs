@@ -10,8 +10,7 @@ public class SegmentData : MonoBehaviour
     [SerializeField] private GameObject segmentFloor;
     [SerializeField] private GameObject[] objectSpawners;
 
-    [SerializeField] private GameObject[] hardSegments;
-    [SerializeField] private GameObject[] impossibleSegments;
+    [SerializeField] private GameObject[] impossibleSegments, hardSegments, mediumSegments;
 
     private LevelSpawner levelSpawner;
 
@@ -62,13 +61,18 @@ public class SegmentData : MonoBehaviour
         return segmentLength; 
     }
 
+    public GameObject[] GetImpossibleSegments()
+    {
+        return impossibleSegments;
+    }
+
     public GameObject[] GetHardSegments()
     {
         return hardSegments;
     }
 
-    public GameObject[] GetImpossibleSegments()
+    public GameObject[] GetMediumSegments()
     {
-        return impossibleSegments;
+        return mediumSegments;
     }
 }
