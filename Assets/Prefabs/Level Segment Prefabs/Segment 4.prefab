@@ -310,6 +310,8 @@ MonoBehaviour:
   - {fileID: 8448213519099176390}
   - {fileID: 4286159160264864258}
   - {fileID: 309458899790891756}
+  mediumSegments:
+  - {fileID: 9098834875976951334, guid: 976a956836cb4e546b2ee3030921e1f4, type: 3}
   hardSegments:
   - {fileID: 9098834875976951334, guid: b4a4dca8e40c7974cb263156cad3bcc8, type: 3}
   impossibleSegments: []

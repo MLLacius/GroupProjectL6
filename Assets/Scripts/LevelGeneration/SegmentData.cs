@@ -10,12 +10,20 @@ public class SegmentData : MonoBehaviour
     [SerializeField] private GameObject segmentFloor;
     [SerializeField] private GameObject[] objectSpawners;
 
-    [SerializeField] private GameObject[] impossibleSegments, hardSegments, mediumSegments;
+    [SerializeField] private GameObject[] mediumSegments, hardSegments, impossibleSegments;
 
     private LevelSpawner levelSpawner;
 
     //Hard and impossible segments combos notes for reference
     /*
+    Medium -
+    Segment 1 - Segment 3
+    Segment 7 - Segment 8
+    Segment 4 - Segment 8
+    Segment 2 - Segment 9
+    Segment 5 - Segment 8
+    Segment 3 - Segment 9
+
     Hard -
     Segment 1 - Segment 4
     Segment 1 - Segment 8
@@ -28,6 +36,7 @@ public class SegmentData : MonoBehaviour
     Segment 3 - Segment 8 (Right Lane)
     Segment 2 - Segment 5
     Segment 4 - Segment 6
+    Segment 2 - Segment 8
 
     Impossible -
     Segment 7 - Segment 6
