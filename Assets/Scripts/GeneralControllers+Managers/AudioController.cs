@@ -7,6 +7,7 @@ public class AudioController : MonoBehaviour
     [SerializeField] private AudioSource dashing;
     [SerializeField] private AudioSource hardPlayerImpact;
     [SerializeField] private AudioSource obstacleDestroy;
+    [SerializeField] private AudioSource playerMove, playerJump;
 
     private float timePassed = 0;
 
@@ -46,5 +47,15 @@ public class AudioController : MonoBehaviour
     public void PlayObstacleDestroy()
     {
         obstacleDestroy.Play();
+    }
+
+    public void PlayPlayerMove()
+    {
+        playerMove.Play();
+    }
+
+    public void PlayPlayerJump()
+    {
+        playerJump.Play();
     }
 }

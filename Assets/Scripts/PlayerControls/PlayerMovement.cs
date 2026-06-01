@@ -54,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private TutorialButtons tutorialButtons;
     [SerializeField] private StumbleRecoveryProgress stumbleRecoveryProgress;
     [SerializeField] private CinemachineImpulseSource cinemachineImpulse; //Reference to the camera shake script to trigger shakes on stumble
+    [SerializeField] private AudioController audioController;
     private GameMaster gameMaster;
     private LevelSpawner levelSpawner;
     private CameraAnimation cameraAnimation;
@@ -108,6 +109,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float worldSpeedRayDistanceMultiplier = 1f;
     [SerializeField] LayerMask obstacleLayers;
     [SerializeField] private bool invincibilityTesting = false;
+
+    private void Awake()
+    {
+        if(!audioController)
+        {
+            audioController = GameObject.Find("AudioController").GetComponent<AudioController>();
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
@@ -344,6 +353,7 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(SmoothLaneSwitch(targetX));
         currentLane = finalTargetLane;
         inputDelayTimer = nextInputDelay;
+        audioController.PlayPlayerMove();
         OnLaneChange.Invoke();
     }
 
@@ -387,6 +397,7 @@ public class PlayerMovement : MonoBehaviour
         playerRigidbody.linearVelocity = velocity;
         playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         currentJumpDelay = jumpInputDelay;
+        audioController.PlayPlayerJump();
         OnJump.Invoke();
     }
 
