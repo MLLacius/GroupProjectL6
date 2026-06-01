@@ -322,6 +322,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   segmentLength: 15
+  baseMaterial: {fileID: 0}
+  segmentFloor: {fileID: 0}
+  objectSpawners: []
+  mediumSegments: []
+  hardSegments: []
+  impossibleSegments: []
 --- !u!1001 &149193024514326943
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -332,7 +338,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4144726785409909332, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_Name
-      value: CoinSpawnPoint (4)
+      value: CollectibleSpawnPoint
       objectReference: {fileID: 0}
     - target: {fileID: 4144726785409909332, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_IsActive
@@ -398,7 +404,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4144726785409909332, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_Name
-      value: CoinSpawnPoint (5)
+      value: CollectibleSpawnPoint
       objectReference: {fileID: 0}
     - target: {fileID: 4144726785409909332, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_IsActive
@@ -596,7 +602,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4144726785409909332, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_Name
-      value: CoinSpawnPoint (1)
+      value: CollectibleSpawnPoint
       objectReference: {fileID: 0}
     - target: {fileID: 4144726785409909332, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_IsActive
@@ -662,7 +668,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4144726785409909332, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_Name
-      value: CoinSpawnPoint (8)
+      value: CollectibleSpawnPoint
       objectReference: {fileID: 0}
     - target: {fileID: 4144726785409909332, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_IsActive
@@ -992,7 +998,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4144726785409909332, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_Name
-      value: CoinSpawnPoint (3)
+      value: CollectibleSpawnPoint
       objectReference: {fileID: 0}
     - target: {fileID: 4144726785409909332, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_IsActive
@@ -1124,7 +1130,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4144726785409909332, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_Name
-      value: CoinSpawnPoint (2)
+      value: CollectibleSpawnPoint
       objectReference: {fileID: 0}
     - target: {fileID: 4144726785409909332, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_IsActive
@@ -1322,7 +1328,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4144726785409909332, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_Name
-      value: CoinSpawnPoint (7)
+      value: CollectibleSpawnPoint
       objectReference: {fileID: 0}
     - target: {fileID: 4144726785409909332, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_IsActive
@@ -1454,7 +1460,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4144726785409909332, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_Name
-      value: CoinSpawnPoint
+      value: CollectibleSpawnPoint
       objectReference: {fileID: 0}
     - target: {fileID: 4144726785409909332, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_IsActive
@@ -1520,7 +1526,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4144726785409909332, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_Name
-      value: CoinSpawnPoint (6)
+      value: CollectibleSpawnPoint
       objectReference: {fileID: 0}
     - target: {fileID: 4144726785409909332, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_IsActive

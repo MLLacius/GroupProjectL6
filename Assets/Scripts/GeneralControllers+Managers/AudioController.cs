@@ -3,17 +3,17 @@ using UnityEngine;
 //Leyton script
 public class AudioController : MonoBehaviour
 {
-    [SerializeField] private AudioSource coinCollect;
+    [SerializeField] private AudioSource collectibleCollect;
     [SerializeField] private AudioSource dashing;
     [SerializeField] private AudioSource hardPlayerImpact;
     [SerializeField] private AudioSource obstacleDestroy;
 
     private float timePassed = 0;
 
-    public void PlayCoinCollect()
+    public void PlayCollectibleCollect()
     {
-        coinCollect.Play();
-        coinCollect.pitch += 0.03f;
+        collectibleCollect.Play();
+        collectibleCollect.pitch += 0.03f;
         timePassed = 0f;
         StartCoroutine(CountTimePassed());
     }
@@ -27,7 +27,7 @@ public class AudioController : MonoBehaviour
         }
         if (timePassed >= 1)
         {
-            coinCollect.pitch = 1f;
+            collectibleCollect.pitch = 1f;
             yield return null;
         }
     }

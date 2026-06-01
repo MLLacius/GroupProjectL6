@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89dcac771ffbb407189ea1d9621b524a, type: 3}
-  m_Name: BigCoinUnlock
+  m_Name: BigCollectibleUnlock
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeSciptableItem
-  upgradeID: bigCoinUnlock
-  displayedUpgradeName: Big Coin
+  upgradeID: bigCollectibleUnlock
+  displayedUpgradeName: Big Collectible
   upgradeIcon: {fileID: 0}
   levelDefinitions:
-  - levelDescription: Large now have a small chance of spawning
+  - levelDescription: Large collectibles now have a small chance of spawning
     cost: 0
     upgradeValue: 0

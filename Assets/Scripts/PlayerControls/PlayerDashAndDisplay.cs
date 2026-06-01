@@ -11,7 +11,7 @@ public class PlayerDashAndDisplay : MonoBehaviour
     [SerializeField] private GameObject controlGlyphPress;
     private Slider dashDisplay;
 
-    private float collectedCoins = 0;
+    private float collectedCollectibles = 0;
     [SerializeField] private Color nonFilledColor; //Red for when using dash
     [SerializeField] private Color filledColor = new Color (1f, (100f / 255f), 0f); //Orange for fully charged
 
@@ -31,8 +31,8 @@ public class PlayerDashAndDisplay : MonoBehaviour
 
     //Dash upgrade variables
     [SerializeField] private UpgradeSciptableItem dashDurationUpgrade; //Increases dash time
-    [SerializeField] private UpgradeSciptableItem dashCostUpgrade; //Reduces number of coins used per dash
-    [Tooltip("How many fewer coins the dash costs with the upgrade")]
+    [SerializeField] private UpgradeSciptableItem dashCostUpgrade; //Reduces number of collectibles used per dash
+    [Tooltip("How many fewer collectibles the dash costs with the upgrade")]
     [SerializeField] private int reducedDashCost;
     private UpgradeManager upgradeManager;
     private bool hasDashDurationUpgrade = false;
@@ -41,7 +41,7 @@ public class PlayerDashAndDisplay : MonoBehaviour
     [SerializeField] private float fillSpeed = 5f;
 
     [Header("Tutorial Values")]
-    [Tooltip("How many coins are required to charge dash in first tutorial")]
+    [Tooltip("How many collectibles are required to charge dash in first tutorial")]
 
     [SerializeField, Min(1)] private int tutorialDashCost; //Must be greater than or equal to 1
     [SerializeField, Min(0)] private int tutorialDashStartValue; //Must be greater than or equal to 0
@@ -104,7 +104,7 @@ public class PlayerDashAndDisplay : MonoBehaviour
         //Show dash charge amount on display
         if (dashDisplay && !isDashing)
         {
-            dashDisplay.value = Mathf.Lerp(dashDisplay.value, collectedCoins, fillSpeed * Time.deltaTime);
+            dashDisplay.value = Mathf.Lerp(dashDisplay.value, collectedCollectibles, fillSpeed * Time.deltaTime);
         }
         //Show dash time left on display
         else if (dashDisplay && isDashing)
@@ -116,7 +116,7 @@ public class PlayerDashAndDisplay : MonoBehaviour
             Debug.Log("Can't find display object");
         }
 
-        if ((collectedCoins >= meterMaximum || (collectedCoins >= tutorialDashCost && tutorialManager.isFirstTutorial)) && !isDashPrepared)
+        if ((collectedCollectibles >= meterMaximum || (collectedCollectibles >= tutorialDashCost && tutorialManager.isFirstTutorial)) && !isDashPrepared)
         {
             sliderFill.GetComponent<Image>().color = filledColor;
             canDash = true;
@@ -131,18 +131,18 @@ public class PlayerDashAndDisplay : MonoBehaviour
         }
     }
 
-    public void IncrementCollectedCoins()
+    public void IncrementCollectedCollectibles()
     {
-        if (collectedCoins < meterMaximum)
+        if (collectedCollectibles < meterMaximum)
         {
-            collectedCoins++;
+            collectedCollectibles++;
         }
     }
 
     public void OnPlayerDash()
     {
         Debug.Log("Player dashed, starting dash depletion");
-        StartCoroutine(DecreaseCoinCount());
+        StartCoroutine(DecreaseCollectibleCount());
         canDash = false;
         controlGlyphWASD.SetActive(false);
         controlGlyphArrowKeys.SetActive(false);
@@ -152,7 +152,7 @@ public class PlayerDashAndDisplay : MonoBehaviour
         isDashPrepared = false;
     }
 
-    private IEnumerator DecreaseCoinCount()
+    private IEnumerator DecreaseCollectibleCount()
     {
         float timePassed = 0;
         
@@ -168,15 +168,15 @@ public class PlayerDashAndDisplay : MonoBehaviour
             float currentValue = Mathf.Lerp(startValue, 0, t);
             
             dashPercentageLeft = currentValue;
-            collectedCoins = currentValue; 
+            collectedCollectibles = currentValue; 
 
             yield return null;
         }
 
         //Ensure values are 0 at end
         isDashing = false;
-        Debug.Log("Dash ended, resetting coin count, time: " + timePassed);
-        collectedCoins = 0;
+        Debug.Log("Dash ended, resetting collectible count, time: " + timePassed);
+        collectedCollectibles = 0;
         dashDisplay.value = 0;
     }
 

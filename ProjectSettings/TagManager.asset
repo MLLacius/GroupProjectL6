@@ -8,6 +8,8 @@ TagManager:
   - Player Bubble
   - Coin
   - Obstacle
+  - Collectible
+  - Collectible Detector
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - Water
   - UI
   - Player
-  - Coins and Powerups
+  - Collectibles and Powerups
   - 
   - 
   - 

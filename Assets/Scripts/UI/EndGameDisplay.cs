@@ -18,7 +18,7 @@ public class EndGameDisplay : MonoBehaviour
 
             lastScoreText.text = "Score: " + lastScore.ToString();
             highScoreText.text = "New High Score!";
-            collectibleText.text = "Coins Collected: " + gameMaster.GetCollectiblesGained();
+            collectibleText.text = "Collectibles Collected: " + gameMaster.GetCollectiblesGained();
             HighScoreEffects();
         }
         else
@@ -29,7 +29,7 @@ public class EndGameDisplay : MonoBehaviour
 
             lastScoreText.text = "Score: " + lastScore.ToString();
             highScoreText.text = "High Score: " + highScore.ToString();
-            collectibleText.text = "Coins Collected: " + gameMaster.GetCollectiblesGained();
+            collectibleText.text = "Collectibles Collected: " + gameMaster.GetCollectiblesGained();
         }
     }
 

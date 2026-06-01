@@ -195,7 +195,7 @@ public class GameMaster : MonoBehaviour
             PlayerPrefs.SetInt("Collectibles", PlayerPrefs.GetInt("Collectibles", 0) + 1);
             if (!playerMovement.GetIsPlayerDashing())
             {
-                PlayerDashAndDisplay.IncrementCollectedCoins();
+                PlayerDashAndDisplay.IncrementCollectedCollectibles();
             }
         }
     }

@@ -3,28 +3,28 @@ using System.Collections;
 //Shara script
 public class Magnet : MonoBehaviour
 {
-    public GameObject coinDectectorObj;
+    public GameObject collectibleDectectorObj;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
-        coinDectectorObj = GameObject.FindGameObjectWithTag("CoinDetector");
-        coinDectectorObj.SetActive(false);
+        collectibleDectectorObj = GameObject.FindGameObjectWithTag("Collectible Detector");
+        collectibleDectectorObj.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            StartCoroutine(ActivateCoin());
+            StartCoroutine(ActivateCollectible());
             Destroy(transform.GetChild(0).gameObject);
         }
     }
 
-    private IEnumerator ActivateCoin()
+    private IEnumerator ActivateCollectible()
     {
-        coinDectectorObj.SetActive(true);
+        collectibleDectectorObj.SetActive(true);
         yield return new WaitForSeconds(10f);
-        coinDectectorObj.SetActive(false);
+        collectibleDectectorObj.SetActive(false);
     }
 }

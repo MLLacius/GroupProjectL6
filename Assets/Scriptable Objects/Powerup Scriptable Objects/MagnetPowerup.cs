@@ -23,13 +23,13 @@ public class MagnetPowerup : PowerUpEffect
     public override void OnTick(GameObject target)
     {
         //Debug.Log("Magnet Powerup ticked!");
-        //Use find objects by tag to find all collectibles named coins in the scene
+        //Use find objects by tag to find all collectibles named collectibles in the scene
         //If within radius, move towards player
         if(magnetIcon != null)
         {
             magnetIcon.MagnetIconUpdated();
         }
-        GameObject[] collectibles = GameObject.FindGameObjectsWithTag("Coin");
+        GameObject[] collectibles = GameObject.FindGameObjectsWithTag("Collectible");
         foreach (GameObject collectible in collectibles)
         {
             float distance = Vector3.Distance(target.transform.position, collectible.transform.position);

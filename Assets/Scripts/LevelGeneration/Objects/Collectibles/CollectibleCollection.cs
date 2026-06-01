@@ -1,10 +1,10 @@
 using UnityEngine;
 //Luke script, Leyton added audio logic
-public class CoinCollection : MonoBehaviour
+public class CollectibleCollection : MonoBehaviour
 {
     [SerializeField] private GameMaster gameMaster;
     [SerializeField] private AudioController audioController;
-    [SerializeField] private ParticleSystem coinCollectEffect;
+    [SerializeField] private ParticleSystem collectibleCollectEffect;
 
     private void Awake()
     {
@@ -28,8 +28,8 @@ public class CoinCollection : MonoBehaviour
 
         if (gameMaster.GetGameplayState())
         {
-            audioController.PlayCoinCollect();
-            Instantiate(coinCollectEffect, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, this.gameObject.transform.position.z), Quaternion.identity);
+            audioController.PlayCollectibleCollect();
+            Instantiate(collectibleCollectEffect, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, this.gameObject.transform.position.z), Quaternion.identity);
         }
         Destroy(gameObject);
     }

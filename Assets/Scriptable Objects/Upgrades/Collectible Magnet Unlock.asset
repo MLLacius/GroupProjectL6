@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89dcac771ffbb407189ea1d9621b524a, type: 3}
-  m_Name: Coin Magnet Unlock
+  m_Name: Collectible Magnet Unlock
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeSciptableItem
-  upgradeID: coinMagnetsUnlocked
-  displayedUpgradeName: Coin Magnet
+  upgradeID: collectibleMagnetsUnlocked
+  displayedUpgradeName: Collectible Magnet
   upgradeIcon: {fileID: 0}
   levelDefinitions:
-  - levelDescription: Unlocks Coin Magnets Spawning
+  - levelDescription: Unlocks collectible magnets spawning
     cost: 250
     upgradeValue: 0.005
   - levelDescription: Increases chance of a magnet spawning

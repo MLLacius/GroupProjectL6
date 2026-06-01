@@ -314,6 +314,7 @@ MonoBehaviour:
   - {fileID: 4245249207283186744}
   - {fileID: 6488026105396937409}
   - {fileID: 1381082202504373177}
+  mediumSegments: []
   hardSegments:
   - {fileID: 9098834875976951334, guid: aa798f03174e6d34abd54386cb63760d, type: 3}
   impossibleSegments: []
@@ -1322,7 +1323,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4144726785409909332, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_Name
-      value: CoinSpawnPoint
+      value: CollectibleSpawnPoint
       objectReference: {fileID: 0}
     - target: {fileID: 5406116461658215525, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1384,7 +1385,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4144726785409909332, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_Name
-      value: CoinSpawnPoint (2)
+      value: CollectibleSpawnPoint
       objectReference: {fileID: 0}
     - target: {fileID: 5406116461658215525, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1513,7 +1514,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4144726785409909332, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_Name
-      value: CoinSpawnPoint (1)
+      value: CollectibleSpawnPoint
       objectReference: {fileID: 0}
     - target: {fileID: 5406116461658215525, guid: be32eda30c9e1e24b90c329393bba814, type: 3}
       propertyPath: m_LocalPosition.x

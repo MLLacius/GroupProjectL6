@@ -39,7 +39,7 @@ public class TutorialStateManager : MonoBehaviour
     [SerializeField] private bool devToggleFirstTutorial = false;
 
     //Events to mark start/end of first in depth tutorial
-    //These get hooked into for things like modifying number of coins needed to charge dash in and outside the tutorial
+    //These get hooked into for things like modifying number of collectibles needed to charge dash in and outside the tutorial
     public UnityEvent FirstTutorialStart;
     public UnityEvent FirstTutorialEnd;
 

@@ -66,15 +66,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7545b41dcb5e9bc429013a8c2378c942, type: 3}
       propertyPath: m_Name
-      value: Coin
+      value: Collectible
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7545b41dcb5e9bc429013a8c2378c942, type: 3}
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7545b41dcb5e9bc429013a8c2378c942, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7545b41dcb5e9bc429013a8c2378c942, type: 3}
       propertyPath: m_TagString
-      value: Coin
+      value: Collectible
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -111,7 +115,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinCollection
   gameMaster: {fileID: 0}
-  coinCollectEffect: {fileID: 1692971705521001475, guid: dc448c785515e26418a4be00f3844463, type: 3}
+  audioController: {fileID: 0}
+  collectibleCollectEffect: {fileID: 1692971705521001475, guid: dc448c785515e26418a4be00f3844463, type: 3}
 --- !u!135 &5727251237501020794
 SphereCollider:
   m_ObjectHideFlags: 0

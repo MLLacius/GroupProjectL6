@@ -3,29 +3,34 @@ using TMPro;
 //Leyton and Luke script
 public class CollectibleDisplay : MonoBehaviour
 {
-    private bool enableCoinDisplay;
+    private bool enableCollectibleDisplay;
 
-    [SerializeField] private TextMeshProUGUI coinDisplay;
+    private TextMeshProUGUI collectibleDisplay;
     [SerializeField] private GameMaster gameMaster;
+
+    private void Awake()
+    {
+        collectibleDisplay = GetComponent<TextMeshProUGUI>();
+    }
 
     private void Start()
     {
-        if(coinDisplay)
+        if(collectibleDisplay)
         {
-            enableCoinDisplay = true;
+            enableCollectibleDisplay = true;
         }
         else
         {
-            enableCoinDisplay = false;
-            Debug.Log("Coin display not found");
+            enableCollectibleDisplay = false;
+            Debug.Log("Collectible display not found");
         }
     }
 
     private void Update()
     {
-        if(enableCoinDisplay)
+        if(enableCollectibleDisplay)
         {
-            coinDisplay.text = "Coins: " + gameMaster.GetCollectiblesGained();
+            collectibleDisplay.text = gameMaster.GetCollectiblesGained().ToString();
         }
     }
 }

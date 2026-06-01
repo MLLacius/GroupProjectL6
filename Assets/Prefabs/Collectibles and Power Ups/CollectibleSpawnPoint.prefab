@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5406116461658215525}
-  - component: {fileID: 9091443798974993220}
+  - component: {fileID: -6216175932369141067}
   m_Layer: 7
-  m_Name: CoinSpawnPoint
+  m_Name: CollectibleSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 5276450097023937393}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9091443798974993220
+--- !u!114 &-6216175932369141067
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,12 +44,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6cdc8c48e1164e34cae985c11617a84b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
-  coinPrefab: {fileID: 5749746760235969366, guid: 0dc1f687378a2ff4b9fcfb4219437160, type: 3}
-  activeCoin: {fileID: 4788003448960299467}
+  m_EditorClassIdentifier: Assembly-CSharp::CollectibleSpawnPoint
+  collectiblePrefab: {fileID: 5749746760235969366, guid: 0dc1f687378a2ff4b9fcfb4219437160, type: 3}
+  activeCollectible: {fileID: 4788003448960299467}
   magnetUpgrade: {fileID: 11400000, guid: 286bf4e863b4343d4be07a19e9e5d279, type: 2}
   magnetPrefab: {fileID: 6446596337969368627, guid: a6962fdcfd90d4b4e829ee016d3efd45, type: 3}
-  magnetSpawnChance: 0.005
 --- !u!1001 &988913900064791197
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -100,7 +99,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5749746760235969366, guid: 0dc1f687378a2ff4b9fcfb4219437160, type: 3}
       propertyPath: m_Name
-      value: Coin
+      value: Collectible
+      objectReference: {fileID: 0}
+    - target: {fileID: 5749746760235969366, guid: 0dc1f687378a2ff4b9fcfb4219437160, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

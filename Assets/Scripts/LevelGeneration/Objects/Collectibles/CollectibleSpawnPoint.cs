@@ -1,9 +1,9 @@
 using UnityEngine;
 //Luke script
-public class CoinSpawnPoint : MonoBehaviour
+public class CollectibleSpawnPoint : MonoBehaviour
 {
-    [SerializeField] private GameObject coinPrefab;
-    [SerializeField] private GameObject activeCoin;
+    [SerializeField] private GameObject collectiblePrefab;
+    [SerializeField] private GameObject activeCollectible;
     private Vector3 initialLocalPosition;
 
     [Header("References")]
@@ -20,9 +20,9 @@ public class CoinSpawnPoint : MonoBehaviour
     private void Awake()
     {
         //Capture Position
-        if (activeCoin != null)
+        if (activeCollectible != null)
         {
-            initialLocalPosition = activeCoin.transform.localPosition;
+            initialLocalPosition = activeCollectible.transform.localPosition;
         }
         else
         {
@@ -49,48 +49,48 @@ public class CoinSpawnPoint : MonoBehaviour
         if (gameMaster)
         {
             //Subscribe to the "Start Button" event
-            gameMaster.OnGameStart.AddListener(SpawnCoin);
+            gameMaster.OnGameStart.AddListener(SpawnCollectible);
             
             //Only spawn immediately if the game is running.
             if (gameMaster.GetGameplayState())
             {
-                SpawnCoin();
+                SpawnCollectible();
             }
         }
     }
 
     private void Start()
     {
-        //Hide existing coin immediately on load
-        if (activeCoin != null && gameMaster != null && !gameMaster.GetGameplayState())
+        //Hide existing collectible immediately on load
+        if (activeCollectible != null && gameMaster != null && !gameMaster.GetGameplayState())
         {
-            activeCoin.SetActive(false);
+            activeCollectible.SetActive(false);
             Destroy(this);
         }
     }
 
-    private void SpawnCoin()
+    private void SpawnCollectible()
     {
-        //Handle the hidden coins from start
-        if (activeCoin != null)
+        //Handle the hidden collectibles from start
+        if (activeCollectible != null)
         {
             // We only turn it on. We assume if it's there, it's the one we hid.
-            activeCoin.SetActive(true);
+            activeCollectible.SetActive(true);
             return;
         }
 
-        //Spawning Logic in case no coin exists at the moment
+        //Spawning Logic in case no collectible exists at the moment
         if (spawnMagnets && Random.value < magnetSpawnRate && magnetPrefab != null)
         {
-            activeCoin = Instantiate(magnetPrefab, transform);
-            activeCoin.transform.localPosition = initialLocalPosition;
+            activeCollectible = Instantiate(magnetPrefab, transform);
+            activeCollectible.transform.localPosition = initialLocalPosition;
             return;
         }
 
-        if (coinPrefab != null)
+        if (collectiblePrefab != null)
         {
-            activeCoin = Instantiate(coinPrefab, transform);
-            activeCoin.transform.localPosition = initialLocalPosition;
+            activeCollectible = Instantiate(collectiblePrefab, transform);
+            activeCollectible.transform.localPosition = initialLocalPosition;
         }
     }
 
@@ -98,7 +98,7 @@ public class CoinSpawnPoint : MonoBehaviour
     {
         if (gameMaster)
         {
-            gameMaster.OnGameStart.RemoveListener(SpawnCoin);
+            gameMaster.OnGameStart.RemoveListener(SpawnCollectible);
         }
     }
 }
