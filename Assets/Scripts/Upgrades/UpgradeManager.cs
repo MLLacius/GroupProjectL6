@@ -9,6 +9,7 @@ public class UpgradeManager : MonoBehaviour
 {
     //References
     [SerializeField] private GameMaster gameMaster;
+    [SerializeField] private AudioController audioController;
     [SerializeField] private UpgradeSciptableItem[] allUpgrades; //List of all possible upgrades in the game
 
     //Maps upgrade ID to current level (if 0, not owned, 1 = lv1, 2 = lv2 etc)
@@ -70,6 +71,7 @@ public class UpgradeManager : MonoBehaviour
         int currentLv = GetUpgradeCurrentLevel(upgrade.upgradeID);
         if(currentLv >= upgrade.levelDefinitions.Length)
         {
+            audioController.PlayMaxedPurchase();
             Debug.Log("Upgrade already maxed.");
             return;
         }
@@ -77,9 +79,14 @@ public class UpgradeManager : MonoBehaviour
         if(gameMaster.TrySpendCollectibles(cost))
         {
             upgradeLevels[upgrade.upgradeID] = currentLv + 1;
+            audioController.PlayValidPurchase();
             SaveUpgrades();
             Debug.Log("Purchased item:" + upgrade.upgradeID);
             onSuccess?.Invoke();
+        }
+        else
+        {
+            audioController.PlayInvalidPurchase();
         }
     }
 }
