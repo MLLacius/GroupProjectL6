@@ -14,7 +14,7 @@ public class EndGameDisplay : MonoBehaviour
     {
         if (gameMaster.HasAchievedHighScore())
         {
-            int lastScore = PlayerPrefs.GetInt("Last Score", 0);
+            int lastScore = PlayerPrefs.GetInt("LastScore", 0);
 
             lastScoreText.text = "Score: " + lastScore.ToString();
             highScoreText.text = "New High Score!";
@@ -24,7 +24,7 @@ public class EndGameDisplay : MonoBehaviour
         else
         {
             //find the last saved score
-            int lastScore = PlayerPrefs.GetInt("Last Score", 0);
+            int lastScore = PlayerPrefs.GetInt("LastScore", 0);
             int highScore = PlayerPrefs.GetInt("HighScore", 0);
 
             lastScoreText.text = "Score: " + lastScore.ToString();

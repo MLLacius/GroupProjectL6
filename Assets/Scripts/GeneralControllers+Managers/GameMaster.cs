@@ -28,12 +28,11 @@ public class GameMaster : MonoBehaviour
     [SerializeField, UnityEngine.Min(0), Max(2)] private int gameDifficultyID; 
 
     private float rawScore;
-    private float scoreOffset;
-    private float tutorialOffset;
     private bool gameplayStarted;
     private bool highScoreAchieved = false;
     private int currentScore = 0;
     private int highScore = 0;
+    private int previousHighScore = 0;
     private int collectiblesGained = 0;
 
     private LevelSpawner levelSpawner;
@@ -51,12 +50,13 @@ public class GameMaster : MonoBehaviour
     private void Start()
     {
         rawScore = 0;
-        scoreOffset = 0;
         levelSpawner = GameObject.Find("Level Spawner").GetComponent<LevelSpawner>();
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
         highScore = PlayerPrefs.GetInt("HighScore", 0);
         Debug.Log("Highscore:" + highScore.ToString());
+        previousHighScore = PlayerPrefs.GetInt("HighScore", 0);
         highScoreAchieved = false;
+        SetInitialDifficulty();
         if(!upgradeManager)
         {
             upgradeManager = GameObject.Find("Upgrades Manager").GetComponent<UpgradeManager>();
@@ -69,7 +69,6 @@ public class GameMaster : MonoBehaviour
         if (gameState == GameState.MainMenu)
         {
             gameplayStarted = false;
-            scoreOffset = Time.time;
             return;
         }
         else if (gameState == GameState.Gameplay)
@@ -92,7 +91,6 @@ public class GameMaster : MonoBehaviour
         }
         else if (gameState == GameState.FirstTutorial)
         {
-            tutorialOffset = Time.time - scoreOffset;
             return;
         }
     }
@@ -149,7 +147,7 @@ public class GameMaster : MonoBehaviour
 
     public int GetLastScore()
     {
-        return PlayerPrefs.GetInt("Last Score", 0);
+        return PlayerPrefs.GetInt("LastScore", 0);
     }
 
     public bool GetGameplayState()
@@ -215,7 +213,7 @@ public class GameMaster : MonoBehaviour
         int lastScore = currentScore;
         SaveValues();
         //Save last score seperately to ensure the last score is always accurate and not saved mid run.
-        PlayerPrefs.SetInt("Last Score", lastScore);
+        PlayerPrefs.SetInt("LastScore", lastScore);
         PlayerPrefs.Save();
         gameState = GameState.GameOver;
         gameplayStarted = false;
@@ -239,9 +237,29 @@ public class GameMaster : MonoBehaviour
         return;
     }
 
+    private void SetInitialDifficulty()
+    {
+        if(highScore < 500)
+        {
+            gameDifficultyID = 0;
+            Debug.Log("Difficulty set to easy");
+        }
+        else if(highScore >= 500 && highScore < 1000)
+        {
+            gameDifficultyID = 1;
+            Debug.Log("Difficulty set to medium");
+        }
+        else if(highScore >= 1000)
+        {
+            gameDifficultyID = 2;
+            Debug.Log("Difficulty set to hard");
+        }
+    }
+
     private void UpdateDifficulty()
     {
-        switch (currentScore)
+        int difficultyScore = currentScore + previousHighScore; //this int is to increase the difficulty earlier depending on how far the player has previously gotten
+        switch (difficultyScore)
         {
             case 0:
                 gameDifficultyID = 0;
@@ -251,12 +269,12 @@ public class GameMaster : MonoBehaviour
             case 500: 
                 gameDifficultyID = 1;
                 Debug.Log("Difficulty set to medium");
-                break;
+            break;
 
             case 1000:
                 gameDifficultyID = 2;
                 Debug.Log("Difficulty set to hard");
-                break;
+            break;
         }
     }
 }
