@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15861399b20532e45b91353e6529c439, type: 3}
   m_Name: LevelSection_Rock
   m_EditorClassIdentifier: Assembly-CSharp::LevelSectionType
-  baseMaterial: {fileID: 2100000, guid: 3f532fd3bc3865a47b05fffc3fe2b8f7, type: 2}
+  baseMaterial: {fileID: 2100000, guid: bce3b293c1f062340a7550bab71265ba, type: 2}
   obstacles:
   - {fileID: 6445847162815758754, guid: b40d431cec4ed5d47953dbc9a5ed2659, type: 3}
   - {fileID: 1794460316948897037, guid: d12877d0604d79b4b9e9371002366399, type: 3}
   - {fileID: 202276436366352147, guid: fb4c21325a0197c4c9fb1ddf03af6330, type: 3}
   minSegmentCount: 20
-  maxSegmentCount: 50
+  maxSegmentCount: 40
+  startingDifficulty: 0

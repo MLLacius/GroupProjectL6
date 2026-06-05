@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15861399b20532e45b91353e6529c439, type: 3}
   m_Name: LevelSection_Grass
   m_EditorClassIdentifier: Assembly-CSharp::LevelSectionType
-  baseMaterial: {fileID: 2100000, guid: 940c11f4610fa69408dfff94f54dc414, type: 2}
+  baseMaterial: {fileID: 2100000, guid: 0544c4b1f086f85498bfcd066bfb5127, type: 2}
   obstacles:
-  - {fileID: 4191161046741582990, guid: d8588ffa8c792194786fc5c3238235f4, type: 3}
-  - {fileID: 4191161046741582990, guid: 6bbff23cb9ae9b646a414664cad771c1, type: 3}
-  - {fileID: 4191161046741582990, guid: 8bbea17507adebf448ee49167c2b6fbe, type: 3}
   - {fileID: 6445847162815758754, guid: c5bf3e88b5c85da4999dcc75d3e0bc6f, type: 3}
-  minSegmentCount: 20
-  maxSegmentCount: 50
+  - {fileID: 2410487681973260434, guid: c540d0677212a0040aa338f342b71f11, type: 3}
+  - {fileID: 245105467080819255, guid: 9c7caeeb311e7914f951c2293cc11d2e, type: 3}
+  minSegmentCount: 10
+  maxSegmentCount: 30
+  startingDifficulty: 0

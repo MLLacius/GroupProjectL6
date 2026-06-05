@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15861399b20532e45b91353e6529c439, type: 3}
-  m_Name: LevelSection_Dead
+  m_Name: LevelSection_Forest
   m_EditorClassIdentifier: Assembly-CSharp::LevelSectionType
-  baseMaterial: {fileID: 2100000, guid: 1a3985f77875f4847988fda355a3fa9a, type: 2}
+  baseMaterial: {fileID: 2100000, guid: aca9212eb0be9ea4a9242978c64bc219, type: 2}
   obstacles:
+  - {fileID: 4191161046741582990, guid: d8588ffa8c792194786fc5c3238235f4, type: 3}
+  - {fileID: 4191161046741582990, guid: 6bbff23cb9ae9b646a414664cad771c1, type: 3}
+  - {fileID: 4191161046741582990, guid: 8bbea17507adebf448ee49167c2b6fbe, type: 3}
   - {fileID: 6445847162815758754, guid: c5bf3e88b5c85da4999dcc75d3e0bc6f, type: 3}
-  - {fileID: 2117490036210599222, guid: c99b5430f3f0eca438d83190e2cdf8cf, type: 3}
-  - {fileID: 1753432967900362907, guid: 717c590073a44c742806f66e8f4cc94f, type: 3}
-  minSegmentCount: 30
-  maxSegmentCount: 50
-  startingDifficulty: 1
+  minSegmentCount: 25
+  maxSegmentCount: 40
+  startingDifficulty: 2

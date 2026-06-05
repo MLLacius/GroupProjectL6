@@ -26625,7 +26625,7 @@ PrefabInstance:
     - target: {fileID: 2229341482224022280, guid: bcf8850a958ac419e82fb3ae8726cbd0, type: 3}
       propertyPath: startingSectionType
       value: 
-      objectReference: {fileID: 11400000, guid: bc6344ea30b2a614baad8be023302fab, type: 2}
+      objectReference: {fileID: 11400000, guid: 8f1614ce70447e04d8bf8d661b328a57, type: 2}
     - target: {fileID: 2229341482224022280, guid: bcf8850a958ac419e82fb3ae8726cbd0, type: 3}
       propertyPath: defaultSegmentLength
       value: 15
