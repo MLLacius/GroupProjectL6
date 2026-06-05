@@ -25,6 +25,9 @@ public class LevelSectionType : ScriptableObject
     [Tooltip("Pool of obstacles that obstacle spawners on sgement can use")]
     public GameObject[] obstacles;
 
+    [Tooltip("Segments that can appear during this segment type")]
+    public GameObject[] segments;
+
     [Tooltip("Minimum amount of segments section can last for")]
     [Min(15)] public int minSegmentCount;
 
@@ -33,4 +36,7 @@ public class LevelSectionType : ScriptableObject
 
     [Tooltip("Section will start appearing from this difficulty onwards")]
     public Difficulty startingDifficulty;
+
+    [Tooltip("Colour of the particle smoke following the sheep during the section")]
+    public Gradient sheepParticles;
 }
