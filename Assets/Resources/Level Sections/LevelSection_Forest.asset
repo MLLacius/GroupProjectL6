@@ -18,6 +18,37 @@ MonoBehaviour:
   - {fileID: 4191161046741582990, guid: 6bbff23cb9ae9b646a414664cad771c1, type: 3}
   - {fileID: 4191161046741582990, guid: 8bbea17507adebf448ee49167c2b6fbe, type: 3}
   - {fileID: 6445847162815758754, guid: c5bf3e88b5c85da4999dcc75d3e0bc6f, type: 3}
+  segments: []
   minSegmentCount: 25
   maxSegmentCount: 40
   startingDifficulty: 2
+  sheepParticles:
+    serializedVersion: 2
+    key0: {r: 0.1882353, g: 0.30980393, b: 0.05882353, a: 1}
+    key1: {r: 0.41960785, g: 0.50980395, b: 0.1254902, a: 0.39215687}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
