@@ -13,6 +13,7 @@ public class SegmentData : MonoBehaviour
     [SerializeField] private GameObject[] mediumSegments, hardSegments, impossibleSegments;
 
     private LevelSpawner levelSpawner;
+    private SegmentComplete segmentComplete;
 
     //Hard and impossible segments combos notes for reference
     /*
@@ -47,6 +48,7 @@ public class SegmentData : MonoBehaviour
     private void Awake()
     {
         levelSpawner = FindFirstObjectByType<LevelSpawner>();
+        segmentComplete = GetComponentInChildren<SegmentComplete>();
         segmentFloor.GetComponent<MeshRenderer>().material = baseMaterial;
     }
 
@@ -63,6 +65,13 @@ public class SegmentData : MonoBehaviour
         {
             objectSpawners[i].GetComponent<ObstacleSpawner>().UpdatePrefabList();
         }
+        segmentComplete.SetCurrentSectionPlayerParticles(levelSpawner.GetSectionData().playerParticles);
+    }
+
+    public void UpdatePlayerRunParticles(Gradient gradient, ParticleSystem playerParticles)
+    {
+        ParticleSystem.ColorOverLifetimeModule particles = playerParticles.colorOverLifetime;
+        particles.color = gradient;
     }
 
     public float GetSegmentLength()

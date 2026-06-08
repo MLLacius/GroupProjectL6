@@ -17,10 +17,11 @@ MonoBehaviour:
   - {fileID: 6445847162815758754, guid: c5bf3e88b5c85da4999dcc75d3e0bc6f, type: 3}
   - {fileID: 2410487681973260434, guid: c540d0677212a0040aa338f342b71f11, type: 3}
   - {fileID: 245105467080819255, guid: 9c7caeeb311e7914f951c2293cc11d2e, type: 3}
+  segments: []
   minSegmentCount: 10
   maxSegmentCount: 30
   startingDifficulty: 0
-  sheepParticles:
+  playerParticles:
     serializedVersion: 2
     key0: {r: 0.39607844, g: 0.61960787, b: 0.16078432, a: 1}
     key1: {r: 0.14117648, g: 0.61960787, b: 0.16078432, a: 0.39215687}

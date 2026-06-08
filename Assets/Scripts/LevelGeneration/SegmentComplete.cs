@@ -9,8 +9,28 @@ public class SegmentComplete : MonoBehaviour
     [SerializeField] private GameObject segmentObject; // Reference to the segment GameObject
     private bool isCompleted = false;
 
+    private SegmentData parentSegmentData;
+    private GameObject player;
+    private Gradient currentSectionPlayerParticles;
+
+    private void Awake()
+    {
+        levelSpawner = FindFirstObjectByType<LevelSpawner>();
+        parentSegmentData = GetComponentInParent<SegmentData>();
+        player = GameObject.Find("Player");
+    }
+
+    private void Start()
+    {
+        
+    }
+
     public void OnTriggerEnter(Collider other)
     {
+        if(other.CompareTag("Player"))
+        {
+            parentSegmentData.UpdatePlayerRunParticles(currentSectionPlayerParticles, player.GetComponentInChildren<ParticleSystem>());
+        }
         if(!isCompleted)
         {
             isCompleted = true;
@@ -23,5 +43,10 @@ public class SegmentComplete : MonoBehaviour
         {
             return;
         }
+    }
+
+    public void SetCurrentSectionPlayerParticles(Gradient particleColour)
+    {
+        currentSectionPlayerParticles = particleColour;
     }
 }

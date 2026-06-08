@@ -22,7 +22,7 @@ MonoBehaviour:
   minSegmentCount: 25
   maxSegmentCount: 40
   startingDifficulty: 2
-  sheepParticles:
+  playerParticles:
     serializedVersion: 2
     key0: {r: 0.1882353, g: 0.30980393, b: 0.05882353, a: 1}
     key1: {r: 0.41960785, g: 0.50980395, b: 0.1254902, a: 0.39215687}

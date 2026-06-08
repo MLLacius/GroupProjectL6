@@ -2,8 +2,10 @@
 
 - Base material: Material used for segment floor
 - Obstacles: List of prefab obstacles for segment to use
+- Segments: List of all segment prefabs that can be used by the level spawner during this section
 - Min segment count: Minimum amount of segments the section lasts for before it can change
 - Max segment count: Maximum amount of segments the section lasts for before it can change
 - Starting difficulty: Difficulty that this section type can appear from onwards, game starts on easy
+- Player particles: Gradient used for the particles coming from the player's feet during this section
 
 - Remember to ctrl + s after any changes to save so they appear in game correctly!
