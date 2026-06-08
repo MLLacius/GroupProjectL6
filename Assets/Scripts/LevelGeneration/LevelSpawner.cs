@@ -50,6 +50,7 @@ public class LevelSpawner : MonoBehaviour
         levelSectionTypes = Resources.LoadAll<LevelSectionType>("Level Sections"); //load the scriptable objects used to store section presets
         currentSectionLength = 0;
         currentSectionType = startingSectionType;
+        levelPrefabs = currentSectionType.segments;
 
         //Setup the dictionary
         foreach (GameObject prefab in levelPrefabs)
@@ -119,7 +120,7 @@ public class LevelSpawner : MonoBehaviour
     private void MoveSegments()
     {
         if(movementStopped) { return; }
-        // 1. Move the actual objects
+        //Move the actual objects
         foreach (GameObject segment in activeSegments)
         {
             segment.transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
@@ -314,6 +315,7 @@ public class LevelSpawner : MonoBehaviour
 
         currentSectionType = levelSectionTypeHolder;
         Debug.Log("Current section type changed to: " + currentSectionType.name);
+        levelPrefabs = currentSectionType.segments;
         currentSectionLength = 0;
         CalculateSectionThreshold();
     }

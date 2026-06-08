@@ -18,7 +18,16 @@ MonoBehaviour:
   - {fileID: 4191161046741582990, guid: 6bbff23cb9ae9b646a414664cad771c1, type: 3}
   - {fileID: 4191161046741582990, guid: 8bbea17507adebf448ee49167c2b6fbe, type: 3}
   - {fileID: 6445847162815758754, guid: c5bf3e88b5c85da4999dcc75d3e0bc6f, type: 3}
-  segments: []
+  segments:
+  - {fileID: 9098834875976951334, guid: 96cd734f56d7891438ae3a58d79ca471, type: 3}
+  - {fileID: 9098834875976951334, guid: 2758dc3c0bfc88d47b072bb2199938c3, type: 3}
+  - {fileID: 9098834875976951334, guid: e5e903a9266091f46b76011efbacbfb6, type: 3}
+  - {fileID: 9098834875976951334, guid: aa798f03174e6d34abd54386cb63760d, type: 3}
+  - {fileID: 9098834875976951334, guid: 5b2e501fd309fff4f8a33f0599a66afd, type: 3}
+  - {fileID: 9098834875976951334, guid: b4a4dca8e40c7974cb263156cad3bcc8, type: 3}
+  - {fileID: 9098834875976951334, guid: 758db34451a453d43ace25d4aae6813b, type: 3}
+  - {fileID: 9098834875976951334, guid: 976a956836cb4e546b2ee3030921e1f4, type: 3}
+  - {fileID: 9098834875976951334, guid: 1bab17ab37635c04b96fe8d4d3dd7177, type: 3}
   minSegmentCount: 25
   maxSegmentCount: 40
   startingDifficulty: 2
