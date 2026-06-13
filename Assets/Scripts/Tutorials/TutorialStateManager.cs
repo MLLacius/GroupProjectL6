@@ -122,6 +122,7 @@ public class TutorialStateManager : MonoBehaviour
 
         Time.timeScale = 0f;
 
+        yield return new WaitForSecondsRealtime(1f);
         yield return new WaitUntil(() => tutorialChecks[0]);
 
 #if !UNITY_ANDROID || UNITY_EDITOR
@@ -186,6 +187,7 @@ public class TutorialStateManager : MonoBehaviour
 
         Time.timeScale = 0f;
 
+        yield return new WaitForSecondsRealtime(1f);
         yield return new WaitUntil(() => tutorialChecks[1]);
 
 #if !UNITY_ANDROID || UNITY_EDITOR
@@ -216,6 +218,7 @@ public class TutorialStateManager : MonoBehaviour
 #if !UNITY_ANDROID || UNITY_EDITOR
         playerMovement.AssignTutorialEvents();
 #endif
+        yield return new WaitForSecondsRealtime(1f);
         yield return new WaitUntil(() => tutorialChecks[2]);
 
         firstTutorialObjects[3].SetActive(false);
@@ -260,7 +263,7 @@ public class TutorialStateManager : MonoBehaviour
             stumbleExplaination.gameObject.SetActive(true);
             Time.timeScale = 0f;
 
-            yield return new WaitForSecondsRealtime(2f);
+            yield return new WaitForSecondsRealtime(3f);
             yield return new WaitUntil(() => stumbleTutorialCheck);
 
             stumbleExplaination.gameObject.SetActive(false);
