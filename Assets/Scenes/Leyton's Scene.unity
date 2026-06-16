@@ -3173,7 +3173,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1904607152}
+    m_TransformParent: {fileID: 1668029465}
     m_Modifications:
     - target: {fileID: 106573390576258190, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3181,7 +3181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1140239725385717274, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
       propertyPath: m_Name
-      value: Upgrade Panel (6)
+      value: Upgrade Panel (4)
       objectReference: {fileID: 0}
     - target: {fileID: 1140239725385717274, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
       propertyPath: m_IsActive
@@ -3385,7 +3385,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9204150088369163622, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -361
+      value: 691
       objectReference: {fileID: 0}
     - target: {fileID: 9204150088369163622, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -7708,7 +7708,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &875030650
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15843,7 +15843,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -8823573466675411108, guid: 71cb392ae4304d74aa87717795fead5f, type: 3}
+  m_Sprite: {fileID: -8823573466675411108, guid: f59ad863bdd7e20419d98d1fedc9119e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -17227,8 +17227,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281519410
-  m_fontColor: {r: 0.1960784, g: 0.8039216, b: 0.1960784, a: 1}
+    rgba: 4280049110
+  m_fontColor: {r: 0.8392157, g: 0.3647059, b: 0.10980392, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -19389,7 +19389,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1904607152}
+    m_TransformParent: {fileID: 1668029465}
     m_Modifications:
     - target: {fileID: 106573390576258190, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -19397,7 +19397,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1140239725385717274, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
       propertyPath: m_Name
-      value: Upgrade Panel (5)
+      value: Upgrade Panel (3)
       objectReference: {fileID: 0}
     - target: {fileID: 1140239725385717274, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
       propertyPath: m_IsActive
@@ -19601,7 +19601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9204150088369163622, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -711
+      value: 341
       objectReference: {fileID: 0}
     - target: {fileID: 9204150088369163622, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -21268,6 +21268,8 @@ RectTransform:
   - {fileID: 1220822105}
   - {fileID: 1812291509}
   - {fileID: 120553077}
+  - {fileID: 1525262511}
+  - {fileID: 355625876}
   - {fileID: 1148839564}
   - {fileID: 875030650}
   m_Father: {fileID: 878989296}
@@ -23592,8 +23594,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1525262511}
-  - {fileID: 355625876}
   - {fileID: 1131278995}
   m_Father: {fileID: 878989296}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
