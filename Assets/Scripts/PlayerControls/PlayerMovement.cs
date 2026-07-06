@@ -96,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
 #endif
 
     private bool isStumbling = false;
+    private bool hasHitLevelEdge = false;
     private bool isJumping = false;
     private bool isGameOver = false;
 
@@ -323,13 +324,13 @@ public class PlayerMovement : MonoBehaviour
         {
             if(currentLane == Lanes.Center) { finalTargetLane = Lanes.Left;}
             else if(currentLane == Lanes.Right) { finalTargetLane = Lanes.Center;}
-            else{ AttemptStumble(); return;}
+            else{ hasHitLevelEdge = true; AttemptStumble(); return;}
         }
         else
         {
             if(currentLane == Lanes.Center) { finalTargetLane = Lanes.Right;}
             else if(currentLane == Lanes.Left) { finalTargetLane = Lanes.Center;}
-            else { AttemptStumble(); return;}
+            else { hasHitLevelEdge = true; AttemptStumble(); return;}
         }
         //Calculate target X position based on final target lane
         float targetX = 0f;
@@ -440,6 +441,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             Debug.Log("Player hit, starting stumble");
+            hasHitLevelEdge = false;
             StartStumble();
         }
     }
@@ -471,33 +473,27 @@ public class PlayerMovement : MonoBehaviour
         OnGameOver.Invoke();
         playerRigidbody.constraints = RigidbodyConstraints.FreezePositionX; //Stop player movement
 
-        StartCoroutine(RotatePlayerX(90f));
-        StartCoroutine(MovePlayerY(0.6f));
-        /*
-        switch (currentLane)
+        if (!hasHitLevelEdge)
         {
-            case Lanes.Left:
-                StartCoroutine(RotatePlayerX(-90));
-
-                break;
-
-            case Lanes.Right:
-                StartCoroutine(RotatePlayerX(90));
-
-                break;
-
-            case Lanes.Center:
-                if (UnityEngine.Random.Range(0, 1) == 0)
-                {
-                    StartCoroutine(RotatePlayerX(-90));
-                }
-                else
-                {
-                    StartCoroutine(RotatePlayerX(90));
-                }
-                break;
+            StartCoroutine(RotatePlayerX(90f));
         }
-        */
+        else
+        {
+
+            switch (currentLane)
+            {
+                case Lanes.Left:
+                    StartCoroutine(RotatePlayerZ(-90));
+
+                    break;
+
+                case Lanes.Right:
+                    StartCoroutine(RotatePlayerZ(90));
+
+                    break;
+            }
+        }
+        StartCoroutine(MovePlayerY(0.6f));
     }
 
     public float GetTotalRecoveryTime()
@@ -615,6 +611,21 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private IEnumerator MovePlayerY(float targetPositionY)
+    {
+        float startY = playerRigidbody.position.y;
+        float t = 0f;
+        Vector3 newY;
+
+        while (playerRigidbody.position.y != targetPositionY)
+        {
+            newY = new Vector3(playerRigidbody.position.x, Mathf.Lerp(startY, targetPositionY, t), playerRigidbody.position.z);
+            t += Time.deltaTime;
+            playerRigidbody.MovePosition(newY);
+            yield return null;
+        }
+    }
+
     private IEnumerator RotatePlayerX(float targetRotationX)
     {
         float startX = playerRigidbody.rotation.x;
@@ -630,17 +641,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private IEnumerator MovePlayerY(float targetPositionY)
+    private IEnumerator RotatePlayerZ(float targetRotationZ)
     {
-        float startY = playerRigidbody.position.y;
+        float startZ = playerRigidbody.rotation.z;
         float t = 0f;
-        Vector3 newY;
+        Quaternion newZ;
 
-        while (playerRigidbody.position.y != targetPositionY)
+        while (playerRigidbody.rotation.z != targetRotationZ)
         {
-            newY = new Vector3(playerRigidbody.position.x, Mathf.Lerp(startY, targetPositionY, t), playerRigidbody.position.z);
+            newZ = Quaternion.Euler(playerRigidbody.rotation.x, playerRigidbody.rotation.y, Mathf.Lerp(startZ, targetRotationZ, t));
             t += Time.deltaTime;
-            playerRigidbody.MovePosition(newY);
+            playerRigidbody.MoveRotation(newZ);
             yield return null;
         }
     }
