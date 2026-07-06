@@ -52,7 +52,7 @@ public class UpgradePanelUI : MonoBehaviour
         //Update optional Level Text
         if(levelText)
         {
-            levelText.text = $"Lv {currentLvl}/{maxLvl}";  
+            levelText.text = $"{currentLvl}/{maxLvl}";  
         } 
 
         //Reached max level

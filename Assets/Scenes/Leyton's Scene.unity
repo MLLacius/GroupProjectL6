@@ -1740,11 +1740,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4612646186196984625, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 90
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 5087508576578333093, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 185
+      value: 135
       objectReference: {fileID: 0}
     - target: {fileID: 5232437731652554630, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
       propertyPath: m_fontAsset
@@ -3342,11 +3342,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4612646186196984625, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 90
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 5087508576578333093, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 185
+      value: 135
       objectReference: {fileID: 0}
     - target: {fileID: 5232437731652554630, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
       propertyPath: m_fontAsset
@@ -15399,7 +15399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeManager
   gameMaster: {fileID: 1771808296}
-  audioController: {fileID: 0}
+  audioController: {fileID: 1610272343}
   allUpgrades:
   - {fileID: 11400000, guid: 9e7496930e26c4677847ce7597f685ed, type: 2}
   - {fileID: 11400000, guid: 8f4c88367edcb45f6b6a8b038e380271, type: 2}
@@ -19579,11 +19579,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4612646186196984625, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 90
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 5087508576578333093, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 185
+      value: 135
       objectReference: {fileID: 0}
     - target: {fileID: 5232437731652554630, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
       propertyPath: m_fontAsset
@@ -22559,11 +22559,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4612646186196984625, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 90
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 5087508576578333093, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 185
+      value: 135
       objectReference: {fileID: 0}
     - target: {fileID: 5232437731652554630, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
       propertyPath: m_fontAsset
