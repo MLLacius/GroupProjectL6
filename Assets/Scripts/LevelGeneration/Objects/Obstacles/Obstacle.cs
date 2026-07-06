@@ -32,8 +32,11 @@ public class Obstacle : MonoBehaviour
                 else
                 {
                     collision.gameObject.GetComponent<PlayerMovement>().AttemptStumble();
-                    audioController.PlayObstacleDestroy();
-                    RemoveObject();
+                    if(!collision.gameObject.GetComponent<PlayerMovement>().GetIsGameOver())
+                    {
+                        audioController.PlayObstacleDestroy();
+                        RemoveObject();
+                    }
                     Debug.Log("Player Collision: Stumble");
                 }
             }

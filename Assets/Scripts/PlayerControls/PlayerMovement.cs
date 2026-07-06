@@ -1,5 +1,6 @@
 using System.Collections;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -468,7 +469,35 @@ public class PlayerMovement : MonoBehaviour
         isGameOver = true;
         Debug.Log("Game Over");
         OnGameOver.Invoke();
-        playerRigidbody.isKinematic = true; //Stop all player movement
+        playerRigidbody.constraints = RigidbodyConstraints.FreezePositionX; //Stop player movement
+
+        StartCoroutine(RotatePlayerX(90f));
+        StartCoroutine(MovePlayerY(0.6f));
+        /*
+        switch (currentLane)
+        {
+            case Lanes.Left:
+                StartCoroutine(RotatePlayerX(-90));
+
+                break;
+
+            case Lanes.Right:
+                StartCoroutine(RotatePlayerX(90));
+
+                break;
+
+            case Lanes.Center:
+                if (UnityEngine.Random.Range(0, 1) == 0)
+                {
+                    StartCoroutine(RotatePlayerX(-90));
+                }
+                else
+                {
+                    StartCoroutine(RotatePlayerX(90));
+                }
+                break;
+        }
+        */
     }
 
     public float GetTotalRecoveryTime()
@@ -586,9 +615,44 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private IEnumerator RotatePlayerX(float targetRotationX)
+    {
+        float startX = playerRigidbody.rotation.x;
+        float t = 0f;
+        Quaternion newX;
+
+        while (playerRigidbody.rotation.x != targetRotationX)
+        {
+            newX = Quaternion.Euler(Mathf.Lerp(startX, targetRotationX, t), playerRigidbody.rotation.y, playerRigidbody.rotation.z);
+            t += Time.deltaTime;
+            playerRigidbody.MoveRotation(newX);
+            yield return null;
+        }
+    }
+
+    private IEnumerator MovePlayerY(float targetPositionY)
+    {
+        float startY = playerRigidbody.position.y;
+        float t = 0f;
+        Vector3 newY;
+
+        while (playerRigidbody.position.y != targetPositionY)
+        {
+            newY = new Vector3(playerRigidbody.position.x, Mathf.Lerp(startY, targetPositionY, t), playerRigidbody.position.z);
+            t += Time.deltaTime;
+            playerRigidbody.MovePosition(newY);
+            yield return null;
+        }
+    }
+
     public bool GetIsPlayerDashing()
     {
         return isPlayerDashing;
+    }
+
+    public bool GetIsGameOver()
+    {
+        return isGameOver;
     }
 
 #if !UNITY_ANDROID || UNITY_EDITOR
