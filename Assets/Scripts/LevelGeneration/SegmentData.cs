@@ -70,6 +70,10 @@ public class SegmentData : MonoBehaviour
 
     public void UpdatePlayerRunParticles(Gradient gradient, ParticleSystem playerParticles)
     {
+        if(gradient == null || playerParticles == null)
+        {
+            return;
+        }
         ParticleSystem.ColorOverLifetimeModule particles = playerParticles.colorOverLifetime;
         particles.color = gradient;
     }
