@@ -1,6 +1,5 @@
 using System.Collections;
 using Unity.Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -97,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isStumbling = false;
     private bool hasHitLevelEdge = false;
+    private bool isChangingLane = false;
     private bool isJumping = false;
     private bool isGameOver = false;
 
@@ -324,7 +324,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if(currentLane == Lanes.Center) { finalTargetLane = Lanes.Left;}
             else if(currentLane == Lanes.Right) { finalTargetLane = Lanes.Center;}
-            else{ hasHitLevelEdge = true; AttemptStumble(); return;}
+            else { hasHitLevelEdge = true; AttemptStumble(); return;}
         }
         else
         {
@@ -361,6 +361,7 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator SmoothLaneSwitch(float targetX)
     {
+        isChangingLane = true;
         float startX = playerRigidbody.position.x;
         float t = 0f;
         while(t < 1f)
@@ -375,6 +376,7 @@ public class PlayerMovement : MonoBehaviour
         playerRigidbody.MovePosition(finalPosition);
         yield return new WaitForFixedUpdate(); //Wait for physics update until we lock player X position again
         playerRigidbody.constraints = lockedX;
+        isChangingLane = false;
     }
 
     private bool CheckForCloseCallObstacles()
@@ -473,27 +475,52 @@ public class PlayerMovement : MonoBehaviour
         OnGameOver.Invoke();
         playerRigidbody.constraints = RigidbodyConstraints.FreezePositionX; //Stop player movement
 
-        if (!hasHitLevelEdge)
+        if (!hasHitLevelEdge && !isChangingLane)
         {
             StartCoroutine(RotatePlayerX(90f));
         }
-        else
+        else if(hasHitLevelEdge && !isChangingLane)
         {
-
             switch (currentLane)
             {
                 case Lanes.Left:
-                    StartCoroutine(RotatePlayerZ(-90));
+                    StartCoroutine(RotatePlayerZ(-90f));
 
                     break;
 
                 case Lanes.Right:
-                    StartCoroutine(RotatePlayerZ(90));
+                    StartCoroutine(RotatePlayerZ(90f));
 
                     break;
             }
         }
-        StartCoroutine(MovePlayerY(0.6f));
+        else
+        {
+            switch (currentLane)
+            {
+                case Lanes.Left:
+                    StartCoroutine(RotatePlayerZ(-90f));
+
+                    break;
+
+                case Lanes.Right:
+                    StartCoroutine(RotatePlayerZ(90f));
+
+                    break;
+
+                case Lanes.Center:
+                    if(transform.position.x > 0)
+                    {
+                        StartCoroutine(RotatePlayerZ(-90f));
+                    }
+                    else
+                    {
+                        StartCoroutine(RotatePlayerZ(90f));
+                    }
+                        break;
+            }
+        }
+            StartCoroutine(MovePlayerY(0.6f));
     }
 
     public float GetTotalRecoveryTime()
