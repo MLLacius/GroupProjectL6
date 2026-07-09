@@ -644,13 +644,14 @@ public class PlayerMovement : MonoBehaviour
         float t = 0f;
         Vector3 newY;
 
-        while (playerRigidbody.position.y != targetPositionY)
+        while (t < 2f)
         {
             newY = new Vector3(playerRigidbody.position.x, Mathf.Lerp(startY, targetPositionY, t), playerRigidbody.position.z);
             t += Time.deltaTime;
             playerRigidbody.MovePosition(newY);
             yield return null;
         }
+        yield return new WaitForFixedUpdate();
     }
 
     private IEnumerator RotatePlayerX(float targetRotationX)
@@ -659,13 +660,14 @@ public class PlayerMovement : MonoBehaviour
         float t = 0f;
         Quaternion newX;
 
-        while (playerRigidbody.rotation.x != targetRotationX)
+        while (t < 2f)
         {
             newX = Quaternion.Euler(Mathf.Lerp(startX, targetRotationX, t), playerRigidbody.rotation.y, playerRigidbody.rotation.z);
             t += Time.deltaTime;
             playerRigidbody.MoveRotation(newX);
             yield return null;
         }
+        yield return new WaitForFixedUpdate();
     }
 
     private IEnumerator RotatePlayerZ(float targetRotationZ)
@@ -674,13 +676,14 @@ public class PlayerMovement : MonoBehaviour
         float t = 0f;
         Quaternion newZ;
 
-        while (playerRigidbody.rotation.z != targetRotationZ)
+        while (t < 2f)
         {
             newZ = Quaternion.Euler(playerRigidbody.rotation.x, playerRigidbody.rotation.y, Mathf.Lerp(startZ, targetRotationZ, t));
             t += Time.deltaTime;
             playerRigidbody.MoveRotation(newZ);
             yield return null;
         }
+        yield return new WaitForFixedUpdate();
     }
 
     public bool GetIsPlayerDashing()
