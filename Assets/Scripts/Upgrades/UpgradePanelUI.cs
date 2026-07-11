@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections;
 
 //Luke script
 //This class takes the data in upgrade scriptable object and automatically fills in relevant UI fields.
@@ -12,6 +13,7 @@ public class UpgradePanelUI : MonoBehaviour
     [SerializeField] private TMP_Text upgradeCostText;
     [SerializeField] private Button purchaseButton;
     [SerializeField] private GameObject greyedOutButton;
+    [SerializeField] private GameObject invalidPurchaseButton;
     [Header("Optional References")]
     [SerializeField] private TMP_Text upgradeDescriptionText;
     [SerializeField] private UnityEngine.UI.Image upgradeIconImage;
@@ -41,7 +43,7 @@ public class UpgradePanelUI : MonoBehaviour
 
     private void OnPurchaseClick()
     {
-        upgradeManager.PurchaseUpgrade(upgradeItem, () => UpdateUI());
+        upgradeManager.PurchaseUpgrade(upgradeItem, () => UpdateUI(), () => StartCoroutine(EnableInvalidPurchase()));
     }
 
     private void UpdateUI()
@@ -79,5 +81,16 @@ public class UpgradePanelUI : MonoBehaviour
         upgradeNameText.text = upgradeItem.displayedUpgradeName;
         upgradeCostText.text = nextLevelData.cost.ToString();
         if(upgradeDescriptionText) upgradeDescriptionText.text = nextLevelData.levelDescription;
+    }
+
+    private IEnumerator EnableInvalidPurchase()
+    {
+        invalidPurchaseButton.SetActive(true);
+
+        yield return new WaitForSecondsRealtime(2f);
+
+        invalidPurchaseButton.SetActive(false);
+
+        yield return null;
     }
 }

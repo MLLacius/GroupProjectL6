@@ -66,7 +66,7 @@ public class UpgradeManager : MonoBehaviour
         return upgradeLevels.ContainsKey(id) ? upgradeLevels[id] : 0;
     }
 
-    public void PurchaseUpgrade(UpgradeSciptableItem upgrade, System.Action onSuccess)
+    public void PurchaseUpgrade(UpgradeSciptableItem upgrade, System.Action onSuccess, System.Action onFail)
     {
         int currentLv = GetUpgradeCurrentLevel(upgrade.upgradeID);
         if(currentLv >= upgrade.levelDefinitions.Length)
@@ -87,6 +87,7 @@ public class UpgradeManager : MonoBehaviour
         else
         {
             audioController.PlayInvalidPurchase();
+            onFail.Invoke();
         }
     }
 }

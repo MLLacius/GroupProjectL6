@@ -534,6 +534,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 44967129}
   m_CullTransparentMesh: 1
+--- !u!1 &71368147 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2013412980249969668, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
+  m_PrefabInstance: {fileID: 120553076}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &96731916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6552,6 +6557,11 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &718958099 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2013412980249969668, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
+  m_PrefabInstance: {fileID: 1812291508}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &726064600
 GameObject:
   m_ObjectHideFlags: 0
@@ -9543,6 +9553,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 980087308}
   m_CullTransparentMesh: 1
+--- !u!1 &985454325 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2013412980249969668, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
+  m_PrefabInstance: {fileID: 355625875}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1003796660
 GameObject:
   m_ObjectHideFlags: 0
@@ -15916,6 +15931,66 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1300808372}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 718958099}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 71368147}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1479513864}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 985454325}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1148839566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17347,6 +17422,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1289104976}
   m_CullTransparentMesh: 1
+--- !u!1 &1300808372 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2013412980249969668, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
+  m_PrefabInstance: {fileID: 1220822104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1329149140
 GameObject:
   m_ObjectHideFlags: 0
@@ -18746,6 +18826,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1476703501}
   m_CullTransparentMesh: 1
+--- !u!1 &1479513864 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2013412980249969668, guid: a197ebf32452c4f55985ec0b7db5ee18, type: 3}
+  m_PrefabInstance: {fileID: 1525262510}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1481925384
 GameObject:
   m_ObjectHideFlags: 0
