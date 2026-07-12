@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Extended Dash
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeSciptableItem
   upgradeID: longerDashDuration
-  displayedUpgradeName: Double Dash
+  displayedUpgradeName: Dash Extension
   upgradeIcon: {fileID: 0}
   levelDefinitions:
   - levelDescription: Makes the dash duration longer

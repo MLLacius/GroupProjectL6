@@ -195,7 +195,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 940c11f4610fa69408dfff94f54dc414, type: 2}
+  - {fileID: 2100000, guid: 0544c4b1f086f85498bfcd066bfb5127, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -300,7 +300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   segmentLength: 15
-  baseMaterial: {fileID: 2100000, guid: 940c11f4610fa69408dfff94f54dc414, type: 2}
+  baseMaterial: {fileID: 2100000, guid: 0544c4b1f086f85498bfcd066bfb5127, type: 2}
   segmentFloor: {fileID: 8339094749612366265}
   objectSpawners:
   - {fileID: 3652444483462355461}

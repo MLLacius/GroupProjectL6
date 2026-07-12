@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Collectible Magnet Unlock
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeSciptableItem
   upgradeID: collectibleMagnetsUnlocked
-  displayedUpgradeName: Collectible Magnet
+  displayedUpgradeName: Magnet
   upgradeIcon: {fileID: 0}
   levelDefinitions:
-  - levelDescription: Unlocks collectible magnets spawning
+  - levelDescription: Magnets that attract collectibles will start rarely appearing
     cost: 250
     upgradeValue: 0.005
   - levelDescription: Increases chance of a magnet spawning

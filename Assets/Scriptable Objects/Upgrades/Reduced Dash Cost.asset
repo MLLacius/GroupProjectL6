@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Reduced Dash Cost
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeSciptableItem
   upgradeID: fasterDashCharge
-  displayedUpgradeName: Lower Dash Cost
+  displayedUpgradeName: Cheaper Dash
   upgradeIcon: {fileID: 0}
   levelDefinitions:
   - levelDescription: Reduces the coins needed to fully charge a dash.
