@@ -26442,6 +26442,14 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2229341482224022280, guid: bcf8850a958ac419e82fb3ae8726cbd0, type: 3}
+      propertyPath: playerMovement
+      value: 
+      objectReference: {fileID: 1803198818}
+    - target: {fileID: 2229341482224022280, guid: bcf8850a958ac419e82fb3ae8726cbd0, type: 3}
+      propertyPath: cameraAnimation
+      value: 
+      objectReference: {fileID: 1464710872}
+    - target: {fileID: 2229341482224022280, guid: bcf8850a958ac419e82fb3ae8726cbd0, type: 3}
       propertyPath: currentSectionType
       value: 
       objectReference: {fileID: 11400000, guid: bc6344ea30b2a614baad8be023302fab, type: 2}

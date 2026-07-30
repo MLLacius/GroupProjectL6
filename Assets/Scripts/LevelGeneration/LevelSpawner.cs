@@ -24,6 +24,7 @@ public class LevelSpawner : MonoBehaviour
     
     private GameMaster gameMaster;
     private TutorialStateManager tutorialStateManager;
+    [SerializeField] private CameraAnimation cameraAnimation;
     private LevelSectionType[] levelSectionTypes;
     [SerializeField] private LevelSectionType startingSectionType;
     private LevelSectionType currentSectionType = null;
@@ -84,6 +85,10 @@ public class LevelSpawner : MonoBehaviour
         if (moveSpeed < maxMoveSpeed && gameMaster.GetGameplayState())
         {
             moveSpeed += moveSpeedGainPerSec * Time.deltaTime;
+            if (!cameraAnimation.GetIsPanningForDash())
+            {
+                cameraAnimation.UpdateCameraPan(moveSpeed);
+            }
             if (moveSpeed > maxMoveSpeed)
             {
                 moveSpeed = maxMoveSpeed;
