@@ -70,7 +70,7 @@ public class CameraAnimation : MonoBehaviour
 
     public void UpdateCameraPan(float levelSpeed)
     {
-        float newPan = ((startingFOV / (levelSpeed * 1000)) / 60);
+        float newPan = ((startingFOV / (levelSpeed * 700)) / 60);
         cineCam.Lens.FieldOfView -= newPan;
     }
 

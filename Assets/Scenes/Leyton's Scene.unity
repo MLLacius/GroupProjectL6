@@ -26438,6 +26438,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2229341482224022280, guid: bcf8850a958ac419e82fb3ae8726cbd0, type: 3}
+      propertyPath: maxMoveSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2229341482224022280, guid: bcf8850a958ac419e82fb3ae8726cbd0, type: 3}
       propertyPath: segmentLength
       value: 15
       objectReference: {fileID: 0}
