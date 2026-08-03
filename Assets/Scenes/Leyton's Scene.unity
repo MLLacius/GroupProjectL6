@@ -4549,8 +4549,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 485647175}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.05398674, y: -0.9316587, z: 0.15521662, w: 0.3240453}
-  m_LocalPosition: {x: 4.4, y: 3.93, z: 3.56}
+  m_LocalRotation: {x: 0.17538948, y: -0.46410167, z: 0.094308734, w: 0.8631072}
+  m_LocalPosition: {x: 4.7170005, y: 3.847, z: -5.118002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9956,7 +9956,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1027469388
 Transform:
   m_ObjectHideFlags: 0
@@ -16246,7 +16246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5342500578afb24a9b83d6343d32a0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineSplineSmoother
-  AutoSmooth: 1
+  AutoSmooth: 0
 --- !u!114 &1161848749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16276,77 +16276,41 @@ MonoBehaviour:
   - m_EditModeType: 1
     m_Knots:
     - Position:
+        x: 1.7040465
+        y: 1.1807728
+        z: -8.341101
+      TangentIn:
+        x: 0
+        y: 0
+        z: -0.7814761
+      TangentOut:
         x: 0
         y: 0
         z: 0
-      TangentIn:
-        x: 0
-        y: 0
-        z: -1.3365645
-      TangentOut:
-        x: 0
-        y: 0
-        z: 1.3365645
       Rotation:
         value:
-          x: -0.22619277
-          y: 0.6070561
-          z: -0.18189304
-          w: 0.7397531
+          x: 0.16225746
+          y: 0
+          z: -0.07435331
+          w: 0.9839431
     - Position:
-        x: 6
-        y: 0.8
-        z: 0
+        x: 0.99577504
+        y: 1.2941229
+        z: -8.941454
       TangentIn:
         x: 0
         y: 0
-        z: -1.1616279
+        z: -0
       TangentOut:
         x: 0
         y: 0
-        z: 1.1616279
+        z: 1.8558848
       Rotation:
         value:
-          x: 0.036557805
-          y: 0.93183994
-          z: 0.10204961
-          w: 0.3463001
-    - Position:
-        x: 4.5
-        y: 1.2
-        z: -4.79
-      TangentIn:
-        x: 0
-        y: 0
-        z: -2.1289358
-      TangentOut:
-        x: 0
-        y: 0
-        z: 2.1289358
-      Rotation:
-        value:
-          x: 0.0011348516
-          y: 0.9586543
-          z: 0.03143949
-          w: -0.28282875
-    - Position:
-        x: 1
-        y: 1.7
-        z: -8.94
-      TangentIn:
-        x: 0
-        y: 0
-        z: -1.4935133
-      TangentOut:
-        x: 0
-        y: 0
-        z: 1.4935133
-      Rotation:
-        value:
-          x: -0.0148417
-          y: 0.9033455
-          z: 0.07722944
-          w: -0.42164227
+          x: -0.10360212
+          y: 0.9005602
+          z: 0.13419282
+          w: -0.4003128
     - Position:
         x: -2
         y: 2.24
@@ -16354,17 +16318,17 @@ MonoBehaviour:
       TangentIn:
         x: 0
         y: 0
-        z: -0.79566485
+        z: -0.7407174
       TangentOut:
         x: 0
         y: 0
-        z: 0.79566485
+        z: 0.7407174
       Rotation:
         value:
-          x: -0.06826062
-          y: -0.70257103
-          z: -0.06700909
-          w: 0.70515543
+          x: -0.07565134
+          y: -0.6587032
+          z: -0.081207946
+          w: 0.74417216
     - Position:
         x: -3.75
         y: 2.6
@@ -16384,13 +16348,9 @@ MonoBehaviour:
           z: -0.27075046
           w: 0.96253973
     m_MetaData:
-    - Mode: 2
+    - Mode: 3
       Tension: 0.5
-    - Mode: 2
-      Tension: 0.5
-    - Mode: 2
-      Tension: 0.5
-    - Mode: 2
+    - Mode: 3
       Tension: 0.5
     - Mode: 2
       Tension: 0.5
@@ -18495,7 +18455,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -18521,8 +18481,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1464710865}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.99057895, z: -0.1369432, w: 0}
-  m_LocalPosition: {x: 0, y: 2.3133335, z: 4.462222}
+  m_LocalRotation: {x: 0.17538948, y: -0.46410167, z: 0.094308734, w: 0.8631072}
+  m_LocalPosition: {x: 5.2411118, y: 3.6633334, z: -3.4644468}
   m_LocalScale: {x: 1.111111, y: 1.1111112, z: 1.1111112}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26661,7 +26621,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5800684817463088337, guid: 0f3f7d1d6bbc94929b265d48af9b9429, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 1.45
       objectReference: {fileID: 0}
     - target: {fileID: 5800684817463088337, guid: 0f3f7d1d6bbc94929b265d48af9b9429, type: 3}
       propertyPath: m_LocalPosition.z
