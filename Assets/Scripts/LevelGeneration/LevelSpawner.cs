@@ -12,10 +12,10 @@ public class LevelSpawner : MonoBehaviour
     [SerializeField] private GameObject [] levelPrefabs;
     [SerializeField] private GameObject [] tutorialLevelPrefabs;
     [SerializeField] private int defaultSegmentLength;
-    private float segmentLength;
     [SerializeField] private int menuInitialSegmentCount;
-    [SerializeField] private int additionalInitialSegmentCount; 
-    
+    [SerializeField] private int additionalInitialSegmentCount;
+    private float segmentLength;
+
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 10f; // Speed the world moves towards camera
     [SerializeField] private float deleteZ = -20f; // The Z position where segments get destroyed
