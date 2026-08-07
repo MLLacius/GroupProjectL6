@@ -71,7 +71,6 @@ public class UpgradeManager : MonoBehaviour
         int currentLv = GetUpgradeCurrentLevel(upgrade.upgradeID);
         if(currentLv >= upgrade.levelDefinitions.Length)
         {
-            audioController.PlayMaxedPurchase();
             Debug.Log("Upgrade already maxed.");
             return;
         }

@@ -8,7 +8,7 @@ public class AudioController : MonoBehaviour
     [SerializeField] private AudioSource hardPlayerImpact;
     [SerializeField] private AudioSource obstacleDestroy;
     [SerializeField] private AudioSource playerMove, playerJump;
-    [SerializeField] private AudioSource validPurchase, invalidPurchase, maxedPurchase;
+    [SerializeField] private AudioSource validPurchase, invalidPurchase;
 
     private float timePassed = 0;
 
@@ -68,10 +68,5 @@ public class AudioController : MonoBehaviour
     public void PlayInvalidPurchase()
     {
         invalidPurchase.Play();
-    }
-
-    public void PlayMaxedPurchase()
-    {
-        maxedPurchase.Play();
     }
 }
