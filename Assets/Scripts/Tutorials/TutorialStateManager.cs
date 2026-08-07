@@ -233,6 +233,7 @@ public class TutorialStateManager : MonoBehaviour
         scoreText.SetActive(true);
         pauseButton.SetActive(true);
         pauseButton.GetComponent<Button>().interactable = true;
+        playerMovement.AssignPauseButton();
 
         playerMovement.UnassignFirstTutorialEvents();
         gameMaster.SetStateGameplay();

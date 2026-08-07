@@ -1,5 +1,6 @@
 using System.Collections;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -55,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private StumbleRecoveryProgress stumbleRecoveryProgress;
     [SerializeField] private CinemachineImpulseSource cinemachineImpulse; //Reference to the camera shake script to trigger shakes on stumble
     [SerializeField] private AudioController audioController;
+    [SerializeField] private PauseMenu pauseMenu;
     private GameMaster gameMaster;
     private LevelSpawner levelSpawner;
     private CameraAnimation cameraAnimation;
@@ -217,6 +219,7 @@ public class PlayerMovement : MonoBehaviour
         if(pauseAction.WasPressedThisFrame())
         {
             OnEscapePressed.Invoke();
+            return;
         }
 #endif
 
@@ -733,6 +736,11 @@ public class PlayerMovement : MonoBehaviour
     {
         InputAction[] actions = {moveAction, jumpAction, dashAction};
         actions[i].Disable();
+    }
+
+    public void AssignPauseButton()
+    {
+        OnEscapePressed.AddListener(delegate{pauseMenu.TogglePauseMenu();});
     }
 
     public void ForceStumblingFalse() //this method is used only in the first tutorial to make sure the player can dash at the dash segment and doesn't get softlocked
