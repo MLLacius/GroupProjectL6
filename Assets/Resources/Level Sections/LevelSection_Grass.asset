@@ -24,6 +24,7 @@ MonoBehaviour:
   - {fileID: 9098834875976951334, guid: aa798f03174e6d34abd54386cb63760d, type: 3}
   - {fileID: 9098834875976951334, guid: 5b2e501fd309fff4f8a33f0599a66afd, type: 3}
   - {fileID: 9098834875976951334, guid: 1bab17ab37635c04b96fe8d4d3dd7177, type: 3}
+  - {fileID: 9098834875976951334, guid: fcc1528d4b9e83d4cb9cad0693570a5d, type: 3}
   minSegmentCount: 10
   maxSegmentCount: 30
   startingDifficulty: 0

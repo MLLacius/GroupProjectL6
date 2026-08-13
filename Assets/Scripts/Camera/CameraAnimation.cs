@@ -10,16 +10,12 @@ public class CameraAnimation : MonoBehaviour
     private CinemachineBrain cineBrain;
 
     private float startingFOV;
-    private float startingSplineOffset;
-    private float targetSplineOffset;
     private bool isPanningForDash;
 
     private void Start()
     {
         cineBrain = GetComponent<CinemachineBrain>();
         startingFOV = cineCam.Lens.FieldOfView;
-        startingSplineOffset = splineDolly.SplineOffset.y;
-        targetSplineOffset = startingSplineOffset - 0.5f;
     }
 
     public void CameraAnim()
@@ -34,6 +30,8 @@ public class CameraAnimation : MonoBehaviour
         float elapsedTime = 0f;
         float currentFOV = cineCam.Lens.FieldOfView;
         float targetFOV = cineCam.Lens.FieldOfView - 10;
+        float startingSplineOffset = splineDolly.SplineOffset.y;
+        float targetSplineOffset = startingSplineOffset - 0.5f;
 
         while(elapsedTime < timeToComplete)
         {
@@ -53,6 +51,8 @@ public class CameraAnimation : MonoBehaviour
         float elapsedTime = 0f;
         float currentFOV = cineCam.Lens.FieldOfView;
         float targetFOV = cineCam.Lens.FieldOfView + 10;
+        float startingSplineOffset = splineDolly.SplineOffset.y;
+        float targetSplineOffset = startingSplineOffset + 0.5f;
 
         while (elapsedTime < timeToComplete)
         {
@@ -61,7 +61,8 @@ public class CameraAnimation : MonoBehaviour
             float lerpValue = elapsedTime / timeToComplete;
 
             cineCam.Lens.FieldOfView = Mathf.Lerp(currentFOV, targetFOV, lerpValue);
-            splineDolly.SplineOffset.y = Mathf.Lerp(targetSplineOffset, startingSplineOffset, lerpValue);
+            splineDolly.SplineOffset.y = Mathf.Lerp(startingSplineOffset, targetSplineOffset, lerpValue);
+            Debug.Log("FOV: " + cineCam.Lens.FieldOfView);
 
             yield return null;
         }
