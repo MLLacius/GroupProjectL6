@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3196170870501245659}
   - component: {fileID: 8706285336855161077}
   m_Layer: 0
-  m_Name: DebrisParticleTree
+  m_Name: DebrisParticleDeadTree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -222,8 +222,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.43137258, g: 0.28627452, b: 0.18823531, a: 1}
-      maxColor: {r: 0.30588236, g: 0.6039216, b: 0.26666668, a: 1}
+      minColor: {r: 0.2901961, g: 0.11764707, b: 0.039215688, a: 1}
+      maxColor: {r: 0.427451, g: 0.15294118, b: 0.043137256, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 0.427451, g: 0.15294118, b: 0.04705883, a: 1}

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle
   instantGameOver: 0
-  debrisParticles: {fileID: 1105822864513978609, guid: 87d9a2662892a1740ae73a9b4634b7e6, type: 3}
+  debrisParticles: {fileID: 1105822864513978609, guid: a2aff224263fcf0438344786bcbebfe2, type: 3}
 --- !u!65 &1220353291779076758
 BoxCollider:
   m_ObjectHideFlags: 0
