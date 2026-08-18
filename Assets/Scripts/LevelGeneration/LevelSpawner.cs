@@ -20,7 +20,7 @@ public class LevelSpawner : MonoBehaviour
     [SerializeField] private float moveSpeed = 10f; // Speed the world moves towards camera
     [SerializeField] private float deleteZ = -20f; // The Z position where segments get destroyed
     [SerializeField] private float moveSpeedGainPerSec = 0.01f;
-    [SerializeField] private float maxMoveSpeed = 30f;
+    [SerializeField] private float maxMoveSpeed = 20f;
     
     private GameMaster gameMaster;
     private TutorialStateManager tutorialStateManager;

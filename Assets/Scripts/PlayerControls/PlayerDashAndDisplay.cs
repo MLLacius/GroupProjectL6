@@ -19,6 +19,7 @@ public class PlayerDashAndDisplay : MonoBehaviour
     [SerializeField] private int meterMinimum = 0;
     [SerializeField] private int meterMaximum = 15;
     [SerializeField] private float dashDuration;
+    [SerializeField] private float dashRampUpTime, dashRampDownTime;
     [SerializeField] private Color[] flashcolors; 
     private bool isDashPrepared;
     public bool canDash = false;
@@ -226,5 +227,15 @@ public class PlayerDashAndDisplay : MonoBehaviour
     public float GetDashDuration()
     {
         return dashDuration;
+    }
+
+    public float GetDashRampUpTime()
+    {
+        return dashRampUpTime;
+    }
+
+    public float GetDashRampDownTime()
+    {
+        return dashRampDownTime;
     }
 }

@@ -584,24 +584,30 @@ public class PlayerMovement : MonoBehaviour
     {
         isPlayerDashing = true; //toggle to let player destroy obstacles instead of dying to them
         dashAndDisplay.OnPlayerDash(); //reset dash meter
-        StartCoroutine(Dash());
+        StartCoroutine(Dash(dashAndDisplay.GetDashRampUpTime(), dashAndDisplay.GetDashRampDownTime()));
     }
 
-    private IEnumerator Dash()
+    private IEnumerator Dash(float speedRampTime, float speedDecreaseTime)
     {
         OnDash.Invoke();
         float startingDashSpeed = levelSpawner.GetSpeed();
         float maxDashSpeed = levelSpawner.GetSpeed() * 3;
         float defaultFieldOfView = cameraAnimation.GetCameraFOV();
+        float elapsedTime = 0f;
         bool hasDashFinished = false;
         Debug.Log("Dash Started at: " + Time.time);
-        StartCoroutine(cameraAnimation.CameraPanIn(0.6f));
+        StartCoroutine(cameraAnimation.CameraPanIn(speedRampTime));
 
         //increase player's speed and pan in camera
-        for (float increasingSpeed = levelSpawner.GetSpeed(); levelSpawner.GetSpeed() < maxDashSpeed; increasingSpeed += (startingDashSpeed / 10))
+        while (elapsedTime < speedRampTime)
         {
-            levelSpawner.SetSpeed(increasingSpeed);
-            yield return new WaitForSeconds(0.02f);
+            elapsedTime += Time.deltaTime;
+
+            float lerpValue = elapsedTime / speedRampTime;
+
+            levelSpawner.SetSpeed(Mathf.Lerp(startingDashSpeed, maxDashSpeed, lerpValue));
+
+            yield return null;
         }
         cameraAnimation.SetCameraFOV(defaultFieldOfView - 10);
         cameraAnimation.SetSplineOffset(-0.5f);
@@ -611,21 +617,24 @@ public class PlayerMovement : MonoBehaviour
         float dashTime = dashAndDisplay.GetDashDuration();
         yield return new WaitForSeconds(dashTime);
         Debug.Log("Dash speed decrease started at: " + Time.time);
-        StartCoroutine(cameraAnimation.CameraPanOut(1.3f));
+        StartCoroutine(cameraAnimation.CameraPanOut(speedDecreaseTime));
 
         //decrease player's speed and pan out camera
-        for (float decreasingSpeed = levelSpawner.GetSpeed(); levelSpawner.GetSpeed() > startingDashSpeed; decreasingSpeed -= ((startingDashSpeed * 3) / 20))
+        while (elapsedTime < speedDecreaseTime)
         {
-            levelSpawner.SetSpeed(decreasingSpeed);
-            yield return new WaitForSeconds(0.08f);
+            elapsedTime += Time.deltaTime;
 
-            if(levelSpawner.GetSpeed() <= startingDashSpeed)
-            {
-                hasDashFinished = true;
-                levelSpawner.SetSpeed(startingDashSpeed);
-                break;
-            }
+            float lerpValue = elapsedTime / speedDecreaseTime;
+
+            levelSpawner.SetSpeed(Mathf.Lerp(maxDashSpeed, startingDashSpeed, lerpValue));
+
+            yield return null;
         }
+
+        yield return new WaitUntil(() => !cameraAnimation.GetIsPanningForDash());
+
+        hasDashFinished = true;
+        levelSpawner.SetSpeed(startingDashSpeed);
         cameraAnimation.SetCameraFOV(defaultFieldOfView);
         cameraAnimation.SetSplineOffset(0f);
         Debug.Log("Dash finished at: " + Time.time);
