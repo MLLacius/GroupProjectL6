@@ -29,7 +29,7 @@ public class EndGameDisplay : MonoBehaviour
 
             lastScoreText.text = "Score: " + lastScore.ToString();
             highScoreText.text = "High Score: " + highScore.ToString();
-            collectibleText.text = "Collectibles Collected: " + gameMaster.GetCollectiblesGained();
+            collectibleText.text = "Coins Collected: " + gameMaster.GetCollectiblesGained();
         }
     }
 

@@ -19,7 +19,7 @@ public class SettingsMenuMobile : MonoBehaviour
     [SerializeField] private TextMeshProUGUI volumeDisplayText;
     [SerializeField] private TextMeshProUGUI musicDisplayText;
     [SerializeField] private Button resetToggle;
-
+    [SerializeField] private AudioSource gameMusic;
     private void Start()
     {
         //set intital values and proporties of components
@@ -28,11 +28,17 @@ public class SettingsMenuMobile : MonoBehaviour
         volumeSlider.value = startingVolume;
         volumeSlider.wholeNumbers = true;
 
+        musicSlider.minValue = minimumVolume;
+        musicSlider.maxValue = maximumVolume;
+        musicSlider.value = startingVolume;
+        musicSlider.wholeNumbers = true;
+
         //assign unity events
         resetToggle.onClick.AddListener(SetDefaultSettings);
         volumeSlider.onValueChanged.AddListener(ChangeVolume);
+        musicSlider.onValueChanged.AddListener(ChangeMusicVolume);
 
-        if(PlayerPrefs.HasKey("Volume"))
+        if(PlayerPrefs.HasKey("Volume") || PlayerPrefs.HasKey("Music Volume"))
         {
             LoadPlayerPrefs();
         }
@@ -55,7 +61,7 @@ public class SettingsMenuMobile : MonoBehaviour
         }
         else
         {
-            musicDisplayText.text = Convert.ToInt32(musicSlider.value * 100).ToString();
+            musicDisplayText.text = musicSlider.value.ToString();
         }
     }
 
@@ -66,21 +72,30 @@ public class SettingsMenuMobile : MonoBehaviour
         Debug.Log("Current volume: " + volume + " AudioListener value: " + AudioListener.volume);
         PlayerPrefs.SetFloat("Volume", volume);
     }
+    public void ChangeMusicVolume(float musicVolume)
+    {
+        musicVolume = musicSlider.value;
+        gameMusic.volume = musicSlider.value / 100;
+        Debug.Log("Current music volume: " + musicVolume);
+        PlayerPrefs.SetFloat("Music Volume", musicVolume);
+    }
 
     public void SetDefaultSettings()
     {
         float volume = volumeSlider.value;
         PlayerPrefs.DeleteKey("Volume");
         volumeSlider.value = startingVolume;
+        musicSlider.value = startingVolume;
         ChangeVolume(volume);
-
-        musicSlider.value = 0.5f;
+        ChangeMusicVolume(volume);
     }
 
     private void LoadPlayerPrefs()
     {
         volumeSlider.value = PlayerPrefs.GetFloat("Volume");
+        musicSlider.value = PlayerPrefs.GetFloat("Music Volume");
         ChangeVolume(PlayerPrefs.GetFloat("Volume"));
+        ChangeMusicVolume(PlayerPrefs.GetFloat("Music Volume"));
     }
 
     private void OnDisable()

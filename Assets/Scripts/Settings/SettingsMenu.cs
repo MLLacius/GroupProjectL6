@@ -33,6 +33,7 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private TextMeshProUGUI controlSchemeDisplay;
     [SerializeField] private ControlSchemeManager controlSchemeManagerScript;
     [SerializeField] private TextMeshProUGUI windowDisplayText;
+    [SerializeField] private AudioSource gameMusic;
 
     private void Start()
     {
@@ -41,6 +42,11 @@ public class SettingsMenu : MonoBehaviour
         volumeSlider.maxValue = maximumVolume;
         volumeSlider.value = startingVolume;
         volumeSlider.wholeNumbers = true;
+
+        musicSlider.minValue = minimumVolume;
+        musicSlider.maxValue = maximumVolume;
+        musicSlider.value = startingVolume;
+        musicSlider.wholeNumbers = true;
 
         resolutionsX = new List<int>();
         resolutionsY = new List<int>();
@@ -64,8 +70,9 @@ public class SettingsMenu : MonoBehaviour
         resetToggle.onClick.AddListener(SetDefaultSettings);
         controlsToggle.onClick.AddListener(ChangeControlScheme);
         volumeSlider.onValueChanged.AddListener(ChangeVolume);
+        musicSlider.onValueChanged.AddListener(ChangeMusicVolume);
 
-        if(PlayerPrefs.HasKey("Volume") || PlayerPrefs.HasKey("Resolution") || PlayerPrefs.HasKey("ResolutionX") || PlayerPrefs.HasKey("ResolutionY"))
+        if(PlayerPrefs.HasKey("Volume") ||PlayerPrefs.HasKey("Music Volume") || PlayerPrefs.HasKey("Resolution") || PlayerPrefs.HasKey("ResolutionX") || PlayerPrefs.HasKey("ResolutionY"))
         {
             LoadPlayerPrefs();
         }
@@ -88,7 +95,7 @@ public class SettingsMenu : MonoBehaviour
         }
         else
         {
-            musicDisplayText.text = Convert.ToInt32(musicSlider.value * 100).ToString();
+            musicDisplayText.text = musicSlider.value.ToString();
         }
     }
 
@@ -98,6 +105,14 @@ public class SettingsMenu : MonoBehaviour
         AudioListener.volume = volumeSlider.value / 100;
         Debug.Log("Current volume: " + volume + " AudioListener value: " + AudioListener.volume);
         PlayerPrefs.SetFloat("Volume", volume);
+    }
+
+    public void ChangeMusicVolume(float musicVolume)
+    {
+        musicVolume = musicSlider.value;
+        gameMusic.volume = musicSlider.value / 100;
+        Debug.Log("Current music volume: " + musicVolume);
+        PlayerPrefs.SetFloat("Music Volume", musicVolume);
     }
 
     private void FindResolutions()
@@ -214,9 +229,9 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.DeleteKey("ResolutionX");
         PlayerPrefs.DeleteKey("ResolutionY");
         volumeSlider.value = startingVolume;
+        musicSlider.value = startingVolume;
         ChangeVolume(volume);
-
-        musicSlider.value = 0.5f;
+        ChangeMusicVolume(volume);
 
         Screen.SetResolution(defaultResolution.width, defaultResolution.height, currentFullScreenMode);
         PlayerPrefs.SetString("Resolution", (defaultResolution.width.ToString() + "x" + defaultResolution.height.ToString()));
@@ -237,8 +252,10 @@ public class SettingsMenu : MonoBehaviour
     private void LoadPlayerPrefs()
     {
         volumeSlider.value = PlayerPrefs.GetFloat("Volume");
-        Screen.SetResolution(PlayerPrefs.GetInt("ResolutionX"), PlayerPrefs.GetInt("ResolutionY"), currentFullScreenMode);
+        musicSlider.value = PlayerPrefs.GetFloat("Music Volume");
         ChangeVolume(PlayerPrefs.GetFloat("Volume"));
+        ChangeMusicVolume(PlayerPrefs.GetFloat("Music Volume"));
+        Screen.SetResolution(PlayerPrefs.GetInt("ResolutionX"), PlayerPrefs.GetInt("ResolutionY"), currentFullScreenMode);
     }
 
     private void OnDisable()
