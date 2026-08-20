@@ -116,7 +116,19 @@ public class PlayerDashAndDisplay : MonoBehaviour
         {
             Debug.Log("Can't find display object");
         }
+    }
 
+    public void IncrementCollectedCollectibles()
+    {
+        if (collectedCollectibles < meterMaximum)
+        {
+            collectedCollectibles++;
+        }
+        CheckForDash(); //check if conditions to prepare dash for use are met
+    }
+
+    private void CheckForDash()
+    {
         if ((collectedCollectibles >= meterMaximum || (collectedCollectibles >= tutorialDashCost && tutorialManager.isFirstTutorial)) && !isDashPrepared)
         {
             sliderFill.GetComponent<Image>().color = filledColor;
@@ -129,14 +141,6 @@ public class PlayerDashAndDisplay : MonoBehaviour
         else if (!isDashPrepared)
         {
             sliderFill.GetComponent<Image>().color = nonFilledColor;
-        }
-    }
-
-    public void IncrementCollectedCollectibles()
-    {
-        if (collectedCollectibles < meterMaximum)
-        {
-            collectedCollectibles++;
         }
     }
 
