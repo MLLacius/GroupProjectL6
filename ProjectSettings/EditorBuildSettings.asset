@@ -6,11 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Leyton's Scene.unity
+    path: Assets/Scenes/Main Game Scene.unity
     guid: 234ea1a30de02714cafa4945e03ea5f1
-  - enabled: 1
-    path: Assets/Scenes/Main Game.unity
-    guid: 639059f20e8d5d64abf53ea70ec5a9e9
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
