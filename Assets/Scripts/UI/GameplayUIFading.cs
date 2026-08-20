@@ -57,7 +57,7 @@ public class GameplayUIFading : MonoBehaviour
 
             if (gameObjects[i].transform.childCount > 0)
             {
-                FadeOutObjects(PopulateChildArray(gameObjects[i]));
+                FadeOutObjects(PopulateChildArray(gameObjects[i])); //recursive calls until every child has been run through the method
             }
             else
             {
@@ -70,14 +70,14 @@ public class GameplayUIFading : MonoBehaviour
     {
         for(int i = 0; i < gameObjects.Length; i++)
         {
-            if (gameObjects[i].GetComponent<CanvasRenderer>())
+            if (gameObjects[i].GetComponent<CanvasRenderer>()) //cross fade alpha method comes from graphic class but requires canvas renderer component present
             {
                 gameObjects[i].GetComponent<Graphic>().CrossFadeAlpha(1f, fadeInDuration, false);
             }
 
             if (gameObjects[i].transform.childCount > 0)
             {
-                CrossFadeAlphaObjects(PopulateChildArray(gameObjects[i]));
+                CrossFadeAlphaObjects(PopulateChildArray(gameObjects[i])); //recursive calls until every child has been run through the method
             }
             else
             {
