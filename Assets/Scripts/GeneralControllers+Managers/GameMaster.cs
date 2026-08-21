@@ -259,22 +259,20 @@ public class GameMaster : MonoBehaviour
     private void UpdateDifficulty()
     {
         int difficultyScore = currentScore + previousHighScore; //this int is to increase the difficulty earlier depending on how far the player has previously gotten
-        switch (difficultyScore)
+        if (difficultyScore < 500)
         {
-            case 0:
-                gameDifficultyID = 0;
-                Debug.Log("Difficulty set to easy");
-            break;
-
-            case 500: 
-                gameDifficultyID = 1;
-                Debug.Log("Difficulty set to medium");
-            break;
-
-            case 1000:
-                gameDifficultyID = 2;
-                Debug.Log("Difficulty set to hard");
-            break;
+            gameDifficultyID = 0;
+            Debug.Log("Difficulty set to easy");
+        }
+        else if (difficultyScore >= 500 && difficultyScore < 1000)
+        {
+            gameDifficultyID = 1;
+            Debug.Log("Difficulty set to medium");
+        }
+        else if (difficultyScore >= 1000)
+        {
+            gameDifficultyID = 2;
+            Debug.Log("Difficulty set to hard");
         }
     }
 }

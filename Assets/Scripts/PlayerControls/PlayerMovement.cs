@@ -190,9 +190,9 @@ public class PlayerMovement : MonoBehaviour
         if (inputDelayTimer <= 0f)
         {
             float moveInput = moveAction.ReadValue<float>();
-            if(moveInput < -0.1f) { TrySwitchLane(Lanes.Left, Lanes.Right);} //Left input
-            else if(moveInput > 0.1f) { TrySwitchLane(Lanes.Right, Lanes.Left);} //Right input
-        } 
+            if(moveInput < -0.02f) { TrySwitchLane(Lanes.Left, Lanes.Right);} //Left input
+            else if(moveInput > 0.02f) { TrySwitchLane(Lanes.Right, Lanes.Left);} //Right input
+        }
         //Jump
         if(jumpAction.WasPressedThisFrame() && currentJumpDelay <= 0f && GroundCheck())
         {

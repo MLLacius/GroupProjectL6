@@ -1432,7 +1432,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.707, y: 0.74200004}
   m_AnchorMax: {x: 0.75975007, y: 0.83500004}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 156}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &162089265
@@ -29183,6 +29183,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4866217831886955832, guid: 92fe787665398460c93f490b205ff7c8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.439
+      objectReference: {fileID: 0}
     - target: {fileID: 4912979495905167400, guid: 92fe787665398460c93f490b205ff7c8, type: 3}
       propertyPath: m_TagString
       value: Player
@@ -29270,6 +29274,18 @@ PrefabInstance:
     - target: {fileID: 7132136211819043818, guid: 92fe787665398460c93f490b205ff7c8, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8007151806061599281, guid: 92fe787665398460c93f490b205ff7c8, type: 3}
+      propertyPath: m_Size.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8007151806061599281, guid: 92fe787665398460c93f490b205ff7c8, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8007151806061599281, guid: 92fe787665398460c93f490b205ff7c8, type: 3}
+      propertyPath: m_Size.z
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 8007151806061599281, guid: 92fe787665398460c93f490b205ff7c8, type: 3}
       propertyPath: m_Center.y
