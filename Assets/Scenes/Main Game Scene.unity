@@ -27421,6 +27421,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 9d6c38a467caf4c19bee72b88a091ef7, type: 2}
     - target: {fileID: 8377336787629280370, guid: 0f3f7d1d6bbc94929b265d48af9b9429, type: 3}
+      propertyPath: gameDifficultyScalingModifier
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8377336787629280370, guid: 0f3f7d1d6bbc94929b265d48af9b9429, type: 3}
       propertyPath: OnGameStart.m_PersistentCalls.m_Calls.Array.size
       value: 2
       objectReference: {fileID: 0}

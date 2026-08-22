@@ -14,7 +14,6 @@ public class GameMaster : MonoBehaviour
         FirstTutorial
     }
 
-
     //Unity Events
     public UnityEvent OnHighScoreAchieved; //Called when the player gets a highscore in the current run
     public UnityEvent OnGameStart;
@@ -25,7 +24,9 @@ public class GameMaster : MonoBehaviour
     [SerializeField] private CinemachineCamera cineCam;
 
     [Tooltip("0 = Easy, 1 = Normal, 2 = Hard")]
-    [SerializeField, UnityEngine.Min(0), Max(2)] private int gameDifficultyID; 
+    [SerializeField, UnityEngine.Min(0), Max(2)] private int gameDifficultyID;
+    [Tooltip("Starting difficulty scaling from the high score will be divided by this amount (default is +500 score for each difficulty increase")]
+    [SerializeField] private float gameDifficultyScalingModifier;
 
     private float rawScore;
     private bool gameplayStarted;
@@ -239,17 +240,17 @@ public class GameMaster : MonoBehaviour
 
     private void SetInitialDifficulty()
     {
-        if(highScore < 500)
+        if(highScore < 500 / gameDifficultyScalingModifier)
         {
             gameDifficultyID = 0;
             Debug.Log("Difficulty set to easy");
         }
-        else if(highScore >= 500 && highScore < 1000)
+        else if(highScore >= 500 / gameDifficultyScalingModifier && highScore < 1000 / gameDifficultyScalingModifier)
         {
             gameDifficultyID = 1;
             Debug.Log("Difficulty set to medium");
         }
-        else if(highScore >= 1000)
+        else if(highScore >= 1000 / gameDifficultyScalingModifier)
         {
             gameDifficultyID = 2;
             Debug.Log("Difficulty set to hard");
@@ -258,7 +259,7 @@ public class GameMaster : MonoBehaviour
 
     private void UpdateDifficulty()
     {
-        int difficultyScore = currentScore + previousHighScore; //this int is to increase the difficulty earlier depending on how far the player has previously gotten
+        int difficultyScore = (int)(currentScore + (previousHighScore / gameDifficultyScalingModifier)); //this int is to increase the difficulty earlier depending on how far the player has previously gotten
         if (difficultyScore < 500)
         {
             gameDifficultyID = 0;
