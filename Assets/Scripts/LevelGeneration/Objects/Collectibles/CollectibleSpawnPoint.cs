@@ -14,6 +14,7 @@ public class CollectibleSpawnPoint : MonoBehaviour
     [SerializeField] private UpgradeSciptableItem magnetUpgrade;
     [SerializeField] private GameObject magnetPrefab;
 
+    private bool isMagnet = false;
     private bool spawnMagnets = false;
     private float magnetSpawnRate;
 
@@ -57,6 +58,11 @@ public class CollectibleSpawnPoint : MonoBehaviour
                 SpawnCollectible();
             }
         }
+
+        if(activeCollectible.transform.localPosition != initialLocalPosition)
+        {
+            activeCollectible.transform.localPosition = initialLocalPosition;
+        }
     }
 
     private void Start()
@@ -84,6 +90,7 @@ public class CollectibleSpawnPoint : MonoBehaviour
         {
             activeCollectible = Instantiate(magnetPrefab, transform);
             activeCollectible.transform.localPosition = initialLocalPosition;
+            isMagnet = true;
             return;
         }
 
@@ -99,6 +106,12 @@ public class CollectibleSpawnPoint : MonoBehaviour
         if (gameMaster)
         {
             gameMaster.OnGameStart.RemoveListener(SpawnCollectible);
+        }
+
+        if(isMagnet)
+        {
+            Destroy(activeCollectible);
+            isMagnet = false;
         }
     }
 }
