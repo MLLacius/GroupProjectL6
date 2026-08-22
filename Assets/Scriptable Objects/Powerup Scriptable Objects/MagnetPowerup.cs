@@ -3,8 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Powerup/Magnet Powerup")]
 public class MagnetPowerup : PowerUpEffect
 {
-    [SerializeField] private float radius = 5f;
-    [SerializeField] private float attractionSpeed = 5f;
+    [SerializeField] private float radius = 25f;
+    [SerializeField] private float attractionSpeed = 20f;
     private MagnetIconFlash magnetIcon; //The icon to display when the powerup is active
     public override void OnActivate(GameObject target)
     {
@@ -37,7 +37,7 @@ public class MagnetPowerup : PowerUpEffect
             {
                 //Move towards player
                 Vector3 direction = (target.transform.position - collectible.transform.position).normalized;
-                collectible.transform.position += direction * Time.deltaTime * attractionSpeed; //5f is the speed of attraction
+                collectible.transform.position += direction * Time.deltaTime * attractionSpeed;
             }
         }
     }

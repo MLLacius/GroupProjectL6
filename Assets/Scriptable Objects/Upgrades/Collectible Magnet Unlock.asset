@@ -18,13 +18,13 @@ MonoBehaviour:
   levelDefinitions:
   - levelDescription: Magnets that attract collectibles will start rarely appearing
     cost: 250
-    upgradeValue: 0.005
+    upgradeValue: 0.01
   - levelDescription: Increases chance of a magnet spawning
     cost: 500
-    upgradeValue: 0.01
+    upgradeValue: 0.02
   - levelDescription: Further chance of a magnet spawning
     cost: 750
-    upgradeValue: 0.015
+    upgradeValue: 0.03
   - levelDescription: Increases chance of magnet spawning to the maximum
     cost: 1000
-    upgradeValue: 0.02
+    upgradeValue: 0.04
