@@ -56,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private CinemachineImpulseSource cinemachineImpulse; //Reference to the camera shake script to trigger shakes on stumble
     [SerializeField] private AudioController audioController;
     [SerializeField] private PauseMenu pauseMenu;
+    [SerializeField] private Animator animator;
     private GameMaster gameMaster;
     private LevelSpawner levelSpawner;
     private CameraAnimation cameraAnimation;
@@ -125,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         gameMaster = GameObject.Find("Game Master").GetComponent<GameMaster>();
-        levelSpawner = GameObject.Find("Level Spawner").GetComponent<LevelSpawner>();
+        levelSpawner = GameObject.Find("Level Spawner").GetComponentInChildren<LevelSpawner>();
         cameraAnimation = GetComponentInChildren<CameraAnimation>();
         playerRigidbody = GetComponent<Rigidbody>();
         InitialiseControlScheme();
@@ -161,6 +162,8 @@ public class PlayerMovement : MonoBehaviour
 
         HandleTimers();
         HandleInputs();
+
+        animator.speed = levelSpawner.GetSpeed() / 10;
     }
     
     private void HandleTimers()
