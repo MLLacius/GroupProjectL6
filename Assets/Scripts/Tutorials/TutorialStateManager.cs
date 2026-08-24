@@ -23,6 +23,8 @@ public class TutorialStateManager : MonoBehaviour
     [SerializeField] private GameObject scoreText;
     [SerializeField] private GameObject pauseButton;
 
+    [SerializeField] private GameObject[] dashGlyphPrompts;
+
     //use this to change the segment ratio for tutorial to increase distance away obstacles spawn
     public UnityEvent setFirstTutorialSegments;
 
@@ -261,12 +263,28 @@ public class TutorialStateManager : MonoBehaviour
         }
         else
         {
+            bool dashPromptCheck = false;
+            int dashPromptIdentifier = -1;
+
+            for(int i = 0; i < dashGlyphPrompts.Length; i++)
+            {
+                if (dashGlyphPrompts[i].activeSelf)
+                {
+                    dashGlyphPrompts[i].SetActive(false);
+                    dashPromptIdentifier = i;
+                    dashPromptCheck = true;
+                }
+            }
             stumbleExplaination.gameObject.SetActive(true);
             Time.timeScale = 0f;
 
-            yield return new WaitForSecondsRealtime(3f);
+            yield return new WaitForSecondsRealtime(4f);
             yield return new WaitUntil(() => stumbleTutorialCheck);
 
+            if(dashPromptCheck && dashPromptIdentifier >= 0)
+            {
+                dashGlyphPrompts[dashPromptIdentifier].SetActive(true);
+            }
             stumbleExplaination.gameObject.SetActive(false);
             Time.timeScale = 1f;
 

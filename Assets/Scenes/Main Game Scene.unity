@@ -21707,6 +21707,10 @@ MonoBehaviour:
   highScoreText: {fileID: 1387837906}
   scoreText: {fileID: 1853942969}
   pauseButton: {fileID: 604313750}
+  dashGlyphPrompts:
+  - {fileID: 344883650}
+  - {fileID: 1289104976}
+  - {fileID: 518579475}
   setFirstTutorialSegments:
     m_PersistentCalls:
       m_Calls:
