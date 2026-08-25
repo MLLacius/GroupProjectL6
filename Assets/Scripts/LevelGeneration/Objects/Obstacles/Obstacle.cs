@@ -27,7 +27,6 @@ public class Obstacle : MonoBehaviour
                 if (instantGameOver)
                 {
                     collision.gameObject.GetComponent<PlayerMovement>().AttemptStumble();
-                    Debug.Log("Player Collision: Attempt stumble forced instead of instant game over");
                 }
                 else
                 {
@@ -37,7 +36,6 @@ public class Obstacle : MonoBehaviour
                         audioController.PlayObstacleDestroy();
                         RemoveObject();
                     }
-                    Debug.Log("Player Collision: Stumble");
                 }
             }
             //destroy obstacle on collision with player if they're dashing instead of triggering gameover/stumbling

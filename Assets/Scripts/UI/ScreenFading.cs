@@ -16,13 +16,11 @@ public class ScreenFading : MonoBehaviour
 
     public void StartFade()
     {
-        if(image == null){ Debug.LogWarning("Diva we're missing an image component"); return; }
+        if(image == null){ return; }
 
         imageColor = image.color;
         imageColor.a = startingAlpha;
         
-
-        Debug.Log("Called start fade on game over");
         StartCoroutine(FadeRoutine());
     }
 
@@ -48,6 +46,5 @@ public class ScreenFading : MonoBehaviour
         imageColor.a = targetAlpha;
         image.color = imageColor;
         onFadeComplete.Invoke();
-        Debug.Log("Fade complete");
     }
 }

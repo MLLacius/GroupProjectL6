@@ -17,10 +17,8 @@ public class UpgradeCollectiblesUI : MonoBehaviour
         if(currentCollectibles > 999999)
         {
             collectiblesText.text = "999999+";
-            Debug.Log("Collectibles exceed display limit, showing 999999+");
             return;
         }
         collectiblesText.text = currentCollectibles.ToString();
-        Debug.Log("Updated collectibles display");
     }
 }

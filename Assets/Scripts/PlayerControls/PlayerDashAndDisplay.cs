@@ -53,9 +53,6 @@ public class PlayerDashAndDisplay : MonoBehaviour
         dashDisplay.minValue = meterMinimum;
         dashDisplay.maxValue = tutorialDashCost;
         dashDisplay.value = tutorialDashStartValue;
-        Debug.Log("Tutorial Values");
-        Debug.Log("Dash meter max value set to: " + tutorialDashCost);
-        Debug.Log("Dash duration set to: " + dashDuration);
         
     }
 
@@ -80,9 +77,6 @@ public class PlayerDashAndDisplay : MonoBehaviour
         dashDisplay.minValue = meterMinimum;
         dashDisplay.maxValue = meterMaximum;
         dashDisplay.value = meterStartValue;
-        Debug.Log("Default Values");
-        Debug.Log("Dash meter max value set to: " + meterMaximum);
-        Debug.Log("Dash duration set to: " + dashDuration);
     }
 
     private void Awake()
@@ -111,10 +105,6 @@ public class PlayerDashAndDisplay : MonoBehaviour
         else if (dashDisplay && isDashing)
         {
             dashDisplay.value = dashPercentageLeft;
-        }
-        else
-        {
-            Debug.Log("Can't find display object");
         }
     }
 
@@ -146,7 +136,6 @@ public class PlayerDashAndDisplay : MonoBehaviour
 
     public void OnPlayerDash()
     {
-        Debug.Log("Player dashed, starting dash depletion");
         StartCoroutine(DecreaseCollectibleCount());
         canDash = false;
         controlGlyphWASD.SetActive(false);
@@ -180,7 +169,6 @@ public class PlayerDashAndDisplay : MonoBehaviour
 
         //Ensure values are 0 at end
         isDashing = false;
-        Debug.Log("Dash ended, resetting collectible count, time: " + timePassed);
         collectedCollectibles = 0;
         dashDisplay.value = 0;
     }

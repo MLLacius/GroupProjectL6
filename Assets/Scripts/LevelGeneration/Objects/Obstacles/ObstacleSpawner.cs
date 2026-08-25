@@ -37,7 +37,6 @@ public class ObstacleSpawner : ObjectSpawner
         if(transform.childCount == 0)
         {
             hasAttemptedSpawn = false;
-            Debug.LogError("Obstacle Spawner has no child objects even after SpawnObject() call");
         }
         else { hasAttemptedSpawn = true; }
     }

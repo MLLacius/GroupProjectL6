@@ -162,7 +162,6 @@ public class LevelSpawner : MonoBehaviour
             {
                 if (selectedPrefab.name == disallowedNextSegments[i].name)
                 {
-                    Debug.Log("Level spawner tried to make a disallowed segment combination: " + previousSegment + " + " + disallowedNextSegments[i].name + " at " + Time.time + "s");
                     selectedPrefabIndex = Random.Range(0, levelPrefabs.Length);
                     selectedPrefab = levelPrefabs[selectedPrefabIndex];
                     isValidCombination = false;
@@ -211,7 +210,6 @@ public class LevelSpawner : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Level spawner could not find: " + segment.name + "'s SegementData");
             spawnZ += defaultSegmentLength;
         }
 
@@ -247,7 +245,6 @@ public class LevelSpawner : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Level spawner could not find: " + segment.name + "'s SegementData");
             spawnZ += defaultSegmentLength;
         }
 
@@ -304,7 +301,6 @@ public class LevelSpawner : MonoBehaviour
     private void CalculateSectionThreshold()
     {
         sectionChangeThreshold = Random.Range(currentSectionType.minSegmentCount, currentSectionType.maxSegmentCount);
-        Debug.Log("Section range threshold: " + sectionChangeThreshold);
     }
 
     private void ChangeCurrentSection()
@@ -314,12 +310,10 @@ public class LevelSpawner : MonoBehaviour
         do 
         {
             levelSectionTypeHolder = levelSectionTypes[Random.Range(0, levelSectionTypes.Length)];
-            Debug.Log("Attempting to change section type to: " + levelSectionTypeHolder.name);
         }
         while (!((int)levelSectionTypeHolder.startingDifficulty <= gameMaster.GetDifficulty()));
 
         currentSectionType = levelSectionTypeHolder;
-        Debug.Log("Current section type changed to: " + currentSectionType.name);
         levelPrefabs = currentSectionType.segments;
         currentSectionLength = 0;
         CalculateSectionThreshold();

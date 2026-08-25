@@ -36,10 +36,6 @@ public class TutorialStateManager : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private GameMaster gameMaster;
 
-    //remove the below value for builds
-    [Tooltip("Toggle this to access the starting tutorial without changing the high score.")]
-    [SerializeField] private bool devToggleFirstTutorial = false;
-
     //Events to mark start/end of first in depth tutorial
     //These get hooked into for things like modifying number of collectibles needed to charge dash in and outside the tutorial
     public UnityEvent FirstTutorialStart;
@@ -48,7 +44,7 @@ public class TutorialStateManager : MonoBehaviour
     private void Awake()
     {
         //either use the playerprefs editor to reset the highscore or edit the below condition to be true to have the intial tutorial run
-        if (!PlayerPrefs.HasKey("HighScore") || PlayerPrefs.GetInt("HighScore") == 0 || devToggleFirstTutorial)
+        if (!PlayerPrefs.HasKey("HighScore") || PlayerPrefs.GetInt("HighScore") == 0)
         {
             isFirstTutorial = true;
             setFirstTutorialSegments.Invoke();
@@ -61,7 +57,6 @@ public class TutorialStateManager : MonoBehaviour
         if (isFirstTutorial)
         {
             FirstTutorialStart.Invoke();
-            Debug.Log("Started first tutorial");
             stumbleTutorialCheck = false;
             firstTutorialObjectsHolder.SetActive(true);
 
@@ -88,7 +83,6 @@ public class TutorialStateManager : MonoBehaviour
                 arrowKeysGlyphHolder.SetActive(false);
                 arrowKeysGlyphs[0].SetActive(false);
                 arrowKeysGlyphs[1].SetActive(false);
-                Debug.Log("Showing WASD Glyphs");
                 break;
 
             case 1:
@@ -99,7 +93,6 @@ public class TutorialStateManager : MonoBehaviour
                 WASDGlyphHolder.SetActive(false);
                 WASDGlyphs[0].SetActive(false);
                 WASDGlyphs[1].SetActive(false);
-                Debug.Log("Showing ArrowKeys Glyphs");
                 break;
 
             default:
@@ -110,7 +103,6 @@ public class TutorialStateManager : MonoBehaviour
                 arrowKeysGlyphHolder.SetActive(false);
                 arrowKeysGlyphs[0].SetActive(false);
                 arrowKeysGlyphs[1].SetActive(false);
-                Debug.Log("Showing WASD Glyphs by default");
                 break;
         }
 #endif
@@ -243,7 +235,6 @@ public class TutorialStateManager : MonoBehaviour
 
         yield return null;
         //End of tutorial
-        Debug.Log("End of tutorial");
         FirstTutorialEnd.Invoke();
     }
 

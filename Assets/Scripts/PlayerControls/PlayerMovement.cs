@@ -140,12 +140,6 @@ public class PlayerMovement : MonoBehaviour
             OnStumble.AddListener(delegate{tutorialStateManager.AttemptStumbleTutorial();});
         }
 
-        //Check stumble timings are valid
-        if(stumbleRecoverTime <= stumbleInvincibilityTime)
-        {
-            Debug.LogError("Player cannot die as stumble recover time and stumble invincibility time are the same in PlayerMovement");
-        }
-
         playerRigidbody.constraints = lockedX;
 
         //if(Application.platform == RuntimePlatform.Android || EditorApplication.isRemoteConnected)
@@ -213,7 +207,6 @@ public class PlayerMovement : MonoBehaviour
             //If we cant dash while stumbling and are stumbling, return
             if(!canDashWhileStumbling && isStumbling) 
             {
-                Debug.Log("Can't dash while stumbling");
                 return;
             } 
             OnPlayerDash();
@@ -233,22 +226,18 @@ public class PlayerMovement : MonoBehaviour
             if (Touchscreen.current.position.x.value - Touchscreen.current.primaryTouch.startPosition.x.value <= -(Screen.currentResolution.width / 12) && moveAction.enabled)
             {
                 touchDirection = TouchDirection.Left;
-                Debug.Log("Swiped left");
             }
             else if (Touchscreen.current.position.x.value - Touchscreen.current.primaryTouch.startPosition.x.value >= (Screen.currentResolution.width / 12) && moveAction.enabled)
             {
                 touchDirection = TouchDirection.Right;
-                Debug.Log("Swiped right");
             }
             else if (Touchscreen.current.position.y.value - Touchscreen.current.primaryTouch.startPosition.y.value >= (Screen.currentResolution.height / 8) && jumpAction.enabled)
             {
                 touchDirection = TouchDirection.Up;
-                Debug.Log("Swiped up");
             }
             else if (Touchscreen.current.position.y.value - Touchscreen.current.primaryTouch.startPosition.y.value <= -(Screen.currentResolution.height / 8))
             {
                 touchDirection = TouchDirection.Down;
-                Debug.Log("Swiped down");
             }
         }
 
@@ -314,7 +303,6 @@ public class PlayerMovement : MonoBehaviour
             //If we cant dash while stumbling and are stumbling, return
             if (!canDashWhileStumbling && isStumbling)
             {
-                Debug.Log("Can't dash while stumbling");
                 return;
             }
             OnDashBarPressed.Invoke();
@@ -353,7 +341,6 @@ public class PlayerMovement : MonoBehaviour
         }
         if(CheckForCloseCallObstacles())
         {
-            Debug.Log("Close call lane switch");
             AttemptStumble();
         }
         playerRigidbody.constraints = unlockedX;
@@ -429,25 +416,21 @@ public class PlayerMovement : MonoBehaviour
         //Don't stumble if invincible, is game over or dashing
         if(invincibilityTesting || isGameOver || isPlayerDashing)
         {
-            Debug.Log("Stumble failed");
              return;      
         }
         //In I frames, ignore hit
         if(currentStumbleInvincibilityTime > 0 )
         {
-            Debug.Log("Ignored stumble due to invincibility frames");
             return;
         }
         //Death
         if(isStumbling)
         {
-            Debug.Log("Player hit while stumbling, triggering game over");
             TriggerGameOver();
         }
         //First stumble
         else
         {
-            Debug.Log("Player hit, starting stumble");
             hasHitLevelEdge = false;
             StartStumble();
         }
@@ -467,7 +450,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if(isGameOver) { return; }
         isStumbling = false;
-        Debug.Log("Recovered from stumble");
         stumbleRecoveryProgress.OnRecoveryEnd();
         OnRecover.Invoke();
     }
@@ -476,7 +458,6 @@ public class PlayerMovement : MonoBehaviour
     {
         TriggerShake();
         isGameOver = true;
-        Debug.Log("Game Over");
         OnGameOver.Invoke();
         playerRigidbody.constraints = RigidbodyConstraints.FreezePositionX; //Stop player movement
 
@@ -541,7 +522,6 @@ public class PlayerMovement : MonoBehaviour
     //Have the camera shake up when stumbling
     private void TriggerShake()
     {
-        Debug.Log("Camera Shake Triggered");
         cinemachineImpulse.GenerateImpulse();
     }
 
@@ -598,7 +578,6 @@ public class PlayerMovement : MonoBehaviour
         float defaultFieldOfView = cameraAnimation.GetCameraFOV();
         float elapsedTime = 0f;
         bool hasDashFinished = false;
-        Debug.Log("Dash Started at: " + Time.time);
         StartCoroutine(cameraAnimation.CameraPanIn(speedRampTime));
 
         //increase player's speed and pan in camera
@@ -614,12 +593,10 @@ public class PlayerMovement : MonoBehaviour
         }
         cameraAnimation.SetCameraFOV(defaultFieldOfView - 10);
         cameraAnimation.SetSplineOffset(-0.5f);
-        Debug.Log("Dash ramp up finished at: " + Time.time);
 
         //duration player will stay at max speed of dash before decreasing
         float dashTime = dashAndDisplay.GetDashDuration();
         yield return new WaitForSeconds(dashTime);
-        Debug.Log("Dash speed decrease started at: " + Time.time);
         StartCoroutine(cameraAnimation.CameraPanOut(speedDecreaseTime));
 
         //decrease player's speed and pan out camera
@@ -640,7 +617,6 @@ public class PlayerMovement : MonoBehaviour
         levelSpawner.SetSpeed(startingDashSpeed);
         cameraAnimation.SetCameraFOV(defaultFieldOfView);
         cameraAnimation.SetSplineOffset(0f);
-        Debug.Log("Dash finished at: " + Time.time);
 
         if (hasDashFinished)
         {

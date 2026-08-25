@@ -61,10 +61,6 @@ public abstract class ObjectSpawner : MonoBehaviour
                 pooledObject.transform.parent = transform; // Reparent to current spawner
                 return pooledObject;
             }
-            else
-            {
-                Debug.LogWarning("Found destroyed object in pool. Cleaning up.");
-            }
         }
         
         // If queue is empty or all items were null, create new
@@ -89,7 +85,6 @@ public abstract class ObjectSpawner : MonoBehaviour
         }
         else
         {
-            //Debug.LogWarning("Attempted to return object to non-existent pool: " + returnObject.name);
             Destroy(returnObject);
         }
     }

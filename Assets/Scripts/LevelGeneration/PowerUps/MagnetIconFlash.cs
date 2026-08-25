@@ -27,10 +27,8 @@ public class MagnetIconFlash : MonoBehaviour
         if(playerPowerupManager)
         {
             float remaningMagnetDuration = playerPowerupManager.GetRemainingDuration(magnetPowerup);
-            Debug.Log(remaningMagnetDuration);
             if(remaningMagnetDuration <= durationStartFlashing && remaningMagnetDuration > 0)
             {
-                Debug.Log(durationStartFlashing + "start flashing");
                 float alpha = Mathf.Abs(Mathf.Sin(Time.time * flashSpeed));
                 SetImageAlpha(alpha);
             }

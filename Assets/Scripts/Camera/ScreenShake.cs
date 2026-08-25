@@ -47,7 +47,6 @@ public class ScreenShake : MonoBehaviour
 
     private IEnumerator DoShake(Vector3 direction)
     {
-        Debug.Log("Do Shake Called");
         float elapsed = 0f;
 
         while (elapsed < shakeDuration)

@@ -54,7 +54,6 @@ public class GameMaster : MonoBehaviour
         levelSpawner = GameObject.Find("Level Spawner").GetComponent<LevelSpawner>();
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
         highScore = PlayerPrefs.GetInt("HighScore", 0);
-        Debug.Log("Highscore:" + highScore.ToString());
         previousHighScore = PlayerPrefs.GetInt("HighScore", 0);
         highScoreAchieved = false;
         SetInitialDifficulty();
@@ -233,7 +232,6 @@ public class GameMaster : MonoBehaviour
         if(dashDestructionUpgradeLevel == 0) { return; }
         //Else, its owned and get the upgrade value for that level
         float dashDestructionBonus = dashDestructionBonusUpgrade.GetValueForLevel(dashDestructionUpgradeLevel);
-        Debug.Log("Dash destruction bonus: " + dashDestructionBonus.ToString());
         rawScore += dashDestructionBonus;
         return;
     }
@@ -243,17 +241,14 @@ public class GameMaster : MonoBehaviour
         if(highScore < 500 / gameDifficultyScalingModifier)
         {
             gameDifficultyID = 0;
-            Debug.Log("Difficulty set to easy");
         }
         else if(highScore >= 500 / gameDifficultyScalingModifier && highScore < 1000 / gameDifficultyScalingModifier)
         {
             gameDifficultyID = 1;
-            Debug.Log("Difficulty set to medium");
         }
         else if(highScore >= 1000 / gameDifficultyScalingModifier)
         {
             gameDifficultyID = 2;
-            Debug.Log("Difficulty set to hard");
         }
     }
 
@@ -263,17 +258,14 @@ public class GameMaster : MonoBehaviour
         if (difficultyScore < 500)
         {
             gameDifficultyID = 0;
-            Debug.Log("Difficulty set to easy");
         }
         else if (difficultyScore >= 500 && difficultyScore < 1000)
         {
             gameDifficultyID = 1;
-            Debug.Log("Difficulty set to medium");
         }
         else if (difficultyScore >= 1000)
         {
             gameDifficultyID = 2;
-            Debug.Log("Difficulty set to hard");
         }
     }
 }

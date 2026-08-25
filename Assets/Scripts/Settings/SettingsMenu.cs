@@ -103,7 +103,6 @@ public class SettingsMenu : MonoBehaviour
     {
         volume = volumeSlider.value;
         AudioListener.volume = volumeSlider.value / 100;
-        Debug.Log("Current volume: " + volume + " AudioListener value: " + AudioListener.volume);
         PlayerPrefs.SetFloat("Volume", volume);
     }
 
@@ -111,7 +110,6 @@ public class SettingsMenu : MonoBehaviour
     {
         musicVolume = musicSlider.value;
         gameMusic.volume = musicSlider.value / 100;
-        Debug.Log("Current music volume: " + musicVolume);
         PlayerPrefs.SetFloat("Music Volume", musicVolume);
     }
 
@@ -151,8 +149,6 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetString("Resolution", displayResolutions[displayResolutionIndex]);
         PlayerPrefs.SetInt("ResolutionX", resolutionsX[displayResolutionIndex]);
         PlayerPrefs.SetInt("ResolutionY", resolutionsY[displayResolutionIndex]);
-        Debug.Log(Screen.currentResolution.ToString());
-        Debug.Log(resolutionsX[displayResolutionIndex] + " X " + resolutionsY[displayResolutionIndex] + ", " + currentFullScreenMode);
     }
 
     public void ChangeWindow()
@@ -162,21 +158,18 @@ public class SettingsMenu : MonoBehaviour
             Screen.fullScreenMode = FullScreenMode.Windowed;
             currentFullScreenMode = FullScreenMode.Windowed;
             windowDisplayText.text = "Windowed";
-            Debug.Log("Set as windowed");
         }
         else if(Screen.fullScreenMode == FullScreenMode.Windowed)
         {
             Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
             currentFullScreenMode = FullScreenMode.FullScreenWindow;
             windowDisplayText.text = "Fullscreen";
-            Debug.Log("Set as fullscreen");
         }
         else
         {
             Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
             currentFullScreenMode = FullScreenMode.FullScreenWindow;
             windowDisplayText.text = "Fullscreen";
-            Debug.Log("Set as fullscreen");
         }
     }
 
@@ -237,8 +230,6 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetString("Resolution", (defaultResolution.width.ToString() + "x" + defaultResolution.height.ToString()));
         PlayerPrefs.SetInt("ResolutionX", defaultResolution.width);
         PlayerPrefs.SetInt("ResolutionY", defaultResolution.height);
-
-        Debug.Log(defaultResolution);
 
         Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
         currentFullScreenMode = FullScreenMode.FullScreenWindow;

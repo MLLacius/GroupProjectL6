@@ -71,7 +71,6 @@ public class UpgradeManager : MonoBehaviour
         int currentLv = GetUpgradeCurrentLevel(upgrade.upgradeID);
         if(currentLv >= upgrade.levelDefinitions.Length)
         {
-            Debug.Log("Upgrade already maxed.");
             return;
         }
         int cost = upgrade.levelDefinitions[currentLv].cost; //Cost is next levels upgrade
@@ -80,7 +79,6 @@ public class UpgradeManager : MonoBehaviour
             upgradeLevels[upgrade.upgradeID] = currentLv + 1;
             audioController.PlayValidPurchase();
             SaveUpgrades();
-            Debug.Log("Purchased item:" + upgrade.upgradeID);
             onSuccess?.Invoke();
         }
         else

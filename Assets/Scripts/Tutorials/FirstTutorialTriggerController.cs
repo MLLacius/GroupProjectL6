@@ -39,7 +39,7 @@ public class FirstTutorialTriggerController : MonoBehaviour
             break;
 
             default:
-                Debug.LogError("Triggered an out of bounds tutorial identifier");
+
             break;
         }
     }

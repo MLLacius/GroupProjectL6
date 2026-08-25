@@ -22,7 +22,6 @@ public class CollectibleDisplay : MonoBehaviour
         else
         {
             enableCollectibleDisplay = false;
-            Debug.Log("Collectible display not found");
         }
     }
 

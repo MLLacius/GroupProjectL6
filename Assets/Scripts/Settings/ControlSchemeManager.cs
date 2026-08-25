@@ -40,10 +40,6 @@ public class ControlSchemeManager : MonoBehaviour
             }
         }
 
-        if(WASD == null || ArrowKeys == null)
-        {
-            Debug.Log("Input Action can't be found");
-        }
         if (PlayerPrefs.HasKey("ControlSchemeKey"))
         {
             currentControlScheme = PlayerPrefs.GetInt("ControlSchemeKey");
@@ -62,12 +58,10 @@ public class ControlSchemeManager : MonoBehaviour
         switch(currentControlScheme)
         {
             case 0:
-                Debug.Log("WASD Controls");
                 WASD.Enable();
                 ArrowKeys.Disable();
                 break;
             case 1:
-                Debug.Log("Arrow key controls");
                 WASD.Disable();
                 ArrowKeys.Enable();
                 break;

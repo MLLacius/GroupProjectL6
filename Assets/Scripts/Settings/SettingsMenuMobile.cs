@@ -69,14 +69,12 @@ public class SettingsMenuMobile : MonoBehaviour
     {
         volume = volumeSlider.value;
         AudioListener.volume = volumeSlider.value / 100;
-        Debug.Log("Current volume: " + volume + " AudioListener value: " + AudioListener.volume);
         PlayerPrefs.SetFloat("Volume", volume);
     }
     public void ChangeMusicVolume(float musicVolume)
     {
         musicVolume = musicSlider.value;
         gameMusic.volume = musicSlider.value / 100;
-        Debug.Log("Current music volume: " + musicVolume);
         PlayerPrefs.SetFloat("Music Volume", musicVolume);
     }
 
