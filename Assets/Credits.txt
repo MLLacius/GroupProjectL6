@@ -1,0 +1,19 @@
+Coins - https://assetstore.unity.com/packages/3d/props/simple-gems-and-items-ultimate-animated-customizable-pack-73764
+Collectible Collect Particles - https://assetstore.unity.com/packages/vfx/particles/sherbb-s-particle-collection-170798 (heavily modified)
+Majority of UI Elements - https://www.kenney.nl/assets/ui-pack
+Regular Font - https://www.dafont.com/milky-nice.font?text=High+Score%3A&back=theme
+Sheep - https://assetstore.unity.com/packages/3d/characters/animals/mammals/sheep-run-platform-pack-150043
+Skybox - https://assetstore.unity.com/packages/2d/textures-materials/sky/allsky-free-10-sky-skybox-set-146014
+
+Assets used for Obstacles (some modified) -
+https://assetstore.unity.com/packages/3d/environments/polygon-starter-pack-art-by-synty-156819
+https://assetstore.unity.com/packages/3d/environments/landscapes/low-poly-simple-nature-pack-162153
+https://assetstore.unity.com/packages/3d/props/pandazole-farm-ranch-low-poly-pack-206756
+
+SFX -
+Collectible Collect - https://freesound.org/people/Valenspire/sounds/699528/ (modified)
+Music - https://assetstore.unity.com/packages/audio/music/cartoon-adventures-vol-1-342408
+Obstacle Destroy - https://pixabay.com/sound-effects/film-special-effects-rock-destroy-6409/ (modified)
+Player Dash - https://www.kenney.nl/assets/impact-sounds (multiple assets + modified)
+Player Impact Hard - https://www.kenney.nl/assets/impact-sounds (modified)
+Upgrade Purchase / Player Jump / Invalid Purchase / Upgrade Maxxed - https://pixabay.com/sound-effects/nature-sheep-bleat-122256/ (all modified)
